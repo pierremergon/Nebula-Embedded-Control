@@ -13,11 +13,15 @@ unsigned char proxDuration(unsigned char t);//Proximity timer duration
 unsigned char ledInit(void);//initialize led to zero
 unsigned char systemGo(void);//green led on
 unsigned char systemNoGo(void);//red led on 
+unsigned char batteryLow(void);//low battery indicator
+unsigned char batteryFullCharge(void);//full charge indictor
 unsigned char systemSetup (void);// blue light displays during calibration
 unsigned char sleep(void);
 unsigned char hibernate(void);
 unsigned char ledInitialize(void);//init samb/ turns off led 
 unsigned char apds9960_prox_write(void);//unused ports
+unsigned char checkBattery(void);//initializes and checks the battery status
+
 
 
 
