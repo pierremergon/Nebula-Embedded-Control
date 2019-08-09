@@ -61,7 +61,7 @@ unsigned char idle(void)
 }
 
 //////////////////////////////////////////////////////////////////////////////////////
-unsigned char ledInitialize(void)//initialize led to zero
+unsigned char ledInit(void)//initialize led to zero
 {
 	DDRC = 0xFF;
 	DDRB = 0x07;
@@ -122,7 +122,7 @@ unsigned char batteryLow(void);//low battery indicator
 {
 	;
 }
-unsigned char batteryFullCharge(void);//full charge indictor
+unsigned char fullCharge(void);//full charge indictor
 {
 	;
 }
