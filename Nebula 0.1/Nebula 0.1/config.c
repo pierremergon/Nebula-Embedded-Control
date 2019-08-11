@@ -129,3 +129,10 @@ unsigned char fullCharge(void)//full charge indictor
 {
 	;
 }
+//Button press actions 
+unsigned char buttonPress(void)
+{
+	;
+}
+
+
