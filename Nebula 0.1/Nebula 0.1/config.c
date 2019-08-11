@@ -97,17 +97,20 @@ unsigned char portSetup(void)
 	//battery indicator ports
 	DDRB |= (1<<6);
 	PORTB &= ~(1<<6);
-	DDRB |= (1<<input pin);
-	PORTB &= ~(1<<input pin);
+	DDRB |= (1<<7);
+	PORTB &= ~(1<<7);
+	//button initialize
+	DDRD &= ~(1<<1);//Input pin
+	PORTD |= (1<<1);//PULL UP
 
 }
 //initializes and checks the battery status 1=
 unsigned char checkBattery(void) {
 	unsigned char batteryStatus;
 	PORTB |= (1<<6);
-	DDRB &= ~(1<<input pin);
-	PINB |=(input pin);
-	if ((PINB & input pin)==1)
+	DDRB &= ~(1<<7);
+	PINB |=(7);
+	if ((PINB & 7)==1)
 	{
 		batteryStatus=1;
 	}
@@ -118,11 +121,11 @@ unsigned char checkBattery(void) {
 	return batteryStatus;
 }
 
-unsigned char batteryLow(void);//low battery indicator
+unsigned char batteryLow(void)//low battery indicator
 {
 	;
 }
-unsigned char fullCharge(void);//full charge indictor
+unsigned char fullCharge(void)//full charge indictor
 {
 	;
 }

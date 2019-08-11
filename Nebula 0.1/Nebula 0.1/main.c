@@ -28,7 +28,7 @@ int main(void)
 		//solOn();
 		//ISR(INT1_vect);
 	
-		ledInitialize();
+		//ledInitialize();
 		int1Setup();
 		apds9960_prox_write();
 		sei();

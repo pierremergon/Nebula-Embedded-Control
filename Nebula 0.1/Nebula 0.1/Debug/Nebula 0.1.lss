@@ -3,37 +3,37 @@ Nebula 0.1.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         00000000  00800100  00800100  00000274  2**0
+  0 .data         00000000  00800100  00800100  0000025e  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         00000220  00000000  00000000  00000054  2**1
+  1 .text         0000020a  00000000  00000000  00000054  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .comment      00000030  00000000  00000000  00000274  2**0
+  2 .comment      00000030  00000000  00000000  0000025e  2**0
                   CONTENTS, READONLY
-  3 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000002a4  2**2
+  3 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00000290  2**2
                   CONTENTS, READONLY
-  4 .debug_aranges 00000170  00000000  00000000  000002e4  2**0
+  4 .debug_aranges 00000190  00000000  00000000  000002d0  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_info   00000e39  00000000  00000000  00000454  2**0
+  5 .debug_info   00000e9f  00000000  00000000  00000460  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_abbrev 0000093e  00000000  00000000  0000128d  2**0
+  6 .debug_abbrev 0000094d  00000000  00000000  000012ff  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   000008ef  00000000  00000000  00001bcb  2**0
+  7 .debug_line   00000987  00000000  00000000  00001c4c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_frame  000002bc  00000000  00000000  000024bc  2**2
+  8 .debug_frame  000002fc  00000000  00000000  000025d4  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    000004ef  00000000  00000000  00002778  2**0
+  9 .debug_str    00000524  00000000  00000000  000028d0  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    00000339  00000000  00000000  00002c67  2**0
+ 10 .debug_loc    00000355  00000000  00000000  00002df4  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 00000120  00000000  00000000  00002fa0  2**0
+ 11 .debug_ranges 00000140  00000000  00000000  00003149  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
 
 00000000 <__vectors>:
    0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
-   4:	0c 94 f8 00 	jmp	0x1f0	; 0x1f0 <__vector_1>
-   8:	0c 94 cd 00 	jmp	0x19a	; 0x19a <__vector_2>
+   4:	0c 94 ef 00 	jmp	0x1de	; 0x1de <__vector_1>
+   8:	0c 94 c4 00 	jmp	0x188	; 0x188 <__vector_2>
    c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
   10:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
   14:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
@@ -79,8 +79,8 @@ Disassembly of section .text:
   7e:	a0 30       	cpi	r26, 0x00	; 0
   80:	b2 07       	cpc	r27, r18
   82:	e1 f7       	brne	.-8      	; 0x7c <.do_clear_bss_loop>
-  84:	0e 94 04 01 	call	0x208	; 0x208 <main>
-  88:	0c 94 0e 01 	jmp	0x21c	; 0x21c <_exit>
+  84:	0e 94 fb 00 	call	0x1f6	; 0x1f6 <main>
+  88:	0c 94 03 01 	jmp	0x206	; 0x206 <_exit>
 
 0000008c <__bad_interrupt>:
   8c:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
@@ -92,16 +92,16 @@ unsigned char apdsReceive(void)
 	return value;
 	
 }
-  90:	0e 94 80 00 	call	0x100	; 0x100 <i2c_start>
+  90:	0e 94 77 00 	call	0xee	; 0xee <i2c_start>
   94:	80 e0       	ldi	r24, 0x00	; 0
   96:	08 95       	ret
 
 00000098 <apdsSend>:
   98:	cf 93       	push	r28
   9a:	c6 2f       	mov	r28, r22
-  9c:	0e 94 a7 00 	call	0x14e	; 0x14e <i2c_write>
+  9c:	0e 94 9e 00 	call	0x13c	; 0x13c <i2c_write>
   a0:	8c 2f       	mov	r24, r28
-  a2:	0e 94 a7 00 	call	0x14e	; 0x14e <i2c_write>
+  a2:	0e 94 9e 00 	call	0x13c	; 0x13c <i2c_write>
   a6:	80 e0       	ldi	r24, 0x00	; 0
   a8:	cf 91       	pop	r28
   aa:	08 95       	ret
@@ -111,273 +111,256 @@ unsigned char apdsTransceive(unsigned char read)
 {   unsigned char data;
 	
 	i2c_write(read);
-  ac:	0e 94 a7 00 	call	0x14e	; 0x14e <i2c_write>
+  ac:	0e 94 9e 00 	call	0x13c	; 0x13c <i2c_write>
 	i2c_write(nebula_read);
   b0:	83 e7       	ldi	r24, 0x73	; 115
-  b2:	0e 94 a7 00 	call	0x14e	; 0x14e <i2c_write>
+  b2:	0e 94 9e 00 	call	0x13c	; 0x13c <i2c_write>
 	data=i2c_readNak();
-  b6:	0e 94 b9 00 	call	0x172	; 0x172 <i2c_readNak>
+  b6:	0e 94 b0 00 	call	0x160	; 0x160 <i2c_readNak>
 	return data;
 }
   ba:	08 95       	ret
 
-000000bc <ledInitialize>:
-}
-unsigned char gestureDuration(unsigned char t)//timer duration
-{
-
+000000bc <apds9960_prox_write>:
 return 0;
 }
-  bc:	8f ef       	ldi	r24, 0xFF	; 255
-  be:	87 b9       	out	0x07, r24	; 7
-  c0:	87 e0       	ldi	r24, 0x07	; 7
-  c2:	84 b9       	out	0x04, r24	; 4
-  c4:	85 b1       	in	r24, 0x05	; 5
-  c6:	87 60       	ori	r24, 0x07	; 7
-  c8:	85 b9       	out	0x05, r24	; 5
-  ca:	80 e0       	ldi	r24, 0x00	; 0
-  cc:	08 95       	ret
-
-000000ce <apds9960_prox_write>:
 
 unsigned char apds9960_prox_write(void)
-{  
+{
 	apdsBegin(nebula_write);
-  ce:	82 e7       	ldi	r24, 0x72	; 114
-  d0:	0e 94 48 00 	call	0x90	; 0x90 <apdsBegin>
+  bc:	82 e7       	ldi	r24, 0x72	; 114
+  be:	0e 94 48 00 	call	0x90	; 0x90 <apdsBegin>
 	apdsSend(0x80,0x25);//enable reg
-  d4:	65 e2       	ldi	r22, 0x25	; 37
-  d6:	80 e8       	ldi	r24, 0x80	; 128
-  d8:	0e 94 4c 00 	call	0x98	; 0x98 <apdsSend>
+  c2:	65 e2       	ldi	r22, 0x25	; 37
+  c4:	80 e8       	ldi	r24, 0x80	; 128
+  c6:	0e 94 4c 00 	call	0x98	; 0x98 <apdsSend>
 	apdsSend(0x8C,0x40);//persistence reg
-  dc:	60 e4       	ldi	r22, 0x40	; 64
-  de:	8c e8       	ldi	r24, 0x8C	; 140
-  e0:	0e 94 4c 00 	call	0x98	; 0x98 <apdsSend>
+  ca:	60 e4       	ldi	r22, 0x40	; 64
+  cc:	8c e8       	ldi	r24, 0x8C	; 140
+  ce:	0e 94 4c 00 	call	0x98	; 0x98 <apdsSend>
 	apdsSend(0x8B,0xFA);// high int threshold
-  e4:	6a ef       	ldi	r22, 0xFA	; 250
-  e6:	8b e8       	ldi	r24, 0x8B	; 139
-  e8:	0e 94 4c 00 	call	0x98	; 0x98 <apdsSend>
-	apdsSend(0x89,0x05);//low int threshold 
-  ec:	65 e0       	ldi	r22, 0x05	; 5
-  ee:	89 e8       	ldi	r24, 0x89	; 137
-  f0:	0e 94 4c 00 	call	0x98	; 0x98 <apdsSend>
-	apdsSend(0x8E,0x54);//prox pulse count 
-  f4:	64 e5       	ldi	r22, 0x54	; 84
-  f6:	8e e8       	ldi	r24, 0x8E	; 142
-  f8:	0e 94 4c 00 	call	0x98	; 0x98 <apdsSend>
+  d2:	6a ef       	ldi	r22, 0xFA	; 250
+  d4:	8b e8       	ldi	r24, 0x8B	; 139
+  d6:	0e 94 4c 00 	call	0x98	; 0x98 <apdsSend>
+	apdsSend(0x89,0x05);//low int threshold
+  da:	65 e0       	ldi	r22, 0x05	; 5
+  dc:	89 e8       	ldi	r24, 0x89	; 137
+  de:	0e 94 4c 00 	call	0x98	; 0x98 <apdsSend>
+	apdsSend(0x8E,0x54);//prox pulse count
+  e2:	64 e5       	ldi	r22, 0x54	; 84
+  e4:	8e e8       	ldi	r24, 0x8E	; 142
+  e6:	0e 94 4c 00 	call	0x98	; 0x98 <apdsSend>
 	return 0;
 }
-  fc:	80 e0       	ldi	r24, 0x00	; 0
-  fe:	08 95       	ret
+  ea:	80 e0       	ldi	r24, 0x00	; 0
+  ec:	08 95       	ret
 
-00000100 <i2c_start>:
+000000ee <i2c_start>:
 {
 	TWCR = (1<<TWINT) | (1<<TWEN) | (1<<TWEA);
 	while(!(TWCR & (1<<TWINT)));    
 
     return TWDR;
 }/* i2c_readAck */
- 100:	94 ea       	ldi	r25, 0xA4	; 164
- 102:	90 93 bc 00 	sts	0x00BC, r25	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7e00bc>
- 106:	ec eb       	ldi	r30, 0xBC	; 188
- 108:	f0 e0       	ldi	r31, 0x00	; 0
- 10a:	90 81       	ld	r25, Z
- 10c:	99 23       	and	r25, r25
- 10e:	ec f7       	brge	.-6      	; 0x10a <i2c_start+0xa>
- 110:	90 91 b9 00 	lds	r25, 0x00B9	; 0x8000b9 <__TEXT_REGION_LENGTH__+0x7e00b9>
- 114:	98 7f       	andi	r25, 0xF8	; 248
- 116:	98 30       	cpi	r25, 0x08	; 8
- 118:	11 f0       	breq	.+4      	; 0x11e <i2c_start+0x1e>
- 11a:	90 31       	cpi	r25, 0x10	; 16
- 11c:	a1 f4       	brne	.+40     	; 0x146 <i2c_start+0x46>
- 11e:	80 93 bb 00 	sts	0x00BB, r24	; 0x8000bb <__TEXT_REGION_LENGTH__+0x7e00bb>
- 122:	84 e8       	ldi	r24, 0x84	; 132
- 124:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7e00bc>
- 128:	ec eb       	ldi	r30, 0xBC	; 188
- 12a:	f0 e0       	ldi	r31, 0x00	; 0
- 12c:	80 81       	ld	r24, Z
- 12e:	88 23       	and	r24, r24
- 130:	ec f7       	brge	.-6      	; 0x12c <i2c_start+0x2c>
- 132:	90 91 b9 00 	lds	r25, 0x00B9	; 0x8000b9 <__TEXT_REGION_LENGTH__+0x7e00b9>
- 136:	98 7f       	andi	r25, 0xF8	; 248
- 138:	98 31       	cpi	r25, 0x18	; 24
- 13a:	39 f0       	breq	.+14     	; 0x14a <i2c_start+0x4a>
- 13c:	81 e0       	ldi	r24, 0x01	; 1
- 13e:	90 34       	cpi	r25, 0x40	; 64
- 140:	29 f4       	brne	.+10     	; 0x14c <i2c_start+0x4c>
- 142:	80 e0       	ldi	r24, 0x00	; 0
- 144:	08 95       	ret
- 146:	81 e0       	ldi	r24, 0x01	; 1
- 148:	08 95       	ret
- 14a:	80 e0       	ldi	r24, 0x00	; 0
- 14c:	08 95       	ret
+  ee:	94 ea       	ldi	r25, 0xA4	; 164
+  f0:	90 93 bc 00 	sts	0x00BC, r25	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7e00bc>
+  f4:	ec eb       	ldi	r30, 0xBC	; 188
+  f6:	f0 e0       	ldi	r31, 0x00	; 0
+  f8:	90 81       	ld	r25, Z
+  fa:	99 23       	and	r25, r25
+  fc:	ec f7       	brge	.-6      	; 0xf8 <i2c_start+0xa>
+  fe:	90 91 b9 00 	lds	r25, 0x00B9	; 0x8000b9 <__TEXT_REGION_LENGTH__+0x7e00b9>
+ 102:	98 7f       	andi	r25, 0xF8	; 248
+ 104:	98 30       	cpi	r25, 0x08	; 8
+ 106:	11 f0       	breq	.+4      	; 0x10c <i2c_start+0x1e>
+ 108:	90 31       	cpi	r25, 0x10	; 16
+ 10a:	a1 f4       	brne	.+40     	; 0x134 <i2c_start+0x46>
+ 10c:	80 93 bb 00 	sts	0x00BB, r24	; 0x8000bb <__TEXT_REGION_LENGTH__+0x7e00bb>
+ 110:	84 e8       	ldi	r24, 0x84	; 132
+ 112:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7e00bc>
+ 116:	ec eb       	ldi	r30, 0xBC	; 188
+ 118:	f0 e0       	ldi	r31, 0x00	; 0
+ 11a:	80 81       	ld	r24, Z
+ 11c:	88 23       	and	r24, r24
+ 11e:	ec f7       	brge	.-6      	; 0x11a <i2c_start+0x2c>
+ 120:	90 91 b9 00 	lds	r25, 0x00B9	; 0x8000b9 <__TEXT_REGION_LENGTH__+0x7e00b9>
+ 124:	98 7f       	andi	r25, 0xF8	; 248
+ 126:	98 31       	cpi	r25, 0x18	; 24
+ 128:	39 f0       	breq	.+14     	; 0x138 <i2c_start+0x4a>
+ 12a:	81 e0       	ldi	r24, 0x01	; 1
+ 12c:	90 34       	cpi	r25, 0x40	; 64
+ 12e:	29 f4       	brne	.+10     	; 0x13a <i2c_start+0x4c>
+ 130:	80 e0       	ldi	r24, 0x00	; 0
+ 132:	08 95       	ret
+ 134:	81 e0       	ldi	r24, 0x01	; 1
+ 136:	08 95       	ret
+ 138:	80 e0       	ldi	r24, 0x00	; 0
+ 13a:	08 95       	ret
 
-0000014e <i2c_write>:
- 14e:	80 93 bb 00 	sts	0x00BB, r24	; 0x8000bb <__TEXT_REGION_LENGTH__+0x7e00bb>
- 152:	84 e8       	ldi	r24, 0x84	; 132
- 154:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7e00bc>
- 158:	ec eb       	ldi	r30, 0xBC	; 188
- 15a:	f0 e0       	ldi	r31, 0x00	; 0
- 15c:	80 81       	ld	r24, Z
- 15e:	88 23       	and	r24, r24
- 160:	ec f7       	brge	.-6      	; 0x15c <i2c_write+0xe>
- 162:	90 91 b9 00 	lds	r25, 0x00B9	; 0x8000b9 <__TEXT_REGION_LENGTH__+0x7e00b9>
- 166:	98 7f       	andi	r25, 0xF8	; 248
- 168:	81 e0       	ldi	r24, 0x01	; 1
- 16a:	98 32       	cpi	r25, 0x28	; 40
- 16c:	09 f4       	brne	.+2      	; 0x170 <i2c_write+0x22>
- 16e:	80 e0       	ldi	r24, 0x00	; 0
- 170:	08 95       	ret
+0000013c <i2c_write>:
+ 13c:	80 93 bb 00 	sts	0x00BB, r24	; 0x8000bb <__TEXT_REGION_LENGTH__+0x7e00bb>
+ 140:	84 e8       	ldi	r24, 0x84	; 132
+ 142:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7e00bc>
+ 146:	ec eb       	ldi	r30, 0xBC	; 188
+ 148:	f0 e0       	ldi	r31, 0x00	; 0
+ 14a:	80 81       	ld	r24, Z
+ 14c:	88 23       	and	r24, r24
+ 14e:	ec f7       	brge	.-6      	; 0x14a <i2c_write+0xe>
+ 150:	90 91 b9 00 	lds	r25, 0x00B9	; 0x8000b9 <__TEXT_REGION_LENGTH__+0x7e00b9>
+ 154:	98 7f       	andi	r25, 0xF8	; 248
+ 156:	81 e0       	ldi	r24, 0x01	; 1
+ 158:	98 32       	cpi	r25, 0x28	; 40
+ 15a:	09 f4       	brne	.+2      	; 0x15e <i2c_write+0x22>
+ 15c:	80 e0       	ldi	r24, 0x00	; 0
+ 15e:	08 95       	ret
 
-00000172 <i2c_readNak>:
+00000160 <i2c_readNak>:
  
  Return:  byte read from I2C device
 *************************************************************************/
 unsigned char i2c_readNak(void)
 {
 	TWCR = (1<<TWINT) | (1<<TWEN);
- 172:	84 e8       	ldi	r24, 0x84	; 132
- 174:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7e00bc>
+ 160:	84 e8       	ldi	r24, 0x84	; 132
+ 162:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7e00bc>
 	while(!(TWCR & (1<<TWINT)));
- 178:	ec eb       	ldi	r30, 0xBC	; 188
- 17a:	f0 e0       	ldi	r31, 0x00	; 0
- 17c:	80 81       	ld	r24, Z
- 17e:	88 23       	and	r24, r24
- 180:	ec f7       	brge	.-6      	; 0x17c <i2c_readNak+0xa>
+ 166:	ec eb       	ldi	r30, 0xBC	; 188
+ 168:	f0 e0       	ldi	r31, 0x00	; 0
+ 16a:	80 81       	ld	r24, Z
+ 16c:	88 23       	and	r24, r24
+ 16e:	ec f7       	brge	.-6      	; 0x16a <i2c_readNak+0xa>
 	
     return TWDR;
- 182:	80 91 bb 00 	lds	r24, 0x00BB	; 0x8000bb <__TEXT_REGION_LENGTH__+0x7e00bb>
+ 170:	80 91 bb 00 	lds	r24, 0x00BB	; 0x8000bb <__TEXT_REGION_LENGTH__+0x7e00bb>
 }/* i2c_readNak */
- 186:	08 95       	ret
+ 174:	08 95       	ret
 
-00000188 <int1Setup>:
+00000176 <int1Setup>:
 		return 0;
 }
 
 unsigned char int1Setup(void)
 {
 	DDRD &= ~(1<<3);
- 188:	53 98       	cbi	0x0a, 3	; 10
+ 176:	53 98       	cbi	0x0a, 3	; 10
 	PORTD |= (1<<3);
- 18a:	5b 9a       	sbi	0x0b, 3	; 11
+ 178:	5b 9a       	sbi	0x0b, 3	; 11
 	EICRA |=(0x00);//logic low
- 18c:	e9 e6       	ldi	r30, 0x69	; 105
- 18e:	f0 e0       	ldi	r31, 0x00	; 0
- 190:	80 81       	ld	r24, Z
- 192:	80 83       	st	Z, r24
+ 17a:	e9 e6       	ldi	r30, 0x69	; 105
+ 17c:	f0 e0       	ldi	r31, 0x00	; 0
+ 17e:	80 81       	ld	r24, Z
+ 180:	80 83       	st	Z, r24
 	EIMSK |= (1<<INT1); // interrupt mask register to interrupt 0
- 194:	e9 9a       	sbi	0x1d, 1	; 29
+ 182:	e9 9a       	sbi	0x1d, 1	; 29
 	//MCUCR  |=(0<<ISC01); //preset conditions to enable interrupt for logic low
 	//MCUCR  |=(0<<ISC00);//""""""""""""""""""""""""""""""""""""""""""""""""""""
 	//cli();
 	return 0;
 }
- 196:	80 e0       	ldi	r24, 0x00	; 0
- 198:	08 95       	ret
+ 184:	80 e0       	ldi	r24, 0x00	; 0
+ 186:	08 95       	ret
 
-0000019a <__vector_2>:
+00000188 <__vector_2>:
 
 ISR(INT1_vect)
 {   unsigned char data;
- 19a:	1f 92       	push	r1
- 19c:	0f 92       	push	r0
- 19e:	0f b6       	in	r0, 0x3f	; 63
- 1a0:	0f 92       	push	r0
- 1a2:	11 24       	eor	r1, r1
- 1a4:	2f 93       	push	r18
- 1a6:	3f 93       	push	r19
- 1a8:	4f 93       	push	r20
- 1aa:	5f 93       	push	r21
- 1ac:	6f 93       	push	r22
- 1ae:	7f 93       	push	r23
- 1b0:	8f 93       	push	r24
- 1b2:	9f 93       	push	r25
- 1b4:	af 93       	push	r26
- 1b6:	bf 93       	push	r27
- 1b8:	ef 93       	push	r30
- 1ba:	ff 93       	push	r31
+ 188:	1f 92       	push	r1
+ 18a:	0f 92       	push	r0
+ 18c:	0f b6       	in	r0, 0x3f	; 63
+ 18e:	0f 92       	push	r0
+ 190:	11 24       	eor	r1, r1
+ 192:	2f 93       	push	r18
+ 194:	3f 93       	push	r19
+ 196:	4f 93       	push	r20
+ 198:	5f 93       	push	r21
+ 19a:	6f 93       	push	r22
+ 19c:	7f 93       	push	r23
+ 19e:	8f 93       	push	r24
+ 1a0:	9f 93       	push	r25
+ 1a2:	af 93       	push	r26
+ 1a4:	bf 93       	push	r27
+ 1a6:	ef 93       	push	r30
+ 1a8:	ff 93       	push	r31
 	cli();
- 1bc:	f8 94       	cli
+ 1aa:	f8 94       	cli
 	apdsBegin(nebula_write);
- 1be:	82 e7       	ldi	r24, 0x72	; 114
- 1c0:	0e 94 48 00 	call	0x90	; 0x90 <apdsBegin>
+ 1ac:	82 e7       	ldi	r24, 0x72	; 114
+ 1ae:	0e 94 48 00 	call	0x90	; 0x90 <apdsBegin>
 	data=apdsTransceive(id_reg);
- 1c4:	82 e9       	ldi	r24, 0x92	; 146
- 1c6:	0e 94 56 00 	call	0xac	; 0xac <apdsTransceive>
+ 1b2:	82 e9       	ldi	r24, 0x92	; 146
+ 1b4:	0e 94 56 00 	call	0xac	; 0xac <apdsTransceive>
 	PORTC=data;
- 1ca:	88 b9       	out	0x08, r24	; 8
+ 1b8:	88 b9       	out	0x08, r24	; 8
 	sei();
- 1cc:	78 94       	sei
+ 1ba:	78 94       	sei
 }
- 1ce:	ff 91       	pop	r31
- 1d0:	ef 91       	pop	r30
- 1d2:	bf 91       	pop	r27
- 1d4:	af 91       	pop	r26
- 1d6:	9f 91       	pop	r25
- 1d8:	8f 91       	pop	r24
- 1da:	7f 91       	pop	r23
- 1dc:	6f 91       	pop	r22
- 1de:	5f 91       	pop	r21
- 1e0:	4f 91       	pop	r20
- 1e2:	3f 91       	pop	r19
- 1e4:	2f 91       	pop	r18
- 1e6:	0f 90       	pop	r0
- 1e8:	0f be       	out	0x3f, r0	; 63
- 1ea:	0f 90       	pop	r0
- 1ec:	1f 90       	pop	r1
- 1ee:	18 95       	reti
+ 1bc:	ff 91       	pop	r31
+ 1be:	ef 91       	pop	r30
+ 1c0:	bf 91       	pop	r27
+ 1c2:	af 91       	pop	r26
+ 1c4:	9f 91       	pop	r25
+ 1c6:	8f 91       	pop	r24
+ 1c8:	7f 91       	pop	r23
+ 1ca:	6f 91       	pop	r22
+ 1cc:	5f 91       	pop	r21
+ 1ce:	4f 91       	pop	r20
+ 1d0:	3f 91       	pop	r19
+ 1d2:	2f 91       	pop	r18
+ 1d4:	0f 90       	pop	r0
+ 1d6:	0f be       	out	0x3f, r0	; 63
+ 1d8:	0f 90       	pop	r0
+ 1da:	1f 90       	pop	r1
+ 1dc:	18 95       	reti
 
-000001f0 <__vector_1>:
+000001de <__vector_1>:
 
 ISR(INT0_vect)
 {
- 1f0:	1f 92       	push	r1
- 1f2:	0f 92       	push	r0
- 1f4:	0f b6       	in	r0, 0x3f	; 63
- 1f6:	0f 92       	push	r0
- 1f8:	11 24       	eor	r1, r1
+ 1de:	1f 92       	push	r1
+ 1e0:	0f 92       	push	r0
+ 1e2:	0f b6       	in	r0, 0x3f	; 63
+ 1e4:	0f 92       	push	r0
+ 1e6:	11 24       	eor	r1, r1
 	//what to do when water becomes hot
 	//solOff();//turn solenoid off
 	//systemNoGo();//flash warning led because of temp ;(
 	//systemGo();
 	PORTB &= ~(1<<2);
- 1fa:	2a 98       	cbi	0x05, 2	; 5
+ 1e8:	2a 98       	cbi	0x05, 2	; 5
 	
 	sei();
- 1fc:	78 94       	sei
+ 1ea:	78 94       	sei
 }
- 1fe:	0f 90       	pop	r0
- 200:	0f be       	out	0x3f, r0	; 63
- 202:	0f 90       	pop	r0
- 204:	1f 90       	pop	r1
- 206:	18 95       	reti
+ 1ec:	0f 90       	pop	r0
+ 1ee:	0f be       	out	0x3f, r0	; 63
+ 1f0:	0f 90       	pop	r0
+ 1f2:	1f 90       	pop	r1
+ 1f4:	18 95       	reti
 
-00000208 <main>:
-		//intSetup();//enables external interrupt 
+000001f6 <main>:
 		//sei();
 		//solOn();
 		//ISR(INT1_vect);
 	
-		ledInitialize();
- 208:	0e 94 5e 00 	call	0xbc	; 0xbc <ledInitialize>
+		//ledInitialize();
 		int1Setup();
- 20c:	0e 94 c4 00 	call	0x188	; 0x188 <int1Setup>
+ 1f6:	0e 94 bb 00 	call	0x176	; 0x176 <int1Setup>
 		apds9960_prox_write();
- 210:	0e 94 67 00 	call	0xce	; 0xce <apds9960_prox_write>
+ 1fa:	0e 94 5e 00 	call	0xbc	; 0xbc <apds9960_prox_write>
 		sei();
- 214:	78 94       	sei
+ 1fe:	78 94       	sei
     while (1) 
     {
 ;
     return(0);
 	}
 }
- 216:	80 e0       	ldi	r24, 0x00	; 0
- 218:	90 e0       	ldi	r25, 0x00	; 0
- 21a:	08 95       	ret
+ 200:	80 e0       	ldi	r24, 0x00	; 0
+ 202:	90 e0       	ldi	r25, 0x00	; 0
+ 204:	08 95       	ret
 
-0000021c <_exit>:
- 21c:	f8 94       	cli
+00000206 <_exit>:
+ 206:	f8 94       	cli
 
-0000021e <__stop_program>:
- 21e:	ff cf       	rjmp	.-2      	; 0x21e <__stop_program>
+00000208 <__stop_program>:
+ 208:	ff cf       	rjmp	.-2      	; 0x208 <__stop_program>
