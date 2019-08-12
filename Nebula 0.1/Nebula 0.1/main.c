@@ -4,7 +4,7 @@
  * Created: 1/11/2019 2:48:09 AM
  * Author : Mergon Pierre
  * Website: Amstartechnology.com
- */ 
+ */
 /*
 Initialize Ports, Initialize I2C, I2C write default data
 
@@ -22,16 +22,29 @@ Initialize Ports, Initialize I2C, I2C write default data
 int main(void)
 {
 		//unUsed();//disable unused ports
-		//i2c_init();//initialize i2c
-		//intSetup();//enables external interrupt 
+		unsigned char test;
+		DDRC |=(1<<1)|(1<<0);
+		i2c_init();//initialize i2c
+		test=apdsTransceive();
+		if ((test=0x92))
+		{
+			PORTC |=(1<<0);
+		}
+		else
+		{
+			PORTC |=(1<<1);
+		}
+		//intSetup();//enables external interrupt
 		//sei();
 		//solOn();
 		//ISR(INT1_vect);
-	
+
 		//ledInitialize();
+		/*
 		int1Setup();
 		apds9960_prox_write();
 		sei();
+		*/
 		//_delay_ms(500);;
 		//apdsBegin();
 		//_delay_ms(500);
@@ -43,26 +56,23 @@ int main(void)
 			DDRC |= (0xff);
 			PORTC |=(1<<0);
 		}
-		
+
 		else if(num==1)
 		{
 			DDRC |= (0xff);
 			PORTC |=(1<<1);
 		}
-		
+
 		else
 		{
 			;
 		}
-		
-		
+
+
 		//i2c_stop();
 		*/
-    while (1) 
+    while (1)
     {
-;
-    return(0);
+   return(0);
 	}
 }
-
-	

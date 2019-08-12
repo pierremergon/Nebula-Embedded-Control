@@ -10,7 +10,7 @@ unsigned char apdsBegin(unsigned char apdsaddr);
 unsigned char apdsSend(unsigned char address,unsigned char value);
 unsigned char apdsReceive(void);
 unsigned char apdsStop(void);
-unsigned char apdsTransceive(unsigned char address);
+unsigned char apdsTransceive(void);
 
-	
-#endif 
+
+#endif

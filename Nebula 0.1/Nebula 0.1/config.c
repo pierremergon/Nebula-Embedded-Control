@@ -102,7 +102,7 @@ unsigned char portSetup(void)
 	//button initialize
 	DDRD &= ~(1<<1);//Input pin
 	PORTD |= (1<<1);//PULL UP
-
+	return 0;
 }
 //initializes and checks the battery status 1=
 unsigned char checkBattery(void) {
@@ -119,20 +119,24 @@ unsigned char checkBattery(void) {
 		batteryStatus=0;
 	}
 	return batteryStatus;
+	return 0;
 }
 
 unsigned char batteryLow(void)//low battery indicator
 {
 	;
+	return 0;
 }
 unsigned char fullCharge(void)//full charge indictor
 {
 	;
+	return 0;
 }
 //Button press actions 
 unsigned char buttonPress(void)
 {
 	;
+	return 0;
 }
 
 

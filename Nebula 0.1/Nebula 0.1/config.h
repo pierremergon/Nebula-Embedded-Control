@@ -22,7 +22,7 @@ unsigned char ledInit(void);//init asmb/ turns off led
 unsigned char apds9960_prox_write(void);//unused ports
 unsigned char checkBattery(void);//initializes and checks the battery status
 unsigned char portSetup(void);// port setup
-unsigned char buttonPress(viod);//button press actions 
+unsigned char buttonPress(void);//button press actions 
 
 
 

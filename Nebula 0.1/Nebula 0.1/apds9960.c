@@ -19,14 +19,15 @@ unsigned char apdsReceive(void)
 {	unsigned char value;
 	value=i2c_readNak();
 	return value;
-	
+
 }
-unsigned char apdsTransceive(unsigned char read)
-{   unsigned char data;
-	
-	i2c_write(read);
-	i2c_write(nebula_read);
-	data=i2c_readNak();
+unsigned char apdsTransceive(void)
+{ unsigned char data;
+
+	i2c_start(nebula_write);
+	i2c_write(id_reg);
+	apdsBegin(nebula_read);
+	data=TWDR;
 	return data;
 }
 unsigned char apdsStop(void)

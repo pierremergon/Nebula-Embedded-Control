@@ -28,16 +28,16 @@ unsigned char int1Setup(void)
 	//cli();
 	return 0;
 }
-
+/*
 ISR(INT1_vect)
 {   unsigned char data;
 	cli();
 	apdsBegin(nebula_write);
-	data=apdsTransceive(id_reg);
+	data=apdsTransceive(void);
 	PORTC=data;
 	sei();
 }
-
+*/
 ISR(INT0_vect)
 {
 	//what to do when water becomes hot
