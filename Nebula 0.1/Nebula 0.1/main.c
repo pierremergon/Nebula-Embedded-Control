@@ -21,6 +21,7 @@ Initialize Ports, Initialize I2C, I2C write default data
 	int num;
 int main(void)
 {
+	/*
 		//unUsed();//disable unused ports
 		unsigned char test;
 		DDRC |=(1<<1)|(1<<0);
@@ -71,6 +72,8 @@ int main(void)
 
 		//i2c_stop();
 		*/
+
+		
     while (1)
     {
    return(0);
