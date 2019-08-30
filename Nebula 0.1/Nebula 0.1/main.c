@@ -73,7 +73,7 @@ int main(void)
 		//i2c_stop();
 		*/
 
-		
+
     while (1)
     {
    return(0);

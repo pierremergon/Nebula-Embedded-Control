@@ -11,7 +11,7 @@ unsigned char apdsBegin(unsigned char apdsaddr)
 
 unsigned char apdsSend(unsigned char address, unsigned char value)
 {
-	i2c_write(address);
+	i2c_start(address);
 	i2c_write(value);
 	return 0;
 }
@@ -33,5 +33,56 @@ unsigned char apdsTransceive(void)
 unsigned char apdsStop(void)
 {
 	i2c_stop();
+	return 0;
+}
+
+unsigned char apdsInit(void)
+{	unsigned char data;
+	i2c_init();
+	apdsSend(nebula_write,id_reg);
+	apdsBegin(nebula_read);
+	data=TWDR;
+	if ((data=0x92))
+	{
+		return 0;
+	}
+	else{
+		return 1;
+	}
+
+}
+unsigned char apdsCalibrate(unsigned char caliBit)
+{
+	//unsigned char caliBit;
+	unsigned char Bit;
+	Bit=caliBit;
+	switch (Bit) {
+		case 1://for proximity calibration
+					break;
+		case 2://for gesture calibration
+					break;
+		case 3://for ALS calibration
+					break;
+		default://proximity
+		break;
+	}
+	return 0;
+}
+unsigned char apdsHandler(void)
+{
+	//unsigned char bitNum[3]={1,2,3};
+	unsigned char i;
+	apdsInit();
+	for(i=1;i<=3; i++)
+	{
+		apdsCalibrate(i);
+	}
+	if ((apdsInit && apdsCalibrate)==0)
+	{
+		;//systemGo
+	}
+	else{
+		;//systemNoGo
+	}
 	return 0;
 }

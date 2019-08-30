@@ -11,6 +11,11 @@ unsigned char apdsSend(unsigned char address,unsigned char value);
 unsigned char apdsReceive(void);
 unsigned char apdsStop(void);
 unsigned char apdsTransceive(void);
+unsigned char apdsInit(void);
+unsigned char apdsCalibrate(unsigned char caliBit);
+unsigned char apdsHandler(void);//coordinates with the apds to ensure it has
+                                //been setup, and configuration bits were sent
+
 //******************************************************************************
 //******************************************************************************
 //Registers
