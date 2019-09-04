@@ -51,19 +51,26 @@ unsigned char apdsInit(void)
 	}
 
 }
+//##########################################################################
+unsigned char proximity(void)
+{
+
+	;
+}
+
 unsigned char apdsCalibrate(unsigned char caliBit)
 {
 	//unsigned char caliBit;
 	unsigned char Bit;
 	Bit=caliBit;
 	switch (Bit) {
-		case 1://for proximity calibration
+		case 1:proximity();//for proximity calibration
 					break;
 		case 2://for gesture calibration
 					break;
 		case 3://for ALS calibration
 					break;
-		default://proximity
+		default:proximity();
 		break;
 	}
 	return 0;

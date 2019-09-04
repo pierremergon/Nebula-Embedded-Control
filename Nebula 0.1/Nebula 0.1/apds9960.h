@@ -15,6 +15,9 @@ unsigned char apdsInit(void);
 unsigned char apdsCalibrate(unsigned char caliBit);
 unsigned char apdsHandler(void);//coordinates with the apds to ensure it has
                                 //been setup, and configuration bits were sent
+unsigned char als(void);//als calibration
+unsigned char proximity(void);//proximity calibration
+unsigned char gesture(void);//gesture calibration
 
 //******************************************************************************
 //******************************************************************************
