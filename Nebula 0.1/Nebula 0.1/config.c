@@ -31,7 +31,7 @@ unsigned char solOff(void)
 //LED Indication Operations
 unsigned char systemGo(void)
 {//green connects to PB2
-	PORTB &= ~(1<<PORTB2);
+	PORTB &= ~(1<<greenPort);
 
 	return 0;
 }
