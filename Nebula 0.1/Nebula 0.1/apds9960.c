@@ -84,7 +84,7 @@ unsigned char apdsHandler(void)
 	{
 		apdsCalibrate(i);
 	}
-	if ((apdsInit && apdsCalibrate)==0)
+	if ((!apdsInit()) && (!apdsCalibrate()))
 	{
 		;//systemGo
 	}
