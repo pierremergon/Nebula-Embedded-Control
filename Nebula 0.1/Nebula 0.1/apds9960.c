@@ -90,7 +90,7 @@ unsigned char apdsHandler(void)
 	{
 		apdsCalibrate(i);
 	}
-	if ((apdsInit && apdsCalibrate)==0)
+	if ((!apdsInit()) && (!apdsCalibrate()))
 	{
 		;//systemGo
 		apdsSend(enableReg,0x25);

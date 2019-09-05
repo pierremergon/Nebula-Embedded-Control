@@ -23,6 +23,13 @@ unsigned char apds9960_prox_write(void);//unused ports
 unsigned char checkBattery(void);//initializes and checks the battery status
 unsigned char portSetup(void);// port setup
 unsigned char buttonPress(void);//button press actions 
+///////////////////////////////////////////////////////////////////////////
+#define redPort 
+#define bluePort
+#define greenPort 
+
+///////////////////////////////////////////////////////////////////////////
+
 
 
 
