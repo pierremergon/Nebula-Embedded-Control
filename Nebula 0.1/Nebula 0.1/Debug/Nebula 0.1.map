@@ -29,20 +29,22 @@ Discarded input sections
                 0x00000000        0x8 apds9960.o
  .text.apdsInit
                 0x00000000       0x1a apds9960.o
+ .text.proximity
+                0x00000000       0x3c apds9960.o
  .text.apdsCalibrate
-                0x00000000        0x4 apds9960.o
+                0x00000000       0x1a apds9960.o
  .text.apdsHandler
-                0x00000000        0x8 apds9960.o
- .debug_info    0x00000000      0x320 apds9960.o
- .debug_abbrev  0x00000000      0x14b apds9960.o
- .debug_loc     0x00000000       0xfc apds9960.o
+                0x00000000       0x1a apds9960.o
+ .debug_info    0x00000000      0x437 apds9960.o
+ .debug_abbrev  0x00000000      0x13c apds9960.o
+ .debug_loc     0x00000000      0x166 apds9960.o
  .debug_aranges
-                0x00000000       0x58 apds9960.o
- .debug_ranges  0x00000000       0x48 apds9960.o
- .debug_line    0x00000000      0x19b apds9960.o
- .debug_str     0x00000000      0x224 apds9960.o
+                0x00000000       0x60 apds9960.o
+ .debug_ranges  0x00000000       0x50 apds9960.o
+ .debug_line    0x00000000      0x1fa apds9960.o
+ .debug_str     0x00000000      0x22e apds9960.o
  .comment       0x00000000       0x31 apds9960.o
- .debug_frame   0x00000000       0x9c apds9960.o
+ .debug_frame   0x00000000       0xac apds9960.o
  .text          0x00000000        0x0 config.o
  .data          0x00000000        0x0 config.o
  .bss           0x00000000        0x0 config.o

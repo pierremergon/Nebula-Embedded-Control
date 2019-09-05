@@ -54,8 +54,14 @@ unsigned char apdsInit(void)
 //##########################################################################
 unsigned char proximity(void)
 {
-
-	;
+	apdsSend(configTwoReg,0x01);
+	apdsSend(configThreeReg,0x10);
+	apdsSend(controlReg1,0x00);
+	apdsSend(persReg,0x10);
+	apdsSend(proxPulsCountReg,0x41);
+	apdsSend(proxIntThresReg1,0x50);
+	apdsSend(proxIntThresReg2,0xC8);
+	return 0;
 }
 
 unsigned char apdsCalibrate(unsigned char caliBit)
@@ -87,6 +93,7 @@ unsigned char apdsHandler(void)
 	if ((apdsInit && apdsCalibrate)==0)
 	{
 		;//systemGo
+		apdsSend(enableReg,0x25);
 	}
 	else{
 		;//systemNoGo

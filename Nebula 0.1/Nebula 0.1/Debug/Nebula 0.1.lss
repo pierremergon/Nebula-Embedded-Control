@@ -114,7 +114,7 @@ ISR(INT0_vect)
   a6:	18 95       	reti
 
 000000a8 <main>:
-		
+
     while (1)
     {
    return(0);
