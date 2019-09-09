@@ -76,7 +76,7 @@ unsigned char apdsCalibrate(unsigned char caliBit)
 					break;
 		case 3://for ALS calibration
 					break;
-		default:proximity();
+		default://already taken care of
 		break;
 	}
 	return 0;
@@ -86,13 +86,14 @@ unsigned char apdsHandler(void)
 	//unsigned char bitNum[3]={1,2,3};
 	unsigned char i;
 	apdsInit();
+
 	for(i=1;i<=3; i++)
 	{
 		apdsCalibrate(i);
 	}
-	if ((!apdsInit()) && (!apdsCalibrate()))
+	if ((!apdsInit()) && (!apdsCalibrate(4)))//4 will be default for apdsCalibrate, thus return 0
 	{
-		;//systemGo
+		systemGo();
 		apdsSend(enableReg,0x25);
 	}
 	else{

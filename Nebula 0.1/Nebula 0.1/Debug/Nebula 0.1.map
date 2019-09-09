@@ -32,17 +32,17 @@ Discarded input sections
  .text.proximity
                 0x00000000       0x3c apds9960.o
  .text.apdsCalibrate
-                0x00000000       0x1a apds9960.o
+                0x00000000        0xc apds9960.o
  .text.apdsHandler
-                0x00000000       0x1a apds9960.o
- .debug_info    0x00000000      0x437 apds9960.o
- .debug_abbrev  0x00000000      0x13c apds9960.o
- .debug_loc     0x00000000      0x166 apds9960.o
+                0x00000000       0x20 apds9960.o
+ .debug_info    0x00000000      0x47c apds9960.o
+ .debug_abbrev  0x00000000      0x15b apds9960.o
+ .debug_loc     0x00000000      0x150 apds9960.o
  .debug_aranges
                 0x00000000       0x60 apds9960.o
  .debug_ranges  0x00000000       0x50 apds9960.o
- .debug_line    0x00000000      0x1fa apds9960.o
- .debug_str     0x00000000      0x22e apds9960.o
+ .debug_line    0x00000000      0x20c apds9960.o
+ .debug_str     0x00000000      0x237 apds9960.o
  .comment       0x00000000       0x31 apds9960.o
  .debug_frame   0x00000000       0xac apds9960.o
  .text          0x00000000        0x0 config.o
@@ -52,7 +52,7 @@ Discarded input sections
  .text.solOn    0x00000000        0xc config.o
  .text.solOff   0x00000000        0xc config.o
  .text.systemGo
-                0x00000000        0x6 config.o
+                0x00000000       0x1a config.o
  .text.systemNoGo
                 0x00000000        0x6 config.o
  .text.systemSetup
@@ -77,14 +77,14 @@ Discarded input sections
                 0x00000000        0x4 config.o
  .text.buttonPress
                 0x00000000        0x4 config.o
- .debug_info    0x00000000      0x30f config.o
- .debug_abbrev  0x00000000       0xc3 config.o
- .debug_loc     0x00000000       0x5e config.o
+ .debug_info    0x00000000      0x394 config.o
+ .debug_abbrev  0x00000000      0x129 config.o
+ .debug_loc     0x00000000       0xa6 config.o
  .debug_aranges
                 0x00000000       0xa0 config.o
  .debug_ranges  0x00000000       0x90 config.o
- .debug_line    0x00000000      0x2e4 config.o
- .debug_str     0x00000000      0x248 config.o
+ .debug_line    0x00000000      0x35c config.o
+ .debug_str     0x00000000      0x293 config.o
  .comment       0x00000000       0x31 config.o
  .debug_frame   0x00000000      0x124 config.o
  .text          0x00000000        0x0 i2c.o

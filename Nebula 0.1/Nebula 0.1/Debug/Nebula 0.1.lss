@@ -103,7 +103,7 @@ ISR(INT0_vect)
 	//systemGo();
 	PORTB &= ~(1<<2);
   9a:	2a 98       	cbi	0x05, 2	; 5
-	
+
 	sei();
   9c:	78 94       	sei
 }

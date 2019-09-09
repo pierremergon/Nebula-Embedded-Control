@@ -6,13 +6,13 @@
 //#include <util/delay.h>
 
 unsigned char int0Setup(void)
-{       
+{
  		DDRD &= ~(1<<2);
  		PORTD |= (1<<2);
 		EICRA |=(0x00);//logic low
 		EIMSK |= (1<<INT0); // interrupt mask register to interrupt 0
     	//MCUCR  |=(0<<ISC01); //preset conditions to enable interrupt for logic low
-    	//MCUCR  |=(0<<ISC00);//"""""""""""""""""""""""""""""""""""""""""""""""""""" 	
+    	//MCUCR  |=(0<<ISC00);//""""""""""""""""""""""""""""""""""""""""""""""""""""
 		//cli();
 		return 0;
 }
@@ -45,6 +45,6 @@ ISR(INT0_vect)
 	//systemNoGo();//flash warning led because of temp ;(
 	//systemGo();
 	PORTB &= ~(1<<2);
-	
+
 	sei();
 }

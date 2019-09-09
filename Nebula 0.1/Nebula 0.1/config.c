@@ -1,7 +1,8 @@
 #include "config.h"
 #include "i2c.h"
 #include "apds9960.h"
-
+#define F_CPU 1000000UL
+#include "util/delay.h"
 
 unsigned char unUsed (void)//disable unused ports
 {
@@ -32,6 +33,8 @@ unsigned char solOff(void)
 unsigned char systemGo(void)
 {//green connects to PB2
 	PORTB &= ~(1<<greenPort);
+	_delay_ms(500);
+	PORTB |= (1<<greenPort);
 
 	return 0;
 }
@@ -132,11 +135,9 @@ unsigned char fullCharge(void)//full charge indictor
 	;
 	return 0;
 }
-//Button press actions 
+//Button press actions
 unsigned char buttonPress(void)
 {
 	;
 	return 0;
 }
-
-
