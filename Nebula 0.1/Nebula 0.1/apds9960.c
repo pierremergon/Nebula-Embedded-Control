@@ -97,7 +97,7 @@ unsigned char apdsHandler(void)
 		apdsSend(enableReg,0x25);
 	}
 	else{
-		;//systemNoGo
+		;systemNoGo();
 	}
 	return 0;
 }
