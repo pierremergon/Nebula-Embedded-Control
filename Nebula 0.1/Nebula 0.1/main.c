@@ -1,4 +1,4 @@
-/*
+   /*
  * Nebula 0.1.c
  *
  * Created: 1/11/2019 2:48:09 AM
@@ -74,8 +74,9 @@ int main(void)
 		*/
 
 
-    while (1)
+    while(1)
     {
-   return(0);
+
 	}
+	return(0);
 }
