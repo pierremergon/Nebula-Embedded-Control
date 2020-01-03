@@ -59,5 +59,5 @@ unsigned char gesture(void);//gesture calibration
 //Proximity Opperation
 
 //Interrupt for apds9960
-unsigned char int0Setup(void);
+unsigned char int0Setup(void)
 #endif

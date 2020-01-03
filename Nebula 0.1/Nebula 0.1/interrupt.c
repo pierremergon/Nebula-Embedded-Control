@@ -2,49 +2,23 @@
 #include "interrupt.h"
 #include "config.h"
 #include "apds9960.h"
-//#define F_CPU 1000000UL
-//#include <util/delay.h>
+
+#define F_CPU 1000000UL
 
 unsigned char int0Setup(void)
 {
- 		DDRD &= ~(1<<2);
- 		PORTD |= (1<<2);
-		EICRA |=(0x00);//logic low
-		EIMSK |= (1<<INT0); // interrupt mask register to interrupt 0
-    	//MCUCR  |=(0<<ISC01); //preset conditions to enable interrupt for logic low
-    	//MCUCR  |=(0<<ISC00);//""""""""""""""""""""""""""""""""""""""""""""""""""""
-		//cli();
-		return 0;
-}
-
-unsigned char int1Setup(void)
-{
-	DDRD &= ~(1<<3);
-	PORTD |= (1<<3);
-	EICRA |=(0x00);//logic low
-	EIMSK |= (1<<INT1); // interrupt mask register to interrupt 0
-	//MCUCR  |=(0<<ISC01); //preset conditions to enable interrupt for logic low
-	//MCUCR  |=(0<<ISC00);//""""""""""""""""""""""""""""""""""""""""""""""""""""
-	//cli();
 	return 0;
 }
-/*
-ISR(INT1_vect)
-{   unsigned char data;
-	cli();
-	apdsBegin(nebula_write);
-	data=apdsTransceive(void);
-	PORTC=data;
-	sei();
-}
-*/
-ISR(INT0_vect)
-{
-	//what to do when water becomes hot
-	//solOff();//turn solenoid off
-	//systemNoGo();//flash warning led because of temp ;(
-	//systemGo();
-	PORTB &= ~(1<<2);
 
+unsigned char pcIntSetup(void)
+{
+	PCICR = 0x02;
+	PCMSK1 |= (1<<PCINT10);
 	sei();
+	return 0;
+}
+
+PCINT1_vect()
+{
+	batteryLow();
 }

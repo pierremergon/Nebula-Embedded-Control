@@ -25,10 +25,10 @@ unsigned char apdsReceive(void)
 unsigned char apdsTransceive(void)
 { unsigned char data;
 
-	i2c_write(nebula_write);
+	apdsSend(nebula_write);
 	i2c_write(proxDataReg);
 	apdsBegin(nebula_read);
-	data=TWDR0;
+	data=TWDR;
 	return data;
 }
 unsigned char apdsStop(void)
@@ -42,7 +42,7 @@ unsigned char apdsInit(void)
 	i2c_init();
 	apdsSend(nebula_write,id_reg);
 	apdsBegin(nebula_read);
-	data=TWDR0;
+	data=TWDR;
 	if ((data=0x92))
 	{
 		return 0;
@@ -105,7 +105,7 @@ unsigned char apdsHandler(void)
 }
 
 //Interrupt
-/*unsigned char int0Setup(void)
+unsigned char int0Setup(void)
 {
  		DDRD &= ~(1<<2);
  		PORTD |= (1<<2);
@@ -115,4 +115,4 @@ unsigned char apdsHandler(void)
     	//MCUCR  |=(0<<ISC00);//""""""""""""""""""""""""""""""""""""""""""""""""""""
 		//cli();
 		return 0;
-}*/
+}

@@ -16,9 +16,8 @@ Initialize Ports, Initialize I2C, I2C write default data
 #include "i2c.h"
 #include "indicate.h"
 #include "apds9960.h"
-#include "vcnl4010.h"
-#include "drv8835.h"
-//#define vcnl_write 0x26
+#define F_CPU 1000000UL
+#include <util/delay.h>
 	int num;
 int main(void)
 {
@@ -42,7 +41,7 @@ int main(void)
 		//ISR(INT1_vect);
 
 		//ledInitialize();
-		
+		/*
 		int1Setup();
 		apds9960_prox_write();
 		sei();
@@ -73,36 +72,20 @@ int main(void)
 
 		//i2c_stop();
 		*/
-
-		/*apdsBegin(nebula_write);
-		apdsCalibrate(1);
-		sei();
-		portSetup();*/
-		portSetup();
-		DDRD|= (1<<0);
-		PORTD = (0<<0);
-		int num;
-		i2c_init();
-		vcnlBegin(vcnl_write);
-		num = vcnlTransceive();
-    while(1)
-    {
-if ((num = 0x21))
-{
- PORTD|= (1<<0);			
-}
-
-else
-{
-	PORTD = ( 0<<0);
-}
-
-	}
-	return(0);
-}
-/*
 		ISR(INT0_vect)
 		{
 			num = apdsTransceive();
 		}
-		*/
+		apdsBegin(nebula_write);
+		apdsCalibrate(1);
+		portSetup();
+    while(1)
+    {
+if (num>0)
+{
+	systemGo();
+  
+}
+	}
+	return(0);
+}

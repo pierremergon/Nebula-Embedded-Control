@@ -1,30 +1,64 @@
 #include "config.h"
 #include "i2c.h"
 #include "apds9960.h"
+#include "drv8835.h"
 #define F_CPU 1000000UL
-#include "util/delay.h"
+#include <util/delay.h>
+
+unsigned char comp = 0; 
+unsigned char buttonCount = 0;
+
 
 unsigned char unUsed (void)//disable unused ports
 {
-	DDRB |= (1<<6)|(1<<7);
-	DDRC |= (1<<0)|(1<<1)|(1<<2)|(1<<3)|(1<<6)|(1<<7);
-	DDRD |= (1<<0)|(1<<1);
-	DDRB |= (1<<0)|(1<<1)|(1<<2);//set as led output
+	DDRD &= ~(1<<unused1) & ~(1<<unused2);
 	return 0;
+}
+
+// boost converter enable/disable
+unsigned char boostEnable(void)
+{
+	PORTE |= (1<<2);
+	return 0; 
+}
+
+unsigned char boostDisable(void)
+{
+	PORTE &= ~(1<<2);
+	return 0;
+}
+
+//comparator output
+unsigned char comparator(void)
+{	
+	PORTB |= (1<<1);
+	if (((PINB & (1<<2)) == 0))
+	{
+		return 0;
+	}
+	else 
+	{
+		return 1;
+	}
+
 }
 
 //solenoid operations
 unsigned char solOn(void)
-{   PORTD |=(1<<5);
-	PORTD =(1<<PORTD6)|(0<<PORTD7);//forward
-	PORTD &= ~(1<<5);//SLEEP
+{   PORTE |= (1<<3);//disable sleep
+	PORTC |= (1<<0);
+	PORTC &= ~(1<<1);//forward
+	PORTC &= ~(1<<0);
+	PORTC &= ~(1<<1);//forward
 	return 0;
 }
 
 unsigned char solOff(void)
-{   PORTD |=(1<<5);
-	PORTD =(0<<PORTD6)|(1<<PORTD7);//reverse
-	PORTD &= ~(1<<5);//SLEEP
+{   PORTE |= (1<<3);//disable sleep
+	PORTC |= (1<<1);
+	PORTC &= ~(1<<0);//reverse
+	PORTC &= ~(1<<1);
+	PORTE &= ~(1<<3);//SLEEP
 	return 0;
 }
 
@@ -32,43 +66,45 @@ unsigned char solOff(void)
 //LED Indication Operations
 unsigned char systemGo(void)
 {//green connects to PB2
-	PORTB &= ~(1<<greenPort);
-	_delay_ms(500);
-	PORTB |= (1<<greenPort);
-
+	unsigned char status = 0;
+	portSetup();
+	status = comparator();
+	if (status == 0)
+	{
+	batteryLow();
+	}
+	
+	else
+	{
+		PORTD &= ~(1<<bluePort);
+		_delay_ms(350);
+		PORTD |= (1<<bluePort);
+		PORTD &= ~(1<<bluePort);
+		_delay_ms(350);
+		PORTD |= (1<<bluePort);
+	}
+	
+	
 	return 0;
 }
 
 unsigned char systemNoGo(void)
-{//red led on PB0
-	//PORTB =(0<<PORTB0);
-	PORTB |= (1<<PORTB2);
+{
+	batteryLow();
 	return 0;
+
 }
 
-unsigned char systemSetup(void)
-{
-	PORTB &= ~(1<<PORTB1);
-	return 0;
-}
 /////////////////////////////////////////////////////////////////////////////Sleep States
 unsigned char powerSave(void)//sleep length
 {
 	SMCR |= ~(1<<SM2)|(1<<SM1)|(1<<SM0);
 	return 0;
 }
+
 unsigned char idle(void)
 {
 
-	return 0;
-}
-
-//////////////////////////////////////////////////////////////////////////////////////
-unsigned char ledInit(void)//initialize led to zero
-{
-	DDRC = 0xFF;
-	DDRB = 0x07;
-	PORTB |= ((1<<PORTB0))|((1<<PORTB1))|((1<<PORTB2));//set them as output,turn off led lights
 	return 0;
 }
 
@@ -97,17 +133,51 @@ unsigned char apds9960_prox_write(void)
 }
 unsigned char portSetup(void)
 {
+	unUsed();
 	//battery indicator ports
-	DDRB |= (1<<6);
-	PORTB &= ~(1<<6);
-	DDRB |= (1<<7);
-	PORTB &= ~(1<<7);
+	DDRD &= ~(1<<redPort);//internal pullup
+	DDRD &= ~(1<<greenPort);
+	DDRD &= ~(1<<bluePort);
+	PORTD |= (1<<redPort);
+	PORTD |= (1<<greenPort);
+	PORTD |= (1<<bluePort);//
+	//battery status
+	DDRB &= ~(1<<batteryPort);
+	
 	//button initialize
-	DDRD &= ~(1<<1);//Input pin
-	PORTD |= (1<<1);//PULL UP
+	DDRC &= ~(1<<button);//Input pin
+	PORTC |= (1<<button);//PULL UP
 	return 0;
+	//solenoid
+	//drv input 1 and 2 pulldown
+	DDRC &= (1<<drvIn1);
+	DDRC &= (1<<drvIn2);
+	DDRC &= (1<<drvSleep);// sleep via pulldown
+	PORTC &= ~(1<<drvSleep);
+	PORTC &= ~(1<<drvIn1);
+	PORTC &= ~(1<<drvIn2);
+	//stepper
+	DDRB &= ~(1<<stepVcc);//disable via pullup 
+	DDRB &= ~(1<<stepMode);
+	DDRD &= ~(1<<ain1);
+	DDRD &= ~(1<<ain2);
+	DDRE &= ~(1<<bin1);
+	DDRE &= ~(1<<bin1);
+	
+	PORTB &= ~(1<<stepVcc);
+	PORTB &= ~(1<<stepMode);
+	PORTD &= ~(1<<ain1);
+	PORTD &= ~(1<<ain2);
+	PORTE &= ~(1<<bin1);
+	PORTE &= ~(1<<bin2);
+
+	//comparator
+	DDRB &= ~(1<<1);
+	DDRB &= ~(1<<2);
+	PORTB &= ~(1<<1);
+	PORTB &= ~(1<<2);
 }
-//initializes and checks the battery status 1=
+//initializes and checks the battery status
 unsigned char checkBattery(void) {
 	unsigned char batteryStatus;
 	PORTB |= (1<<6);
@@ -121,23 +191,53 @@ unsigned char checkBattery(void) {
 	{
 		batteryStatus=0;
 	}
-	return batteryStatus;
-	return 0;
+	return batteryStatus;	
 }
 
 unsigned char batteryLow(void)//low battery indicator
 {
-	;
+	boostDisable();
+	
+	PORTD |= (1<<redPort);
+	_delay_ms(150);
+	PORTD &= ~(1<<redPort);
+	_delay_ms(150);
+	PORTD |= (1<<redPort);
+	_delay_ms(150);
+	PORTD &= ~(1<<redPort);
+	_delay_ms(150);
+	idle();
 	return 0;
 }
-unsigned char fullCharge(void)//full charge indictor
+
+unsigned char charging(void)//charge indictor
 {
-	;
+	//pin change int
+	comp = comparator();
+	if ((PINB & (1<<batteryPort)) == 0)
+	{
+		PORTD |= (1<<redPort);
+	}
+	else if((((PINB & (1<<batteryPort)) != 0) & (comp)))
+	{
+		PORTD |= (1<<redPort);
+	}
+	else
+	{
+		PORTD &= ~(1<<redPort);
+	}
 	return 0;
 }
+
 //Button press actions
 unsigned char buttonPress(void)
 {
-	;
+	// pin change interrupt
+	
+	if ((PINC & (1<<2)) == 0)
+	{
+		//do task for single button press
+		buttonCount += 1;
+	}
 	return 0;
 }
