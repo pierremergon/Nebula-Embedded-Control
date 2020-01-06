@@ -76,12 +76,7 @@ unsigned char systemGo(void)
 	
 	else
 	{
-		PORTD &= ~(1<<bluePort);
-		_delay_ms(350);
-		PORTD |= (1<<bluePort);
-		PORTD &= ~(1<<bluePort);
-		_delay_ms(350);
-		PORTD |= (1<<bluePort);
+	flashy();//all good
 	}
 	
 	
@@ -95,6 +90,17 @@ unsigned char systemNoGo(void)
 
 }
 
+unsigned char flashy(void)
+{
+		PORTD &= ~(1<<bluePort);
+		_delay_ms(350);
+		PORTD |= (1<<bluePort);
+		PORTD &= ~(1<<bluePort);
+		_delay_ms(350);
+		PORTD |= (1<<bluePort);
+		
+		return 0;
+}
 /////////////////////////////////////////////////////////////////////////////Sleep States
 unsigned char powerSave(void)//sleep length
 {

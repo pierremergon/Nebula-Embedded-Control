@@ -56,8 +56,5 @@ unsigned char gesture(void);//gesture calibration
 #define FIFOL 0xFE
 #define FIFOR 0xFF
 //******************************************************************************
-//Proximity Opperation
-
-//Interrupt for apds9960
-unsigned char int0Setup(void);
+//Proximity Operation
 #endif

@@ -79,6 +79,7 @@ int main(void)
 		sei();
 		portSetup();*/
 		portSetup();
+		timerSetup(0x0000);
 		DDRD|= (1<<0);
 		PORTD = (0<<0);
 		int num;
@@ -98,6 +99,7 @@ else
 }
 
 	}
+	
 	return(0);
 }
 /*

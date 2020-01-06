@@ -14,6 +14,7 @@ unsigned char proxDuration(unsigned char t);//Proximity timer duration
 unsigned char ledInit(void);//initialize led to zero
 unsigned char systemGo(void);//green led on
 unsigned char systemNoGo(void);//red led on
+unsigned char flashy(void);//blue led for general purpose operation
 unsigned char batteryLow(void);//low battery indicator
 unsigned char charging(void);//charge indictor
 unsigned char systemSetup(void);// blue light displays during calibration
