@@ -13,7 +13,7 @@ unsigned char int0Setup(void)
 unsigned char pcIntSetup(void)
 
 {
-	PCICR = 0x02;
+	PCICR |= (1<<PCIE1);
 	PCMSK1 |= (1<<PCINT10);
 	sei();
 	return 0;
@@ -21,8 +21,9 @@ unsigned char pcIntSetup(void)
 
 ISR(PCINT1_vect)
 {
-	flashy();
-	charging();
+	//flashy();
+	//charging();
+	batteryLow();
 
 }
 /*

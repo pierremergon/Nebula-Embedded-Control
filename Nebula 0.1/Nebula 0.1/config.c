@@ -17,8 +17,9 @@ unsigned char unUsed (void)//disable unused ports
 
 // boost converter enable/disable
 unsigned char boostEnable(void)
-{
-	PORTE |= (1<<2);
+{   
+	DDRE |=(1<<boostEn);
+	PORTE |= (1<<boostEn);
 	return 0; 
 }
 
@@ -45,20 +46,17 @@ unsigned char comparator(void)
 
 //solenoid operations
 unsigned char solOn(void)
-{   PORTE |= (1<<3);//disable sleep
-	PORTC |= (1<<0);
-	PORTC &= ~(1<<1);//forward
-	PORTC &= ~(1<<0);
-	PORTC &= ~(1<<1);//forward
+{   PORTC |=(1<<1);
+	_delay_ms(20);
+	PORTC &= ~(1<<1);
 	return 0;
 }
 
 unsigned char solOff(void)
-{   PORTE |= (1<<3);//disable sleep
-	PORTC |= (1<<1);
-	PORTC &= ~(1<<0);//reverse
-	PORTC &= ~(1<<1);
-	PORTE &= ~(1<<3);//SLEEP
+{   PORTC |=(1<<0);
+	_delay_ms(20);
+	PORTC &= ~(1<<0);
+	PORTC &= ~(1<<drvSleep);
 	return 0;
 }
 
@@ -76,7 +74,7 @@ unsigned char systemGo(void)
 	
 	else
 	{
-	flashy();//all good
+	flashy();//all good,m  
 	}
 	
 	
@@ -93,10 +91,10 @@ unsigned char systemNoGo(void)
 unsigned char flashy(void)
 {
 		PORTD &= ~(1<<bluePort);
-		_delay_ms(350);
+		_delay_ms(1000);
 		PORTD |= (1<<bluePort);
 		PORTD &= ~(1<<bluePort);
-		_delay_ms(350);
+		_delay_ms(1000);
 		PORTD |= (1<<bluePort);
 		
 		return 0;
@@ -141,9 +139,9 @@ unsigned char portSetup(void)
 {
 	unUsed();
 	//battery indicator ports
-	DDRD &= ~(1<<redPort);//internal pullup
-	DDRD &= ~(1<<greenPort);
-	DDRD &= ~(1<<bluePort);
+	DDRD = (1<<redPort);//internal pullup
+	DDRD = (1<<greenPort);
+	DDRD = (1<<bluePort);
 	PORTD |= (1<<redPort);
 	PORTD |= (1<<greenPort);
 	PORTD |= (1<<bluePort);//
@@ -156,10 +154,10 @@ unsigned char portSetup(void)
 	return 0;
 	//solenoid
 	//drv input 1 and 2 pulldown
-	DDRC &= (1<<drvIn1);
-	DDRC &= (1<<drvIn2);
-	DDRC &= (1<<drvSleep);// sleep via pulldown
-	PORTC &= ~(1<<drvSleep);
+	DDRC |= (1<<drvIn1);
+	DDRC |= (1<<drvIn2);
+	DDRE |= (1<<drvSleep);// sleep via pulldown
+	PORTE &= ~(1<<drvSleep);
 	PORTC &= ~(1<<drvIn1);
 	PORTC &= ~(1<<drvIn2);
 	//stepper
@@ -202,16 +200,27 @@ unsigned char checkBattery(void) {
 
 unsigned char batteryLow(void)//low battery indicator
 {
-	boostDisable();
+	//boostDisable();
+    
+	PORTD &= ~(1<<redPort);
+	_delay_ms(100);
+	PORTD |= (1<<redPort);
+	PORTD &= ~(1<<greenPort);
+	_delay_ms(100);
+	PORTD |= (1<<greenPort);
+	PORTD &= ~(1<<bluePort);
+	_delay_ms(100);
+	PORTD |= (1<<bluePort);
+	PORTD &= ~(1<<redPort) & ~(1<<bluePort);
+	_delay_ms(100);
+	PORTD |= (1<<redPort) | (1<<bluePort);
+	PORTD &= ~(1<<greenPort) & (1<<redPort);
+	_delay_ms(100);
+	PORTD |= (1<<greenPort) |(1<<redPort);
+	PORTD &= ~(1<<bluePort) & ~(1<<greenPort);
+	_delay_ms(100);
+	PORTD |= (1<<bluePort) | (1<<greenPort);
 	
-	PORTD |= (1<<redPort);
-	_delay_ms(150);
-	PORTD &= ~(1<<redPort);
-	_delay_ms(150);
-	PORTD |= (1<<redPort);
-	_delay_ms(150);
-	PORTD &= ~(1<<redPort);
-	_delay_ms(150);
 	idle();
 	return 0;
 }

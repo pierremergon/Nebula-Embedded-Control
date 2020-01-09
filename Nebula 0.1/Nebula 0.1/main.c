@@ -18,6 +18,8 @@ Initialize Ports, Initialize I2C, I2C write default data
 #include "apds9960.h"
 #include "vcnl4010.h"
 #include "drv8835.h"
+#define F_CPU 1000000
+#include <util/delay.h>
 //#define vcnl_write 0x26
 	int num;
 int main(void)
@@ -78,28 +80,58 @@ int main(void)
 		apdsCalibrate(1);
 		sei();
 		portSetup();*/
-		portSetup();
-		timerSetup(0x0000);
-		DDRD|= (1<<0);
-		PORTD = (0<<0);
-		int num;
+		//portSetup();
+		//timerSetup(0x0000);
+
+		/*int num;
 		i2c_init();
 		vcnlBegin(vcnl_write);
 		num = vcnlTransceive();
+		*/
+		/*DDRD = (1<<6);
+		DDRD |= (1<<redPort);*/
+		DDRD |= (1<<greenPort);
+		DDRD |=(1<<redPort);
+		DDRD |=(1<<bluePort);
+		DDRE |=(1<<drvSleep);
+		DDRC &= ~(1<<2);
+		PORTC |=(1<<2);
+		PORTE |=(1<<drvSleep);
+
+			DDRC |= (1<<drvIn1);
+			DDRC |= (1<<drvIn2);
+		boostEnable();
+		pcIntSetup();
+		//sei();
+		/*PORTC |=(1<<1);
+		_delay_ms(20);
+		PORTC &= ~(1<<1);
+		PORTC |=(1<<0);
+		_delay_ms(20);
+		PORTC &= ~(1<<0);
+*/
+		/*PORTC &= ~(1<<1);
+		_delay_ms(20);
+		PORTC |=(1<<1);
+		*/
+		
+				
+		
+		solOn();
+		//solOff();
+
     while(1)
     {
-if ((num = 0x21))
-{
- PORTD|= (1<<0);			
-}
-
-else
-{
-	PORTD = ( 0<<0);
-}
-
+//flashy();
+//batteryLow();
+//checkBattery();
+//DDRE |=(1<<2);
+//PORTE |= (1<<2);
+//systemNoGo();
+//solOff();
+//solOff();
+;
 	}
-	
 	return(0);
 }
 /*
