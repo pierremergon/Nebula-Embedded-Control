@@ -1,5 +1,8 @@
 #ifndef config_H_INCLUDED
 #define config_H_INCLUDED
+#include "i2c.h"
+#include "apds9960.h"
+#include "drv8835.h"
 
 /* Defines the various processes/ indicators used on the PCB */
 unsigned char unUsed(void);//unused ports
@@ -26,6 +29,7 @@ unsigned char checkBattery(void);//initializes and checks the battery status
 unsigned char portSetup(void);// port setup
 unsigned char buttonPress(void);//button press actions
 unsigned char comparator(void);// retruns status of comparator
+unsigned char i2c_check(void);//led flash for i2c test
 ///////////////////////////////////////////////////////////////////////////
 
 #define redPort 5 //red led

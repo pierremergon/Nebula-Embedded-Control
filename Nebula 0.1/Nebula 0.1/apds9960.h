@@ -1,5 +1,9 @@
 #ifndef apds9960_H_INCLUDED
 #define apds9960_H_INCLUDED
+#include "i2c.h"
+#include "interrupt.h"
+#include "config.h"
+#include <avr/interrupt.h>
 #define nebula_write 0x72
 #define nebula_read 0x73
 #define proxEnable 0x8

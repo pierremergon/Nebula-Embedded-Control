@@ -8,7 +8,7 @@
 **************************************************************************/
 #ifndef i2c_H_INCLUDED
 #define i2c_H_INCLUDED
-#include <avr/io.h>
+
 
  
 /* I2C clock in Hz */

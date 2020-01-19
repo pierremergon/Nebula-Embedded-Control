@@ -1,20 +1,19 @@
-#include "i2c.h"
 #include "apds9960.h"
-#include "interrupt.h"
-#include "config.h"
-#include <avr/interrupt.h>
 
 unsigned char apdsBegin(unsigned char apdsaddr)
 {
 	unsigned char i2cStatus;
 	i2c_init();
+	
 	i2cStatus = i2c_start(apdsaddr);
 	if (i2cStatus != 0)
 	{
-		batteryLow();
+		idle();
 	}
+	
 	return 0;
 }
+
 
 unsigned char apdsSend(unsigned char address, unsigned char value)
 {
@@ -30,12 +29,40 @@ unsigned char apdsReceive(void)
 }
 unsigned char apdsTransceive(void)
 { unsigned char data;
-
-	i2c_write(nebula_write);
+	i2c_start(nebula_write);
 	i2c_write(proxDataReg);
-	apdsBegin(nebula_read);
-	data=TWDR0;
-	return data;
+	//i2c_write(id_reg);
+	i2c_start(nebula_read);
+	data = i2c_readNak();
+	apdsStop();
+	///i2c_start(nebula_write);
+	//i2c_write(0xE5);
+	//apdsStop();
+	
+	if (data == 0x00)
+	{
+		flashy();
+		//systemNoGo();
+	}
+	else
+	{
+		i2c_check();
+		
+	}
+	
+	//i2c_start(nebula_write);
+	///i2c_write(0xE5);
+	//apdsStop();
+	//i2c_start(nebula_write);
+	//apdsSend(enableReg,0x25);
+	//apdsStop();
+	/*
+	i2c_start(nebula_write);
+	i2c_write(0xE5);
+	apdsStop();*/
+	
+	return 0;
+	
 }
 unsigned char apdsStop(void)
 {
@@ -45,10 +72,16 @@ unsigned char apdsStop(void)
 
 unsigned char apdsInit(void)
 {	unsigned char data;
+	//i2c_init();
+	apdsBegin(nebula_write);
+    i2c_write(id_reg);
 	apdsBegin(nebula_read);
+	i2c_readNak();
+	i2c_stop();
 	data = TWDR0;
 	if ((data = 0x92))
-	{
+	{   
+		batteryLow();
 		return 0;
 	}
 	else{
@@ -58,15 +91,40 @@ unsigned char apdsInit(void)
 }
 //##########################################################################
 unsigned char proximity(void)
-{   
+{   i2c_start(nebula_write);
 	apdsSend(configTwoReg,0x01);
-	apdsSend(configThreeReg,0x10);
-	apdsSend(controlReg1,0x00);
-	apdsSend(persReg,0x10);
-	apdsSend(proxPulsCountReg,0x41);
-	apdsSend(proxIntThresReg1,0x50);
-	apdsSend(proxIntThresReg2,0xC8);
+	apdsStop();
+	i2c_start(nebula_write);
+	apdsSend(configThreeReg,0x00);
+	apdsStop();
+	i2c_start(nebula_write);
+	apdsSend(controlReg1,0x0C);
+	apdsStop();
+	i2c_start(nebula_write);
+	apdsSend(persReg,0x5F);
+	apdsStop();
+	i2c_start(nebula_write);
+	apdsSend(proxPulsCountReg,0x7C);
+	apdsStop();
+	i2c_start(nebula_write);
+	apdsSend(proxIntThresReg1,0x09);
+	apdsStop();
+	i2c_start(nebula_write);
+	apdsSend(proxIntThresReg2,0xFE);
+	apdsStop();
+	i2c_start(nebula_write);
+	apdsSend(0x83,0x00);
+	apdsStop();
+	i2c_start(nebula_write);
+	i2c_write(0xE5);
+	i2c_stop();
+	i2c_start(nebula_write);
 	apdsSend(enableReg,0x25);
+	apdsStop();
+	//i2c_write(0xE7);
+	//i2c_write(0xE4);
+	//apdsStop();
+	
 	return 0;
 }
 

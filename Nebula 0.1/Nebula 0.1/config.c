@@ -1,7 +1,4 @@
 #include "config.h"
-#include "i2c.h"
-#include "apds9960.h"
-#include "drv8835.h"
 #define F_CPU 1000000UL
 #include <util/delay.h>
 
@@ -46,17 +43,31 @@ unsigned char comparator(void)
 
 //solenoid operations
 unsigned char solOn(void)
-{   PORTC |=(1<<1);
-	_delay_ms(20);
+
+{   PORTE |= (1<<drvSleep);
+	PORTC |=(1<<1);
+	_delay_ms(10);
 	PORTC &= ~(1<<1);
+	//_delay_ms(10);
+	PORTC &= ~(1<<0);
+	//PORTC |=(1<<0);
+	PORTE &= ~(1<<drvSleep);
+	//PORTC &= ~(1<<1);
+	//_delay_ms(500);
+	//PORTC |= (1<<0) | (1<<1);
 	return 0;
 }
 
 unsigned char solOff(void)
-{   PORTC |=(1<<0);
-	_delay_ms(20);
+{    PORTE |= (1<<drvSleep);
+	 PORTC |=(1<<0);
+	_delay_ms(10);
 	PORTC &= ~(1<<0);
-	PORTC &= ~(1<<drvSleep);
+	//_delay_ms(10);
+	//PORTC |=(1<<0);
+	PORTC &= ~(1<<1);
+	PORTE &= ~(1<<drvSleep);
+	//PORTC |= (1<<0) | (1<<1);
 	return 0;
 }
 
@@ -91,11 +102,13 @@ unsigned char systemNoGo(void)
 unsigned char flashy(void)
 {
 		PORTD &= ~(1<<bluePort);
-		_delay_ms(1000);
+		_delay_ms(50);
 		PORTD |= (1<<bluePort);
+		_delay_ms(50);
 		PORTD &= ~(1<<bluePort);
-		_delay_ms(1000);
+		_delay_ms(50);
 		PORTD |= (1<<bluePort);
+		_delay_ms(50);
 		
 		return 0;
 }
@@ -108,7 +121,14 @@ unsigned char powerSave(void)//sleep length
 
 unsigned char idle(void)
 {
-
+	PORTD &= ~(1<<redPort);
+	_delay_ms(50);
+	PORTD |= (1<<redPort);
+	_delay_ms(50);
+	PORTD &= ~(1<<redPort);
+	_delay_ms(50);
+	PORTD |= (1<<redPort);
+	_delay_ms(50);
 	return 0;
 }
 
@@ -212,26 +232,28 @@ unsigned char batteryLow(void)//low battery indicator
 	_delay_ms(100);
 	PORTD |= (1<<bluePort);
 	PORTD &= ~(1<<redPort) & ~(1<<bluePort);
-	_delay_ms(100);
+	_delay_ms(300);
 	PORTD |= (1<<redPort) | (1<<bluePort);
 	PORTD &= ~(1<<greenPort) & (1<<redPort);
-	_delay_ms(100);
+	_delay_ms(300);
 	PORTD |= (1<<greenPort) |(1<<redPort);
 	PORTD &= ~(1<<bluePort) & ~(1<<greenPort);
-	_delay_ms(100);
+	_delay_ms(300);
 	PORTD |= (1<<bluePort) | (1<<greenPort);
-	
-	idle();
+	PORTD &= ~(1<<redPort) & ~(1<<greenPort);
+	_delay_ms(300);
+	PORTD |= (1<<redPort) | (1<<greenPort);
+	//idle();
 	return 0;
 }
 
-unsigned char charging(void)//charge indictor
+unsigned char charging(void)//charge indicator
 {
 	//pin change int
 	comp = comparator();
 	if ((PINB & (1<<batteryPort)) == 0)
 	{
-		PORTD |= (1<<redPort);
+		PORTD &= ~(1<<redPort);
 	}
 	else if((((PINB & (1<<batteryPort)) != 0) & (comp)))
 	{
@@ -241,6 +263,7 @@ unsigned char charging(void)//charge indictor
 	{
 		PORTD &= ~(1<<redPort);
 	}
+
 	return 0;
 }
 
@@ -254,5 +277,14 @@ unsigned char buttonPress(void)
 		//do task for single button press
 		buttonCount += 1;
 	}
+	return 0;
+}
+
+unsigned char i2c_check(void)
+{
+	PORTD &= ~(1<<greenPort);
+	_delay_ms(50);
+	PORTD |= (1<<greenPort);
+	_delay_ms(50);
 	return 0;
 }

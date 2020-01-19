@@ -10,7 +10,6 @@ Initialize Ports, Initialize I2C, I2C write default data
 
 */
 #include <avr/io.h>
-#include <avr/interrupt.h>
 #include "config.h"
 #include "interrupt.h"
 #include "i2c.h"
@@ -96,12 +95,25 @@ int main(void)
 		DDRE |=(1<<drvSleep);
 		DDRC &= ~(1<<2);
 		PORTC |=(1<<2);
-		PORTE |=(1<<drvSleep);
+		DDRB &= ~(1<<0);
+		PORTB |= (1<<0);
+		
+		PORTD |= (1<<greenPort);
+		PORTD |= (1<<bluePort);
+		PORTD |= (1<<redPort);
+		//PORTE &= ~(1<<drvSleep);
 
-			DDRC |= (1<<drvIn1);
-			DDRC |= (1<<drvIn2);
+		DDRC |= (1<<drvIn1);
+		DDRC |= (1<<drvIn2);
+		PORTC &= ~(1<<drvIn1);
+		PORTC &= ~(1<<drvIn2);
+		//PORTE |= (1<<drvSleep);
+		
+		
 		boostEnable();
+		//boostDisable();
 		pcIntSetup();
+		int0Setup();
 		//sei();
 		/*PORTC |=(1<<1);
 		_delay_ms(20);
@@ -117,8 +129,26 @@ int main(void)
 		
 				
 		
-		solOn();
+		//solOn();
 		//solOff();
+		DDRD &= ~(1<<2);
+		PORTD |= (1<<2);
+		//apdsInit();
+		i2c_init();
+		//apdsBegin(nebula_write);
+		proximity();
+		//int0Setup();
+		//apdsInit();
+		//apdsTransceive();
+		//solOn();
+		//solOn();
+		//_delay_ms(5000);
+		//solOff();
+		//_delay_ms(5000);
+		//proximity();
+		sei();
+		//apdsInit();
+		
 
     while(1)
     {
@@ -130,7 +160,11 @@ int main(void)
 //systemNoGo();
 //solOff();
 //solOff();
-;
+//solOn();
+//_delay_ms(10000);
+//solOff();
+//apdsTransceive();
+//_delay_ms(5000);
 	}
 	return(0);
 }
