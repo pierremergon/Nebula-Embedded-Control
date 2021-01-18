@@ -1,4 +1,5 @@
 #include "apds9960.h"
+#include <avr/sleep.h>
 
 unsigned char apdsBegin(unsigned char apdsaddr)
 {
@@ -33,20 +34,23 @@ unsigned char apdsTransceive(void)
 	i2c_write(proxDataReg);
 	//i2c_write(id_reg);
 	i2c_start(nebula_read);
+	//data = i2c_readAck();
 	data = i2c_readNak();
 	apdsStop();
-	///i2c_start(nebula_write);
-	//i2c_write(0xE5);
-	//apdsStop();
+	i2c_start(nebula_write);
+	i2c_write(0xE5);
+	apdsStop();
+
 	
-	if (data == 0x00)
+	if (data == 0xFF)//A0
 	{
 		flashy();
 		//systemNoGo();
 	}
-	else
+	else 
 	{
-		i2c_check();
+		//i2c_check();
+		;
 		
 	}
 	
@@ -60,7 +64,7 @@ unsigned char apdsTransceive(void)
 	i2c_start(nebula_write);
 	i2c_write(0xE5);
 	apdsStop();*/
-	
+	//sleep_mode();
 	return 0;
 	
 }
@@ -92,19 +96,22 @@ unsigned char apdsInit(void)
 //##########################################################################
 unsigned char proximity(void)
 {   i2c_start(nebula_write);
-	apdsSend(configTwoReg,0x01);
+	apdsSend(configTwoReg,0x31);//01
 	apdsStop();
 	i2c_start(nebula_write);
-	apdsSend(configThreeReg,0x00);
+	apdsSend(0x90,0x00);
 	apdsStop();
 	i2c_start(nebula_write);
-	apdsSend(controlReg1,0x0C);
+	apdsSend(configThreeReg,0x3c);//up down diode disabled, gain compensation = 1, sleep after interrupt//3c
 	apdsStop();
 	i2c_start(nebula_write);
-	apdsSend(persReg,0x5F);
+	apdsSend(controlReg1,0x0C);//0c
 	apdsStop();
 	i2c_start(nebula_write);
-	apdsSend(proxPulsCountReg,0x7C);
+	apdsSend(persReg,0xAF);//5F
+	apdsStop();
+	i2c_start(nebula_write);
+	apdsSend(proxPulsCountReg,0x7C);//7c//c3
 	apdsStop();
 	i2c_start(nebula_write);
 	apdsSend(proxIntThresReg1,0x09);
@@ -119,7 +126,10 @@ unsigned char proximity(void)
 	i2c_write(0xE5);
 	i2c_stop();
 	i2c_start(nebula_write);
-	apdsSend(enableReg,0x25);
+	apdsSend(waitTimeReg,0xE6);//E6
+	apdsStop();
+	i2c_start(nebula_write);
+	apdsSend(enableReg,0x00);//2D
 	apdsStop();
 	//i2c_write(0xE7);
 	//i2c_write(0xE4);

@@ -1,9 +1,12 @@
 #include "interrupt.h"
 #include "config.h"
 #include "apds9960.h"
+#include <avr/sleep.h>
 
 #define F_CPU 1000000UL
 #include <util/delay.h>
+
+unsigned char count = 0;
 
 unsigned char int0Setup(void)
 {	
@@ -13,26 +16,17 @@ unsigned char int0Setup(void)
 }
 
 ISR(INT0_vect)
-{   
-	
-	
-	
-	//i2c_check();
-	//batteryLow();
-	//flashy();
-	//i2c_start(nebula_write);
-	//i2c_write(0xE5);
+{  
+	//sleep_disable();
+	count = 1;
+	solOn();
+	//timerSetup(19530);
 	apdsTransceive();
-	//i2c_start(nebula_write);
-	//apdsTransceive();
 	i2c_start(nebula_write);
 	i2c_write(0xE5);
-	i2c_stop();
-	//i2c_start(nebula_write);
-	//apdsSend(enableReg,0x25);
-	//apdsStop();
-	//_delay_ms(100);
-	//i2c_write(0x00);	
+	i2c_stop();	
+	//sleep_mode();
+	
 }
 
 unsigned char pcIntSetup(void)
@@ -44,7 +38,7 @@ unsigned char pcIntSetup(void)
 }
 
 ISR(PCINT1_vect)
-{   
+{  // sleep_disable();
 	if ((PINC & (1<<2))==0)
 	{
 	solOn();
@@ -52,13 +46,15 @@ ISR(PCINT1_vect)
 	solOff();
 	_delay_ms(20);
 	flashy();
+	//sleep_mode();
 	//_delay_ms(1000);
 	}
 }
 
 ISR(PCINT0_vect)
-{
+{   //sleep_disable();
 	charging();
+	//sleep_mode();
 }
 unsigned char timerSetup(unsigned int timerValue)
 {
@@ -72,6 +68,12 @@ unsigned char timerSetup(unsigned int timerValue)
 }
 
 ISR(TIMER1_COMPA_vect)// Interrupt service routine  for timer
-{
+{   
+	//if (count == 1)
+	//{
 	solOff();
+	count = 0;
+	//}
+	//TCCR1B = 0x00;
+	flashy();
 }

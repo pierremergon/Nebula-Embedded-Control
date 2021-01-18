@@ -17,8 +17,9 @@ Initialize Ports, Initialize I2C, I2C write default data
 #include "apds9960.h"
 #include "vcnl4010.h"
 #include "drv8835.h"
+#include <avr/sleep.h>
 #define F_CPU 1000000
-#include <util/delay.h>
+//#include "USI_TWI_"
 //#define vcnl_write 0x26
 	int num;
 int main(void)
@@ -77,8 +78,8 @@ int main(void)
 
 		/*apdsBegin(nebula_write);
 		apdsCalibrate(1);
-		sei();
-		portSetup();*/
+		sei();*/
+		portSetup();
 		//portSetup();
 		//timerSetup(0x0000);
 
@@ -88,7 +89,7 @@ int main(void)
 		num = vcnlTransceive();
 		*/
 		/*DDRD = (1<<6);
-		DDRD |= (1<<redPort);*/
+		DDRD |= (1<<redPort);
 		DDRD |= (1<<greenPort);
 		DDRD |=(1<<redPort);
 		DDRD |=(1<<bluePort);
@@ -97,23 +98,24 @@ int main(void)
 		PORTC |=(1<<2);
 		DDRB &= ~(1<<0);
 		PORTB |= (1<<0);
-		
-		PORTD |= (1<<greenPort);
-		PORTD |= (1<<bluePort);
-		PORTD |= (1<<redPort);
+		*/
+		DDRD |= (1<<greenPort);
+		DDRD |= (1<<bluePort);
+		DDRD |= (1<<redPort); PORTD |= ((1<<greenPort) | (1<<bluePort) | (1<<redPort));
 		//PORTE &= ~(1<<drvSleep);
 
-		DDRC |= (1<<drvIn1);
+	/*	DDRC |= (1<<drvIn1);
 		DDRC |= (1<<drvIn2);
 		PORTC &= ~(1<<drvIn1);
 		PORTC &= ~(1<<drvIn2);
 		//PORTE |= (1<<drvSleep);
 		
-		
-		boostEnable();
+		*/
+		//boostEnable();
+		boostDisable();
+		//pcIntSetup();
+		//int0Setup();
 		//boostDisable();
-		pcIntSetup();
-		int0Setup();
 		//sei();
 		/*PORTC |=(1<<1);
 		_delay_ms(20);
@@ -131,12 +133,12 @@ int main(void)
 		
 		//solOn();
 		//solOff();
-		DDRD &= ~(1<<2);
-		PORTD |= (1<<2);
+		//DDRD &= ~(1<<2);
+		//PORTD |= (1<<2);
 		//apdsInit();
-		i2c_init();
+		//i2c_init();
 		//apdsBegin(nebula_write);
-		proximity();
+		//proximity();
 		//int0Setup();
 		//apdsInit();
 		//apdsTransceive();
@@ -146,12 +148,20 @@ int main(void)
 		//solOff();
 		//_delay_ms(5000);
 		//proximity();
-		sei();
+		//sei();
 		//apdsInit();
-		
-
+		//SMCR |=(1<<0x07);
+		//DDRB |=(1<<1)|(1<<7);
+		//DDRE |=(1<<3);
+		//PORTB &= ~(1<<1);
+		////PORTB &= ~(1<<7);
+		//PORTE &= ~(1<<3);
+		SMCR |=(1<<0x07);//07 powersave
+		sleep_mode();
+        sei();
     while(1)
     {
+			//sleep_mode();
 //flashy();
 //batteryLow();
 //checkBattery();
@@ -164,7 +174,7 @@ int main(void)
 //_delay_ms(10000);
 //solOff();
 //apdsTransceive();
-//_delay_ms(5000);
+//PORTD &= ~(1<<5);
 	}
 	return(0);
 }

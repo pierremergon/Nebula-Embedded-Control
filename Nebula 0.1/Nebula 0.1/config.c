@@ -21,7 +21,7 @@ unsigned char boostEnable(void)
 }
 
 unsigned char boostDisable(void)
-{
+{   DDRE |=(1<<boostEn);
 	PORTE &= ~(1<<2);
 	return 0;
 }
@@ -101,15 +101,10 @@ unsigned char systemNoGo(void)
 
 unsigned char flashy(void)
 {
-		PORTD &= ~(1<<bluePort);
-		_delay_ms(50);
-		PORTD |= (1<<bluePort);
-		_delay_ms(50);
-		PORTD &= ~(1<<bluePort);
-		_delay_ms(50);
-		PORTD |= (1<<bluePort);
-		_delay_ms(50);
-		
+		PORTD &= ~(1<<redPort);
+		_delay_ms(100);
+		PORTD |= (1<<redPort);
+		_delay_ms(100);
 		return 0;
 }
 /////////////////////////////////////////////////////////////////////////////Sleep States
@@ -196,10 +191,10 @@ unsigned char portSetup(void)
 	PORTE &= ~(1<<bin2);
 
 	//comparator
-	DDRB &= ~(1<<1);
-	DDRB &= ~(1<<2);
-	PORTB &= ~(1<<1);
-	PORTB &= ~(1<<2);
+	DDRD |= (1<<2);
+	DDRD |= (1<<3);
+	PORTD &= ~(1<<2);
+	PORTD &= ~(1<<3);
 }
 //initializes and checks the battery status
 unsigned char checkBattery(void) {
@@ -223,13 +218,13 @@ unsigned char batteryLow(void)//low battery indicator
 	//boostDisable();
     
 	PORTD &= ~(1<<redPort);
-	_delay_ms(100);
+	_delay_ms(300);
 	PORTD |= (1<<redPort);
 	PORTD &= ~(1<<greenPort);
-	_delay_ms(100);
+	_delay_ms(300);
 	PORTD |= (1<<greenPort);
 	PORTD &= ~(1<<bluePort);
-	_delay_ms(100);
+	_delay_ms(300);
 	PORTD |= (1<<bluePort);
 	PORTD &= ~(1<<redPort) & ~(1<<bluePort);
 	_delay_ms(300);
