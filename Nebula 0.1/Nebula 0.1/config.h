@@ -21,8 +21,8 @@ unsigned char flashy(void);//blue led for general purpose operation
 unsigned char batteryLow(void);//low battery indicator
 unsigned char charging(void);//charge indictor
 unsigned char systemSetup(void);// blue light displays during calibration
-unsigned char boostEnable(void);//enables boost converter 
-unsigned char boostDisable(void);//disable 
+unsigned char boostEnable(void);//enables boost converter
+unsigned char boostDisable(void);//disable
 unsigned char ledInit(void);//init led/ turns off led
 unsigned char apds9960_prox_write(void);//unused ports
 unsigned char checkBattery(void);//initializes and checks the battery status
@@ -40,12 +40,13 @@ unsigned char i2c_check(void);//led flash for i2c test
 #define drvIn2 1 //drv8837 motor control 2
 #define drvSleep 3 //drv8837 motor sleep
 #define gpioPin 3 //external gpio for peripheral module
-#define compPower 1 //comparator power 
+#define compPower 1 //comparator power
 #define compOutput 2 //comparator input
-#define unused1 0 //unused port
-#define unused2 1 //^
-#define boostEn 2 //boost converter enable 
-#define batteryPort 0 //battery port
+#define unused1 1 //unused port B1
+#define unused2 4 //^ D4
+#define unused3 0 // E0
+#define boostEn 2 //boost converter enable
+#define batteryStatusPort 0 //battery port
 
 ///////////////////////////////////////////////////////////////////////////
 

@@ -2,39 +2,92 @@
 #define F_CPU 1000000UL
 #include <util/delay.h>
 
-unsigned char comp = 0; 
+unsigned char comp = 0;
 unsigned char buttonCount = 0;
 
 
 unsigned char unUsed (void)//disable unused ports
 {
-	DDRD &= ~(1<<unused1) & ~(1<<unused2);
+	DDRB &= ~(1<<unused1);//inputs
+	DDRD & ~(1<<unused2);
+	DDRE & ~(1<<unused3);
+	PORTB |= (1<<unused1);//pullup
+	PORTD |= (1<<unused2);//pullup
+	PORTE |= (1<<unused3);//pullup
 	return 0;
+}
+
+unsigned char portSetup(void)
+{
+	unUsed();
+	//battery indicator ports
+	DDRD = (1<<redPort);//internal pullup
+	DDRD = (1<<greenPort);
+	DDRD = (1<<bluePort);
+	PORTD |= (1<<redPort);
+	PORTD |= (1<<greenPort);
+	PORTD |= (1<<bluePort);// disables LED
+	//battery status
+	DDRB &= ~(1<<batteryStatusPort) & ~(1<<compOutput);//status and charger
+  PORTB |= (1<<batteryStatusPort) | (1<<compOutput);//input pullup
+
+	//button initialize
+	DDRC &= ~(1<<button);//Input pin
+	PORTC |= (1<<button);//pull up
+	return 0;
+	//solenoid
+	//drv8836 input control for solenoid and actuator
+	DDRC |= (1<<drvIn1);
+	DDRC |= (1<<drvIn2);
+	DDRE |= (1<<drvSleep);// sleep via pulldown
+	PORTE &= ~(1<<drvSleep);
+	PORTC &= ~(1<<drvIn1);
+	PORTC &= ~(1<<drvIn2);
+	//stepper
+	DDRB &= ~(1<<stepVcc);//disable via pullup
+	DDRB &= ~(1<<stepMode);
+	DDRD &= ~(1<<ain1);
+	DDRD &= ~(1<<ain2);
+	DDRE &= ~(1<<bin1);
+	DDRE &= ~(1<<bin1);
+
+	PORTB &= ~(1<<stepVcc);
+	PORTB &= ~(1<<stepMode);
+	PORTD &= ~(1<<ain1);
+	PORTD &= ~(1<<ain2);
+	PORTE &= ~(1<<bin1);
+	PORTE &= ~(1<<bin2);
+/*
+	//comparator
+	DDRB &= ~(1<<2);//Input/ pullup
+	PORTD |= (1<<2);
+*/
 }
 
 // boost converter enable/disable
 unsigned char boostEnable(void)
-{   
-	DDRE |=(1<<boostEn);
+{
+	DDRE |=(1<<boostEn);//high
 	PORTE |= (1<<boostEn);
-	return 0; 
-}
-
-unsigned char boostDisable(void)
-{   DDRE |=(1<<boostEn);
-	PORTE &= ~(1<<2);
 	return 0;
 }
 
-//comparator output
+unsigned char boostDisable(void)
+{
+  DDRE |=(1<<boostEn);
+	PORTE &= ~(1<<boostEn);//low
+	return 0;
+}
+
+//Battery comparator output
 unsigned char comparator(void)
-{	
-	PORTB |= (1<<1);
+{
+	PORTB |= (1<<2);
 	if (((PINB & (1<<2)) == 0))
 	{
 		return 0;
 	}
-	else 
+	else
 	{
 		return 1;
 	}
@@ -82,13 +135,13 @@ unsigned char systemGo(void)
 	{
 	batteryLow();
 	}
-	
+
 	else
 	{
-	flashy();//all good,m  
+	flashy();//all good,m
 	}
-	
-	
+
+
 	return 0;
 }
 
@@ -150,52 +203,7 @@ unsigned char apds9960_prox_write(void)
 	apdsSend(0x8E,0x54);//prox pulse count
 	return 0;
 }
-unsigned char portSetup(void)
-{
-	unUsed();
-	//battery indicator ports
-	DDRD = (1<<redPort);//internal pullup
-	DDRD = (1<<greenPort);
-	DDRD = (1<<bluePort);
-	PORTD |= (1<<redPort);
-	PORTD |= (1<<greenPort);
-	PORTD |= (1<<bluePort);//
-	//battery status
-	DDRB &= ~(1<<batteryPort);
-	
-	//button initialize
-	DDRC &= ~(1<<button);//Input pin
-	PORTC |= (1<<button);//PULL UP
-	return 0;
-	//solenoid
-	//drv input 1 and 2 pulldown
-	DDRC |= (1<<drvIn1);
-	DDRC |= (1<<drvIn2);
-	DDRE |= (1<<drvSleep);// sleep via pulldown
-	PORTE &= ~(1<<drvSleep);
-	PORTC &= ~(1<<drvIn1);
-	PORTC &= ~(1<<drvIn2);
-	//stepper
-	DDRB &= ~(1<<stepVcc);//disable via pullup 
-	DDRB &= ~(1<<stepMode);
-	DDRD &= ~(1<<ain1);
-	DDRD &= ~(1<<ain2);
-	DDRE &= ~(1<<bin1);
-	DDRE &= ~(1<<bin1);
-	
-	PORTB &= ~(1<<stepVcc);
-	PORTB &= ~(1<<stepMode);
-	PORTD &= ~(1<<ain1);
-	PORTD &= ~(1<<ain2);
-	PORTE &= ~(1<<bin1);
-	PORTE &= ~(1<<bin2);
 
-	//comparator
-	DDRD |= (1<<2);
-	DDRD |= (1<<3);
-	PORTD &= ~(1<<2);
-	PORTD &= ~(1<<3);
-}
 //initializes and checks the battery status
 unsigned char checkBattery(void) {
 	unsigned char batteryStatus;
@@ -210,13 +218,13 @@ unsigned char checkBattery(void) {
 	{
 		batteryStatus=0;
 	}
-	return batteryStatus;	
+	return batteryStatus;
 }
 
 unsigned char batteryLow(void)//low battery indicator
 {
 	//boostDisable();
-    
+
 	PORTD &= ~(1<<redPort);
 	_delay_ms(300);
 	PORTD |= (1<<redPort);
@@ -266,7 +274,7 @@ unsigned char charging(void)//charge indicator
 unsigned char buttonPress(void)
 {
 	// pin change interrupt
-	
+
 	if ((PINC & (1<<2)) == 0)
 	{
 		//do task for single button press
