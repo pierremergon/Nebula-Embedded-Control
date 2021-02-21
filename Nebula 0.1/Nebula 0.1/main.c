@@ -79,7 +79,7 @@ int main(void)
 		/*apdsBegin(nebula_write);
 		apdsCalibrate(1);
 		sei();*/
-		portSetup();
+		//portSetup();
 		//portSetup();
 		//timerSetup(0x0000);
 
@@ -102,8 +102,8 @@ int main(void)
 		DDRD |= (1<<greenPort);
 		DDRD |= (1<<bluePort);
 		DDRD |= (1<<redPort); PORTD |= ((1<<greenPort) | (1<<bluePort) | (1<<redPort));
-		//PORTE &= ~(1<<drvSleep);
-
+		boostDisable();
+        //cli();
 	/*	DDRC |= (1<<drvIn1);
 		DDRC |= (1<<drvIn2);
 		PORTC &= ~(1<<drvIn1);
@@ -112,10 +112,10 @@ int main(void)
 		
 		*/
 		//boostEnable();
-		boostDisable();
+		//boostDisable();
 		//pcIntSetup();
 		//int0Setup();
-		//boostDisable();
+		
 		//sei();
 		/*PORTC |=(1<<1);
 		_delay_ms(20);
@@ -156,14 +156,14 @@ int main(void)
 		//PORTB &= ~(1<<1);
 		////PORTB &= ~(1<<7);
 		//PORTE &= ~(1<<3);
-		SMCR |=(1<<0x07);//07 powersave
-		sleep_mode();
-        sei();
+		//SMCR |=(1<<0x07);//07 powersave
+		//sleep_mode();
+       // sei();
     while(1)
     {
 			//sleep_mode();
 //flashy();
-//batteryLow();
+batteryLow();
 //checkBattery();
 //DDRE |=(1<<2);
 //PORTE |= (1<<2);
@@ -174,7 +174,7 @@ int main(void)
 //_delay_ms(10000);
 //solOff();
 //apdsTransceive();
-//PORTD &= ~(1<<5);
+//PORTD &= ~(1<<redPort);
 	}
 	return(0);
 }
