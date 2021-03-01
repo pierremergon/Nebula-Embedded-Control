@@ -16,7 +16,7 @@ Initialize Ports, Initialize I2C, I2C write default data
 #include "indicate.h"
 #include "apds9960.h"
 #include "vcnl4010.h"
-#include "drv8835.h"
+#include "drv8836.h"
 #include <avr/sleep.h>
 #define F_CPU 1000000
 //#include "USI_TWI_"
@@ -44,7 +44,7 @@ int main(void)
 		//ISR(INT1_vect);
 
 		//ledInitialize();
-		
+
 		int1Setup();
 		apds9960_prox_write();
 		sei();
@@ -109,7 +109,7 @@ int main(void)
 		PORTC &= ~(1<<drvIn1);
 		PORTC &= ~(1<<drvIn2);
 		//PORTE |= (1<<drvSleep);
-		
+
 		*/
 		//boostEnable();
 		boostDisable();
@@ -128,9 +128,9 @@ int main(void)
 		_delay_ms(20);
 		PORTC |=(1<<1);
 		*/
-		
-				
-		
+
+
+
 		//solOn();
 		//solOff();
 		//DDRD &= ~(1<<2);

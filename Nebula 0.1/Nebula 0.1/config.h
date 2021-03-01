@@ -2,7 +2,7 @@
 #define config_H_INCLUDED
 #include "i2c.h"
 #include "apds9960.h"
-#include "drv8835.h"
+#include "drv8836.h"
 
 /* Defines the various processes/ indicators used on the PCB */
 unsigned char unUsed(void);//unused ports
@@ -18,7 +18,7 @@ unsigned char ledInit(void);//initialize led to zero
 unsigned char systemGo(void);//green led on
 unsigned char systemNoGo(void);//red led on
 unsigned char flashy(void);//blue led for general purpose operation
-unsigned char batteryLow(void);//low battery indicator
+unsigned char batteryLow(void);//low batter1!!y indicator
 unsigned char charging(void);//charge indictor
 unsigned char systemSetup(void);// blue light displays during calibration
 unsigned char boostEnable(void);//enables boost converter
