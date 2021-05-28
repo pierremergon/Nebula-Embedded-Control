@@ -15,7 +15,7 @@ Initialize Ports, Initialize I2C, I2C write default data
 #include "i2c.h"
 #include "indicate.h"
 #include "apds9960.h"
-#include "vcnl4010.h"
+#include "vcnl36826s.h"
 #include "drv8835.h"
 #include <avr/sleep.h>
 #define F_CPU 1000000
@@ -102,7 +102,7 @@ int main(void)
 		DDRD |= (1<<greenPort);
 		DDRD |= (1<<bluePort);
 		DDRD |= (1<<redPort); PORTD |= ((1<<greenPort) | (1<<bluePort) | (1<<redPort));
-		boostDisable();
+		//boostDisable();
         //cli();
 	/*	DDRC |= (1<<drvIn1);
 		DDRC |= (1<<drvIn2);
@@ -111,7 +111,7 @@ int main(void)
 		//PORTE |= (1<<drvSleep);
 		
 		*/
-		//boostEnable();
+		boostEnable();
 		//boostDisable();
 		//pcIntSetup();
 		//int0Setup();

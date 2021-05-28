@@ -102,9 +102,9 @@ unsigned char systemNoGo(void)
 unsigned char flashy(void)
 {
 		PORTD &= ~(1<<redPort);
-		_delay_ms(100);
+		_delay_ms(800);
 		PORTD |= (1<<redPort);
-		_delay_ms(100);
+		_delay_ms(800);
 		return 0;
 }
 /////////////////////////////////////////////////////////////////////////////Sleep States
@@ -218,25 +218,25 @@ unsigned char batteryLow(void)//low battery indicator
 	//boostDisable();
     
 	PORTD &= ~(1<<redPort);
-	_delay_ms(300);
+	_delay_ms(800);
 	PORTD |= (1<<redPort);
 	PORTD &= ~(1<<greenPort);
-	_delay_ms(300);
+	_delay_ms(800);
 	PORTD |= (1<<greenPort);
 	PORTD &= ~(1<<bluePort);
-	_delay_ms(300);
+	_delay_ms(800);
 	PORTD |= (1<<bluePort);
 	PORTD &= ~(1<<redPort) & ~(1<<bluePort);
-	_delay_ms(300);
+	_delay_ms(800);
 	PORTD |= (1<<redPort) | (1<<bluePort);
 	PORTD &= ~(1<<greenPort) & (1<<redPort);
-	_delay_ms(300);
+	_delay_ms(800);
 	PORTD |= (1<<greenPort) |(1<<redPort);
 	PORTD &= ~(1<<bluePort) & ~(1<<greenPort);
-	_delay_ms(300);
+	_delay_ms(800);
 	PORTD |= (1<<bluePort) | (1<<greenPort);
 	PORTD &= ~(1<<redPort) & ~(1<<greenPort);
-	_delay_ms(300);
+	_delay_ms(800);
 	PORTD |= (1<<redPort) | (1<<greenPort);
 	//idle();
 	return 0;
