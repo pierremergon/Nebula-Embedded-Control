@@ -121,7 +121,7 @@ Discarded input sections
                 0x00000000       0x60 vcnl4010.o
  .debug_ranges  0x00000000       0x50 vcnl4010.o
  .debug_line    0x00000000      0x22c vcnl4010.o
- .debug_str     0x00000000      0x247 vcnl4010.o
+ .debug_str     0x00000000      0x250 vcnl4010.o
  .comment       0x00000000       0x31 vcnl4010.o
  .debug_frame   0x00000000       0xac vcnl4010.o
  .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
@@ -536,9 +536,9 @@ END GROUP
  *(.comment)
  .comment       0x00000000       0x30 apds9960.o
                                  0x31 (size before relaxing)
- .comment       0x00000030       0x30 config.o
+ .comment       0x00000030       0x31 config.o
+ .comment       0x00000030       0x30 i2c.o
                                  0x31 (size before relaxing)
- .comment       0x00000060       0x31 i2c.o
  .comment       0x00000060       0x31 interrupt.o
  .comment       0x00000060       0x31 main.o
 
@@ -616,14 +616,14 @@ END GROUP
 .debug_str      0x00000000      0x794
  *(.debug_str)
  .debug_str     0x00000000      0x318 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/1.3.300/gcc/dev/atmega328pb/avr5/crtatmega328pb.o
- .debug_str     0x00000318      0x237 apds9960.o
-                                0x26b (size before relaxing)
- .debug_str     0x0000054f      0x17b config.o
+ .debug_str     0x00000318      0x240 apds9960.o
+                                0x274 (size before relaxing)
+ .debug_str     0x00000558      0x128 config.o
                                 0x2d3 (size before relaxing)
- .debug_str     0x000006ca       0x41 i2c.o
+ .debug_str     0x00000680       0x8b i2c.o
                                 0x1e4 (size before relaxing)
  .debug_str     0x0000070b       0x78 interrupt.o
-                                0x270 (size before relaxing)
+                                0x279 (size before relaxing)
  .debug_str     0x00000783       0x11 main.o
                                 0x195 (size before relaxing)
 

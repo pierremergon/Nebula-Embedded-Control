@@ -107,24 +107,69 @@ Disassembly of section .text:
   d8:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
 
 000000dc <apdsTransceive>:
+	value=i2c_readNak();
+	return value;
+
+}
+unsigned char apdsTransceive(void)
+{ unsigned char data;
   dc:	cf 93       	push	r28
+	i2c_start(nebula_write);
   de:	82 e7       	ldi	r24, 0x72	; 114
   e0:	0e 94 40 01 	call	0x280	; 0x280 <i2c_start>
+	i2c_write(proxDataReg);
   e4:	8c e9       	ldi	r24, 0x9C	; 156
   e6:	0e 94 70 01 	call	0x2e0	; 0x2e0 <i2c_write>
+	//i2c_write(id_reg);
+	i2c_start(nebula_read);
   ea:	83 e7       	ldi	r24, 0x73	; 115
   ec:	0e 94 40 01 	call	0x280	; 0x280 <i2c_start>
+	//data = i2c_readAck();
+	data = i2c_readNak();
   f0:	0e 94 82 01 	call	0x304	; 0x304 <i2c_readNak>
   f4:	c8 2f       	mov	r28, r24
+	return 0;
+	
+}
+unsigned char apdsStop(void)
+{
+	i2c_stop();
   f6:	0e 94 67 01 	call	0x2ce	; 0x2ce <i2c_stop>
+	//i2c_write(id_reg);
+	i2c_start(nebula_read);
+	//data = i2c_readAck();
+	data = i2c_readNak();
+	apdsStop();
+	i2c_start(nebula_write);
   fa:	82 e7       	ldi	r24, 0x72	; 114
   fc:	0e 94 40 01 	call	0x280	; 0x280 <i2c_start>
+	i2c_write(0xE5);
  100:	85 ee       	ldi	r24, 0xE5	; 229
  102:	0e 94 70 01 	call	0x2e0	; 0x2e0 <i2c_write>
+	return 0;
+	
+}
+unsigned char apdsStop(void)
+{
+	i2c_stop();
  106:	0e 94 67 01 	call	0x2ce	; 0x2ce <i2c_stop>
+	i2c_start(nebula_write);
+	i2c_write(0xE5);
+	apdsStop();
+
+	
+	if (data == 0xFF)//A0
  10a:	cf 3f       	cpi	r28, 0xFF	; 255
  10c:	11 f4       	brne	.+4      	; 0x112 <apdsTransceive+0x36>
+	{
+		flashy();
  10e:	0e 94 b0 00 	call	0x160	; 0x160 <flashy>
+	i2c_write(0xE5);
+	apdsStop();*/
+	//sleep_mode();
+	return 0;
+	
+}
  112:	80 e0       	ldi	r24, 0x00	; 0
  114:	cf 91       	pop	r28
  116:	08 95       	ret
@@ -425,6 +470,12 @@ unsigned char charging(void)//charge indicator
  318:	08 95       	ret
 
 0000031a <__vector_1>:
+	TCNT1 = 0;// sets the default value for the timer.
+	OCR1A = timerValue;// sets the value for the timer delay, example the 2 minutes or few seconds.
+	TIMSK1 = 0x01;// interrupt mask for timer 1A compare match
+	return 0;
+	
+}
  31a:	1f 92       	push	r1
  31c:	0f 92       	push	r0
  31e:	0f b6       	in	r0, 0x3f	; 63
@@ -563,6 +614,9 @@ unsigned char charging(void)//charge indicator
  434:	18 95       	reti
 
 00000436 <__vector_11>:
+
+ISR(TIMER1_COMPA_vect)// Interrupt service routine  for timer
+{   
  436:	1f 92       	push	r1
  438:	0f 92       	push	r0
  43a:	0f b6       	in	r0, 0x3f	; 63
@@ -580,9 +634,17 @@ unsigned char charging(void)//charge indicator
  452:	bf 93       	push	r27
  454:	ef 93       	push	r30
  456:	ff 93       	push	r31
+	//if (count == 1)
+	//{
+	solOff();
  458:	0e 94 a3 00 	call	0x146	; 0x146 <solOff>
+	count = 0;
  45c:	10 92 01 01 	sts	0x0101, r1	; 0x800101 <count>
+	//}
+	//TCCR1B = 0x00;
+	flashy();
  460:	0e 94 b0 00 	call	0x160	; 0x160 <flashy>
+}
  464:	ff 91       	pop	r31
  466:	ef 91       	pop	r30
  468:	bf 91       	pop	r27
