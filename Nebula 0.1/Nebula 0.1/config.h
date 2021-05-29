@@ -31,14 +31,19 @@ unsigned char buttonPress(void);//button press actions
 unsigned char comparator(void);// retruns status of comparator
 unsigned char i2c_check(void);//led flash for i2c test
 unsigned char reboot(void);//reboot
+unsigned char drvIN_IN(void);//configuration for drv8836 in in mode
+unsigned char drvPhase_En(void);//configuration for drv8836 Phase / Enable mode
+unsigned char drvActuate(unsigned char mode);// determines actuation depending on the mode selected
 ///////////////////////////////////////////////////////////////////////////
 
 #define redPort 5 //red led
 #define bluePort 6 // blue led
 #define greenPort 7 // green led
 #define button 2 //push button
-#define drvIn1 0 //drv8837 motor control 1
-#define drvIn2 1 //drv8837 motor control 2
+#define drv1A 6 //drv8837 motor control 1
+#define drv1B 7 //drv8837 motor control 1
+#define drv2A 1 //drv8837 motor control 2
+#define drv2B 0 //drv8837 motor control 2
 #define drvSleep 3 //drv8837 motor sleep
 #define gpioPin 3 //external gpio for peripheral module
 #define compPower 1 //comparator power
@@ -49,6 +54,8 @@ unsigned char reboot(void);//reboot
 #define boostEn 2 //boost converter enable
 #define batteryStatusPort 0 //battery port
 #define rebootpin 3 //reboot pin
+#define drvMode 1 //drv8837 motor mode ow = in/in high = ph/en, pulldown internally
+
 
 ///////////////////////////////////////////////////////////////////////////
 

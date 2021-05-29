@@ -163,8 +163,9 @@ int main(void)
     while(1)
     {
 //sleep_mode();
-flashy();
-reboot();
+//flashy();
+//reboot();//fix
+
 //batteryLow();
 //checkBattery();
 //DDRE |=(1<<2);
@@ -173,6 +174,8 @@ reboot();
 //solOff();
 //solOff();
 //solOn();
+drvActuate(1);
+flashy();
 //_delay_ms(10000);
 //solOff();
 //apdsTransceive();
