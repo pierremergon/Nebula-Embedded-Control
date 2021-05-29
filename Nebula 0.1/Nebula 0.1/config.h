@@ -30,6 +30,7 @@ unsigned char portSetup(void);// port setup
 unsigned char buttonPress(void);//button press actions
 unsigned char comparator(void);// retruns status of comparator
 unsigned char i2c_check(void);//led flash for i2c test
+unsigned char reboot(void);//reboot
 ///////////////////////////////////////////////////////////////////////////
 
 #define redPort 5 //red led
@@ -47,6 +48,7 @@ unsigned char i2c_check(void);//led flash for i2c test
 #define unused3 0 // E0
 #define boostEn 2 //boost converter enable
 #define batteryStatusPort 0 //battery port
+#define rebootpin 3 //reboot pin
 
 ///////////////////////////////////////////////////////////////////////////
 

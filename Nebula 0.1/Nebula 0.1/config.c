@@ -57,6 +57,10 @@ unsigned char portSetup(void)
 	PORTD &= ~(1<<ain2);
 	PORTE &= ~(1<<bin1);
 	PORTE &= ~(1<<bin2);
+	
+	// reboot
+	DDRC |= (1<<rebootpin);//port enable
+	PORTC &= ~(1<<rebootpin);//high
 /*
 	//comparator
 	DDRB &= ~(1<<2);//Input/ pullup
@@ -155,9 +159,9 @@ unsigned char systemNoGo(void)
 unsigned char flashy(void)
 {
 		PORTD &= ~(1<<redPort);
-		_delay_ms(100);
-		PORTD |= (1<<redPort);
-		_delay_ms(100);
+		//_delay_ms(100);
+		//PORTD |= (1<<redPort);
+		//_delay_ms(100);
 		return 0;
 }
 /////////////////////////////////////////////////////////////////////////////Sleep States
@@ -249,7 +253,7 @@ unsigned char batteryLow(void)//low battery indicator
 	//idle();
 	return 0;
 }
-
+/*
 unsigned char charging(void)//charge indicator
 {
 	//pin change int
@@ -269,7 +273,7 @@ unsigned char charging(void)//charge indicator
 
 	return 0;
 }
-
+*/
 //Button press actions
 unsigned char buttonPress(void)
 {
@@ -281,6 +285,14 @@ unsigned char buttonPress(void)
 		buttonCount += 1;
 	}
 	return 0;
+}
+
+unsigned char reboot(void)//reboot
+{
+	PORTC &= ~(1<<rebootpin);
+	_delay_ms(500);
+	PORTC |= (1<<rebootpin);
+	
 }
 
 unsigned char i2c_check(void)

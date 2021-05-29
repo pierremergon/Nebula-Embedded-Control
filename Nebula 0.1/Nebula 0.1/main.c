@@ -111,8 +111,9 @@ int main(void)
 		//PORTE |= (1<<drvSleep);
 		
 		*/
-		//boostEnable();
-		boostDisable();
+		boostEnable();
+		//boostDisable();
+		
 		//pcIntSetup();
 		//int0Setup();
 		//boostDisable();
@@ -156,13 +157,14 @@ int main(void)
 		//PORTB &= ~(1<<1);
 		////PORTB &= ~(1<<7);
 		//PORTE &= ~(1<<3);
-		SMCR |=(1<<0x07);//07 powersave
-		sleep_mode();
-        sei();
+		///SMCR |=(1<<0x07);//07 powersave
+		//sleep_mode();
+        //sei();
     while(1)
     {
-			//sleep_mode();
-//flashy();
+//sleep_mode();
+flashy();
+reboot();
 //batteryLow();
 //checkBattery();
 //DDRE |=(1<<2);

@@ -53,7 +53,7 @@ ISR(PCINT1_vect)
 
 ISR(PCINT0_vect)
 {   //sleep_disable();
-	charging();
+	//charging();
 	//sleep_mode();
 }
 unsigned char timerSetup(unsigned int timerValue)
