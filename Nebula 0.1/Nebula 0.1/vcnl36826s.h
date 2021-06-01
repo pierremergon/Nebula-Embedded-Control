@@ -6,6 +6,9 @@
 
 #define vcnlSend 0x60 //write
 #define vcnlRecv 0x61 //read
+#define vcnlID 0xFA //id register
+#define vcnlPower 0x00;//on/off
+#define 
 
 
 unsigned char vcnlInit(unsigned char type); // gesture or proximity sensor

@@ -114,7 +114,7 @@ int main(void)
 		boostEnable();
 		//boostDisable();
 		
-		//pcIntSetup();
+		pcIntSetup();
 		//int0Setup();
 		//boostDisable();
 		//sei();
@@ -149,7 +149,7 @@ int main(void)
 		//solOff();
 		//_delay_ms(5000);
 		//proximity();
-		//sei();
+		sei();
 		//apdsInit();
 		//SMCR |=(1<<0x07);
 		//DDRB |=(1<<1)|(1<<7);
@@ -174,7 +174,7 @@ int main(void)
 //solOff();
 //solOff();
 //solOn();
-drvActuate(1);
+//drvActuate(1);
 flashy();
 //_delay_ms(10000);
 //solOff();

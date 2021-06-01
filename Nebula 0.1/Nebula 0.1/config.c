@@ -161,9 +161,9 @@ unsigned char systemNoGo(void)
 unsigned char flashy(void)
 {
 		PORTD &= ~(1<<redPort);
-		_delay_ms(100);
+		_delay_ms(800);
 		PORTD |= (1<<redPort);
-		_delay_ms(100);
+		_delay_ms(800);
 		return 0;
 }
 /////////////////////////////////////////////////////////////////////////////Sleep States
@@ -332,12 +332,12 @@ unsigned char drvActuate(unsigned char mode)
 		for(i = 0; i<20; i++)
 		{
 			PORTB &= ~(1<<drv1A);
-			//_delay_ms(5);
+			_delay_ms(50);
 			PORTB |= (1<<drv1B);
-			_delay_ms(500);
+			_delay_ms(2000);
 			
 			PORTB &= ~(1<<drv1B);
-			//_delay_ms(5);
+			_delay_ms(50);
 			PORTB |= (1<<drv1A);
 			_delay_ms(500);
 		}

@@ -30,7 +30,7 @@ unsigned char vcnlReceive(void)
 }
 unsigned char vcnlTransceive(void)
 { unsigned char data;
-	i2c_start(nebula_write);
+	i2c_start(vcnlSend);
 	i2c_write(proxDataReg);
 	//i2c_write(id_reg);
 	i2c_start(nebula_read);
