@@ -176,6 +176,7 @@ int main(void)
 //solOn();
 //drvActuate(1);
 flashy();
+vcnlTransceive();
 //_delay_ms(10000);
 //solOff();
 //apdsTransceive();

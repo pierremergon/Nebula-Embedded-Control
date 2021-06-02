@@ -29,19 +29,22 @@ unsigned char vcnlReceive(void)
 
 }
 unsigned char vcnlTransceive(void)
-{ unsigned char data;
-	i2c_start(vcnlSend);
-	i2c_write(proxDataReg);
+{   
+	unsigned char data;
+	vcnlBegin(0x60);
+	vcnlSend(0xFA,0x00);
+	//i2c_start(vcnlSend);
+	//i2c_write(proxDataReg);
 	//i2c_write(id_reg);
-	i2c_start(nebula_read);
+	//i2c_start(nebula_read);
 	//data = i2c_readAck();
-	data = i2c_readNak();
+	//data = i2c_readNak();
 	vcnlStop();
-	i2c_start(nebula_write);
-	i2c_write(0xE5);
-	vcnlStop();
+	//i2c_start(nebula_write);
+	//i2c_write(0xE5);
+	//vcnlStop();
 
-
+/*
 	if (data == 0xFF)//A0
 	{
 		flashy();
@@ -53,7 +56,7 @@ unsigned char vcnlTransceive(void)
 		;
 
 	}
-
+*/
 	//i2c_start(nebula_write);
 	///i2c_write(0xE5);
 	//vcnlStop();

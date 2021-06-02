@@ -3,31 +3,31 @@ Nebula 0.1.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         00000000  00800100  00800100  000004d2  2**0
+  0 .data         00000000  00800100  00800100  000004f0  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         0000045e  00000000  00000000  00000074  2**1
+  1 .text         0000047c  00000000  00000000  00000074  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .bss          00000001  00800100  00800100  000004d2  2**0
+  2 .bss          00000001  00800100  00800100  000004f0  2**0
                   ALLOC
-  3 .comment      00000060  00000000  00000000  000004d2  2**0
+  3 .comment      00000060  00000000  00000000  000004f0  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00000534  2**2
+  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00000550  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 00000200  00000000  00000000  00000574  2**0
+  5 .debug_aranges 00000260  00000000  00000000  00000590  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   00001f8e  00000000  00000000  00000774  2**0
+  6 .debug_info   0000244a  00000000  00000000  000007f0  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00000df7  00000000  00000000  00002702  2**0
+  7 .debug_abbrev 00000f5f  00000000  00000000  00002c3a  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   000010d4  00000000  00000000  000034f9  2**0
+  8 .debug_line   00001318  00000000  00000000  00003b99  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  0000047c  00000000  00000000  000045d0  2**2
+  9 .debug_frame  00000528  00000000  00000000  00004eb4  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    000007b7  00000000  00000000  00004a4c  2**0
+ 10 .debug_str    0000082f  00000000  00000000  000053dc  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00000cd4  00000000  00000000  00005203  2**0
+ 11 .debug_loc    00000e0f  00000000  00000000  00005c0b  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 000001b0  00000000  00000000  00005ed7  2**0
+ 12 .debug_ranges 00000200  00000000  00000000  00006a1a  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -101,7 +101,7 @@ Disassembly of section .text:
   cc:	b2 07       	cpc	r27, r18
   ce:	e1 f7       	brne	.-8      	; 0xc8 <.do_clear_bss_loop>
   d0:	0e 94 1d 02 	call	0x43a	; 0x43a <main>
-  d4:	0c 94 2d 02 	jmp	0x45a	; 0x45a <_exit>
+  d4:	0c 94 3c 02 	jmp	0x478	; 0x478 <_exit>
 
 000000d8 <__bad_interrupt>:
   d8:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
@@ -690,10 +690,44 @@ ISR(TIMER1_COMPA_vect)// Interrupt service routine  for timer
 //drvActuate(1);
 flashy();
  454:	0e 94 c7 00 	call	0x18e	; 0x18e <flashy>
- 458:	fd cf       	rjmp	.-6      	; 0x454 <main+0x1a>
+vcnlTransceive();
+ 458:	0e 94 2f 02 	call	0x45e	; 0x45e <vcnlTransceive>
+ 45c:	fb cf       	rjmp	.-10     	; 0x454 <main+0x1a>
 
-0000045a <_exit>:
- 45a:	f8 94       	cli
+0000045e <vcnlTransceive>:
 
-0000045c <__stop_program>:
- 45c:	ff cf       	rjmp	.-2      	; 0x45c <__stop_program>
+}
+unsigned char vcnlTransceive(void)
+{ unsigned char data;
+
+	i2c_write(id_reg);
+ 45e:	82 e9       	ldi	r24, 0x92	; 146
+ 460:	0e 94 6c 01 	call	0x2d8	; 0x2d8 <i2c_write>
+#include "config.h"
+#include <avr/interrupt.h>
+
+unsigned char vcnlBegin(unsigned char val)
+{
+	i2c_start(val);
+ 464:	87 e2       	ldi	r24, 0x27	; 39
+ 466:	0e 94 3c 01 	call	0x278	; 0x278 <i2c_start>
+
+	i2c_write(id_reg);
+	vcnlBegin(vcnl_read);
+	//i2c_write(proxDataReg);
+	//apdsBegin(nebula_read);
+	i2c_readNak();
+ 46a:	0e 94 7e 01 	call	0x2fc	; 0x2fc <i2c_readNak>
+	i2c_stop();
+ 46e:	0e 94 63 01 	call	0x2c6	; 0x2c6 <i2c_stop>
+	data=TWDR0;
+ 472:	80 91 bb 00 	lds	r24, 0x00BB	; 0x8000bb <__DATA_REGION_ORIGIN__+0x5b>
+	return data;
+}
+ 476:	08 95       	ret
+
+00000478 <_exit>:
+ 478:	f8 94       	cli
+
+0000047a <__stop_program>:
+ 47a:	ff cf       	rjmp	.-2      	; 0x47a <__stop_program>
