@@ -3,48 +3,48 @@ Nebula 0.1.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         00000000  00800100  00800100  0000048a  2**0
+  0 .data         00000000  00800100  00800100  000004bc  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         00000416  00000000  00000000  00000074  2**1
+  1 .text         00000448  00000000  00000000  00000074  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .bss          00000002  00800100  00800100  0000048a  2**0
+  2 .bss          00000001  00800100  00800100  000004bc  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  0000048a  2**0
+  3 .comment      00000060  00000000  00000000  000004bc  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000004bc  2**2
+  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  0000051c  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 000001e8  00000000  00000000  000004fc  2**0
+  5 .debug_aranges 00000200  00000000  00000000  0000055c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   00001eab  00000000  00000000  000006e4  2**0
+  6 .debug_info   00001fae  00000000  00000000  0000075c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00000e43  00000000  00000000  0000258f  2**0
+  7 .debug_abbrev 00000e1d  00000000  00000000  0000270a  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   0000105a  00000000  00000000  000033d2  2**0
+  8 .debug_line   000010ec  00000000  00000000  00003527  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  00000494  00000000  00000000  0000442c  2**2
+  9 .debug_frame  0000047c  00000000  00000000  00004614  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00000741  00000000  00000000  000048c0  2**0
+ 10 .debug_str    000007b7  00000000  00000000  00004a90  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00000ca8  00000000  00000000  00005001  2**0
+ 11 .debug_loc    00000cc1  00000000  00000000  00005247  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000198  00000000  00000000  00005ca9  2**0
+ 12 .debug_ranges 000001b0  00000000  00000000  00005f08  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
 
 00000000 <__vectors>:
    0:	0c 94 5a 00 	jmp	0xb4	; 0xb4 <__ctors_end>
-   4:	0c 94 3d 01 	jmp	0x27a	; 0x27a <__vector_1>
+   4:	0c 94 76 01 	jmp	0x2ec	; 0x2ec <__vector_1>
    8:	0c 94 6c 00 	jmp	0xd8	; 0xd8 <__bad_interrupt>
-   c:	0c 94 a7 01 	jmp	0x34e	; 0x34e <__vector_3>
-  10:	0c 94 6e 01 	jmp	0x2dc	; 0x2dc <__vector_4>
+   c:	0c 94 d8 01 	jmp	0x3b0	; 0x3b0 <__vector_3>
+  10:	0c 94 b3 01 	jmp	0x366	; 0x366 <__vector_4>
   14:	0c 94 6c 00 	jmp	0xd8	; 0xd8 <__bad_interrupt>
   18:	0c 94 6c 00 	jmp	0xd8	; 0xd8 <__bad_interrupt>
   1c:	0c 94 6c 00 	jmp	0xd8	; 0xd8 <__bad_interrupt>
   20:	0c 94 6c 00 	jmp	0xd8	; 0xd8 <__bad_interrupt>
   24:	0c 94 6c 00 	jmp	0xd8	; 0xd8 <__bad_interrupt>
   28:	0c 94 6c 00 	jmp	0xd8	; 0xd8 <__bad_interrupt>
-  2c:	0c 94 cb 01 	jmp	0x396	; 0x396 <__vector_11>
+  2c:	0c 94 e2 01 	jmp	0x3c4	; 0x3c4 <__vector_11>
   30:	0c 94 6c 00 	jmp	0xd8	; 0xd8 <__bad_interrupt>
   34:	0c 94 6c 00 	jmp	0xd8	; 0xd8 <__bad_interrupt>
   38:	0c 94 6c 00 	jmp	0xd8	; 0xd8 <__bad_interrupt>
@@ -97,11 +97,11 @@ Disassembly of section .text:
   c8:	1d 92       	st	X+, r1
 
 000000ca <.do_clear_bss_start>:
-  ca:	a2 30       	cpi	r26, 0x02	; 2
+  ca:	a1 30       	cpi	r26, 0x01	; 1
   cc:	b2 07       	cpc	r27, r18
   ce:	e1 f7       	brne	.-8      	; 0xc8 <.do_clear_bss_loop>
-  d0:	0e 94 f3 01 	call	0x3e6	; 0x3e6 <main>
-  d4:	0c 94 09 02 	jmp	0x412	; 0x412 <_exit>
+  d0:	0e 94 0a 02 	call	0x414	; 0x414 <main>
+  d4:	0c 94 22 02 	jmp	0x444	; 0x444 <_exit>
 
 000000d8 <__bad_interrupt>:
   d8:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
@@ -116,17 +116,17 @@ unsigned char apdsTransceive(void)
   dc:	cf 93       	push	r28
 	i2c_start(nebula_write);
   de:	82 e7       	ldi	r24, 0x72	; 114
-  e0:	0e 94 f0 00 	call	0x1e0	; 0x1e0 <i2c_start>
+  e0:	0e 94 29 01 	call	0x252	; 0x252 <i2c_start>
 	i2c_write(proxDataReg);
   e4:	8c e9       	ldi	r24, 0x9C	; 156
-  e6:	0e 94 20 01 	call	0x240	; 0x240 <i2c_write>
+  e6:	0e 94 59 01 	call	0x2b2	; 0x2b2 <i2c_write>
 	//i2c_write(id_reg);
 	i2c_start(nebula_read);
   ea:	83 e7       	ldi	r24, 0x73	; 115
-  ec:	0e 94 f0 00 	call	0x1e0	; 0x1e0 <i2c_start>
+  ec:	0e 94 29 01 	call	0x252	; 0x252 <i2c_start>
 	//data = i2c_readAck();
 	data = i2c_readNak();
-  f0:	0e 94 32 01 	call	0x264	; 0x264 <i2c_readNak>
+  f0:	0e 94 6b 01 	call	0x2d6	; 0x2d6 <i2c_readNak>
   f4:	c8 2f       	mov	r28, r24
 	return 0;
 	
@@ -134,7 +134,7 @@ unsigned char apdsTransceive(void)
 unsigned char apdsStop(void)
 {
 	i2c_stop();
-  f6:	0e 94 17 01 	call	0x22e	; 0x22e <i2c_stop>
+  f6:	0e 94 50 01 	call	0x2a0	; 0x2a0 <i2c_stop>
 	//i2c_write(id_reg);
 	i2c_start(nebula_read);
 	//data = i2c_readAck();
@@ -142,17 +142,17 @@ unsigned char apdsStop(void)
 	apdsStop();
 	i2c_start(nebula_write);
   fa:	82 e7       	ldi	r24, 0x72	; 114
-  fc:	0e 94 f0 00 	call	0x1e0	; 0x1e0 <i2c_start>
+  fc:	0e 94 29 01 	call	0x252	; 0x252 <i2c_start>
 	i2c_write(0xE5);
  100:	85 ee       	ldi	r24, 0xE5	; 229
- 102:	0e 94 20 01 	call	0x240	; 0x240 <i2c_write>
+ 102:	0e 94 59 01 	call	0x2b2	; 0x2b2 <i2c_write>
 	return 0;
 	
 }
 unsigned char apdsStop(void)
 {
 	i2c_stop();
- 106:	0e 94 17 01 	call	0x22e	; 0x22e <i2c_stop>
+ 106:	0e 94 50 01 	call	0x2a0	; 0x2a0 <i2c_stop>
 	i2c_start(nebula_write);
 	i2c_write(0xE5);
 	apdsStop();
@@ -163,7 +163,7 @@ unsigned char apdsStop(void)
  10c:	11 f4       	brne	.+4      	; 0x112 <apdsTransceive+0x36>
 	{
 		flashy();
- 10e:	0e 94 b5 00 	call	0x16a	; 0x16a <flashy>
+ 10e:	0e 94 aa 00 	call	0x154	; 0x154 <flashy>
 	i2c_write(0xE5);
 	apdsStop();*/
 	//sleep_mode();
@@ -174,327 +174,330 @@ unsigned char apdsStop(void)
  114:	cf 91       	pop	r28
  116:	08 95       	ret
 
-00000118 <unUsed>:
-unsigned char systemNoGo(void)
-{
-	batteryLow();
-	return 0;
-
+00000118 <boostEnable>:
+	else
+	{
+		batteryStatus=0;
+	}
+	return batteryStatus;
 }
- 118:	8a b1       	in	r24, 0x0a	; 10
- 11a:	8c 7f       	andi	r24, 0xFC	; 252
- 11c:	8a b9       	out	0x0a, r24	; 10
- 11e:	80 e0       	ldi	r24, 0x00	; 0
- 120:	08 95       	ret
+ 118:	6a 9a       	sbi	0x0d, 2	; 13
+ 11a:	72 9a       	sbi	0x0e, 2	; 14
+ 11c:	80 e0       	ldi	r24, 0x00	; 0
+ 11e:	08 95       	ret
 
-00000122 <boostDisable>:
- 122:	6a 9a       	sbi	0x0d, 2	; 13
- 124:	72 98       	cbi	0x0e, 2	; 14
- 126:	80 e0       	ldi	r24, 0x00	; 0
- 128:	08 95       	ret
+00000120 <solOn>:
+ 120:	73 9a       	sbi	0x0e, 3	; 14
+ 122:	41 9a       	sbi	0x08, 1	; 8
+ 124:	83 ec       	ldi	r24, 0xC3	; 195
+ 126:	99 e0       	ldi	r25, 0x09	; 9
+ 128:	01 97       	sbiw	r24, 0x01	; 1
+ 12a:	f1 f7       	brne	.-4      	; 0x128 <solOn+0x8>
+ 12c:	00 c0       	rjmp	.+0      	; 0x12e <solOn+0xe>
+ 12e:	00 00       	nop
+ 130:	41 98       	cbi	0x08, 1	; 8
+ 132:	40 98       	cbi	0x08, 0	; 8
+ 134:	73 98       	cbi	0x0e, 3	; 14
+ 136:	80 e0       	ldi	r24, 0x00	; 0
+ 138:	08 95       	ret
 
-0000012a <comparator>:
- 12a:	29 9a       	sbi	0x05, 1	; 5
- 12c:	83 b1       	in	r24, 0x03	; 3
- 12e:	82 fb       	bst	r24, 2
- 130:	88 27       	eor	r24, r24
- 132:	80 f9       	bld	r24, 0
- 134:	08 95       	ret
+0000013a <solOff>:
+ 13a:	73 9a       	sbi	0x0e, 3	; 14
+ 13c:	40 9a       	sbi	0x08, 0	; 8
+ 13e:	83 ec       	ldi	r24, 0xC3	; 195
+ 140:	99 e0       	ldi	r25, 0x09	; 9
+ 142:	01 97       	sbiw	r24, 0x01	; 1
+ 144:	f1 f7       	brne	.-4      	; 0x142 <solOff+0x8>
+ 146:	00 c0       	rjmp	.+0      	; 0x148 <solOff+0xe>
+ 148:	00 00       	nop
+ 14a:	40 98       	cbi	0x08, 0	; 8
+ 14c:	41 98       	cbi	0x08, 1	; 8
+ 14e:	73 98       	cbi	0x0e, 3	; 14
+ 150:	80 e0       	ldi	r24, 0x00	; 0
+ 152:	08 95       	ret
 
-00000136 <solOn>:
- 136:	73 9a       	sbi	0x0e, 3	; 14
- 138:	41 9a       	sbi	0x08, 1	; 8
- 13a:	83 ec       	ldi	r24, 0xC3	; 195
- 13c:	99 e0       	ldi	r25, 0x09	; 9
- 13e:	01 97       	sbiw	r24, 0x01	; 1
- 140:	f1 f7       	brne	.-4      	; 0x13e <solOn+0x8>
- 142:	00 c0       	rjmp	.+0      	; 0x144 <solOn+0xe>
- 144:	00 00       	nop
- 146:	41 98       	cbi	0x08, 1	; 8
- 148:	40 98       	cbi	0x08, 0	; 8
- 14a:	73 98       	cbi	0x0e, 3	; 14
- 14c:	80 e0       	ldi	r24, 0x00	; 0
- 14e:	08 95       	ret
+00000154 <flashy>:
+ 154:	5d 98       	cbi	0x0b, 5	; 11
+ 156:	2f ef       	ldi	r18, 0xFF	; 255
+ 158:	80 e7       	ldi	r24, 0x70	; 112
+ 15a:	92 e0       	ldi	r25, 0x02	; 2
+ 15c:	21 50       	subi	r18, 0x01	; 1
+ 15e:	80 40       	sbci	r24, 0x00	; 0
+ 160:	90 40       	sbci	r25, 0x00	; 0
+ 162:	e1 f7       	brne	.-8      	; 0x15c <flashy+0x8>
+ 164:	00 c0       	rjmp	.+0      	; 0x166 <flashy+0x12>
+ 166:	00 00       	nop
+ 168:	5d 9a       	sbi	0x0b, 5	; 11
+ 16a:	2f e3       	ldi	r18, 0x3F	; 63
+ 16c:	82 e4       	ldi	r24, 0x42	; 66
+ 16e:	9f e0       	ldi	r25, 0x0F	; 15
+ 170:	21 50       	subi	r18, 0x01	; 1
+ 172:	80 40       	sbci	r24, 0x00	; 0
+ 174:	90 40       	sbci	r25, 0x00	; 0
+ 176:	e1 f7       	brne	.-8      	; 0x170 <flashy+0x1c>
+ 178:	00 c0       	rjmp	.+0      	; 0x17a <flashy+0x26>
+ 17a:	00 00       	nop
+ 17c:	80 e0       	ldi	r24, 0x00	; 0
+ 17e:	08 95       	ret
 
-00000150 <solOff>:
- 150:	73 9a       	sbi	0x0e, 3	; 14
- 152:	40 9a       	sbi	0x08, 0	; 8
- 154:	83 ec       	ldi	r24, 0xC3	; 195
- 156:	99 e0       	ldi	r25, 0x09	; 9
- 158:	01 97       	sbiw	r24, 0x01	; 1
- 15a:	f1 f7       	brne	.-4      	; 0x158 <solOff+0x8>
- 15c:	00 c0       	rjmp	.+0      	; 0x15e <solOff+0xe>
- 15e:	00 00       	nop
- 160:	40 98       	cbi	0x08, 0	; 8
- 162:	41 98       	cbi	0x08, 1	; 8
- 164:	73 98       	cbi	0x0e, 3	; 14
- 166:	80 e0       	ldi	r24, 0x00	; 0
- 168:	08 95       	ret
+00000180 <batteryLow>:
 
-0000016a <flashy>:
- 16a:	5d 98       	cbi	0x0b, 5	; 11
- 16c:	87 ea       	ldi	r24, 0xA7	; 167
- 16e:	91 e6       	ldi	r25, 0x61	; 97
- 170:	01 97       	sbiw	r24, 0x01	; 1
- 172:	f1 f7       	brne	.-4      	; 0x170 <flashy+0x6>
- 174:	00 c0       	rjmp	.+0      	; 0x176 <flashy+0xc>
- 176:	00 00       	nop
- 178:	5d 9a       	sbi	0x0b, 5	; 11
- 17a:	87 ea       	ldi	r24, 0xA7	; 167
- 17c:	91 e6       	ldi	r25, 0x61	; 97
- 17e:	01 97       	sbiw	r24, 0x01	; 1
- 180:	f1 f7       	brne	.-4      	; 0x17e <flashy+0x14>
- 182:	00 c0       	rjmp	.+0      	; 0x184 <flashy+0x1a>
- 184:	00 00       	nop
- 186:	80 e0       	ldi	r24, 0x00	; 0
- 188:	08 95       	ret
+unsigned char batteryLow(void)//low battery indicator
+{
+	//boostDisable();
 
-0000018a <portSetup>:
- 18a:	0e 94 8c 00 	call	0x118	; 0x118 <unUsed>
- 18e:	80 e2       	ldi	r24, 0x20	; 32
- 190:	8a b9       	out	0x0a, r24	; 10
- 192:	80 e8       	ldi	r24, 0x80	; 128
- 194:	8a b9       	out	0x0a, r24	; 10
- 196:	80 e4       	ldi	r24, 0x40	; 64
- 198:	8a b9       	out	0x0a, r24	; 10
- 19a:	5d 9a       	sbi	0x0b, 5	; 11
- 19c:	5f 9a       	sbi	0x0b, 7	; 11
- 19e:	5e 9a       	sbi	0x0b, 6	; 11
- 1a0:	20 98       	cbi	0x04, 0	; 4
- 1a2:	3a 98       	cbi	0x07, 2	; 7
- 1a4:	42 9a       	sbi	0x08, 2	; 8
- 1a6:	80 e0       	ldi	r24, 0x00	; 0
- 1a8:	08 95       	ret
+	PORTD &= ~(1<<redPort);
+ 180:	5d 98       	cbi	0x0b, 5	; 11
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
 
-000001aa <charging>:
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 182:	2f e5       	ldi	r18, 0x5F	; 95
+ 184:	8a ee       	ldi	r24, 0xEA	; 234
+ 186:	90 e0       	ldi	r25, 0x00	; 0
+ 188:	21 50       	subi	r18, 0x01	; 1
+ 18a:	80 40       	sbci	r24, 0x00	; 0
+ 18c:	90 40       	sbci	r25, 0x00	; 0
+ 18e:	e1 f7       	brne	.-8      	; 0x188 <batteryLow+0x8>
+ 190:	00 c0       	rjmp	.+0      	; 0x192 <batteryLow+0x12>
+ 192:	00 00       	nop
+	_delay_ms(300);
+	PORTD |= (1<<redPort);
+ 194:	5d 9a       	sbi	0x0b, 5	; 11
+	PORTD &= ~(1<<greenPort);
+ 196:	5f 98       	cbi	0x0b, 7	; 11
+ 198:	2f e5       	ldi	r18, 0x5F	; 95
+ 19a:	8a ee       	ldi	r24, 0xEA	; 234
+ 19c:	90 e0       	ldi	r25, 0x00	; 0
+ 19e:	21 50       	subi	r18, 0x01	; 1
+ 1a0:	80 40       	sbci	r24, 0x00	; 0
+ 1a2:	90 40       	sbci	r25, 0x00	; 0
+ 1a4:	e1 f7       	brne	.-8      	; 0x19e <batteryLow+0x1e>
+ 1a6:	00 c0       	rjmp	.+0      	; 0x1a8 <batteryLow+0x28>
+ 1a8:	00 00       	nop
+	_delay_ms(300);
+	PORTD |= (1<<greenPort);
+ 1aa:	5f 9a       	sbi	0x0b, 7	; 11
+	PORTD &= ~(1<<bluePort);
+ 1ac:	5e 98       	cbi	0x0b, 6	; 11
+ 1ae:	2f e5       	ldi	r18, 0x5F	; 95
+ 1b0:	8a ee       	ldi	r24, 0xEA	; 234
+ 1b2:	90 e0       	ldi	r25, 0x00	; 0
+ 1b4:	21 50       	subi	r18, 0x01	; 1
+ 1b6:	80 40       	sbci	r24, 0x00	; 0
+ 1b8:	90 40       	sbci	r25, 0x00	; 0
+ 1ba:	e1 f7       	brne	.-8      	; 0x1b4 <batteryLow+0x34>
+ 1bc:	00 c0       	rjmp	.+0      	; 0x1be <batteryLow+0x3e>
+ 1be:	00 00       	nop
+	_delay_ms(300);
+	PORTD |= (1<<bluePort);
+ 1c0:	5e 9a       	sbi	0x0b, 6	; 11
+	PORTD &= ~(1<<redPort) & ~(1<<bluePort);
+ 1c2:	8b b1       	in	r24, 0x0b	; 11
+ 1c4:	8f 79       	andi	r24, 0x9F	; 159
+ 1c6:	8b b9       	out	0x0b, r24	; 11
+ 1c8:	2f e5       	ldi	r18, 0x5F	; 95
+ 1ca:	8a ee       	ldi	r24, 0xEA	; 234
+ 1cc:	90 e0       	ldi	r25, 0x00	; 0
+ 1ce:	21 50       	subi	r18, 0x01	; 1
+ 1d0:	80 40       	sbci	r24, 0x00	; 0
+ 1d2:	90 40       	sbci	r25, 0x00	; 0
+ 1d4:	e1 f7       	brne	.-8      	; 0x1ce <batteryLow+0x4e>
+ 1d6:	00 c0       	rjmp	.+0      	; 0x1d8 <batteryLow+0x58>
+ 1d8:	00 00       	nop
+	_delay_ms(300);
+	PORTD |= (1<<redPort) | (1<<bluePort);
+ 1da:	8b b1       	in	r24, 0x0b	; 11
+ 1dc:	80 66       	ori	r24, 0x60	; 96
+ 1de:	8b b9       	out	0x0b, r24	; 11
+	PORTD &= ~(1<<greenPort) & (1<<redPort);
+ 1e0:	8b b1       	in	r24, 0x0b	; 11
+ 1e2:	80 72       	andi	r24, 0x20	; 32
+ 1e4:	8b b9       	out	0x0b, r24	; 11
+ 1e6:	2f e5       	ldi	r18, 0x5F	; 95
+ 1e8:	8a ee       	ldi	r24, 0xEA	; 234
+ 1ea:	90 e0       	ldi	r25, 0x00	; 0
+ 1ec:	21 50       	subi	r18, 0x01	; 1
+ 1ee:	80 40       	sbci	r24, 0x00	; 0
+ 1f0:	90 40       	sbci	r25, 0x00	; 0
+ 1f2:	e1 f7       	brne	.-8      	; 0x1ec <batteryLow+0x6c>
+ 1f4:	00 c0       	rjmp	.+0      	; 0x1f6 <batteryLow+0x76>
+ 1f6:	00 00       	nop
+	_delay_ms(300);
+	PORTD |= (1<<greenPort) |(1<<redPort);
+ 1f8:	8b b1       	in	r24, 0x0b	; 11
+ 1fa:	80 6a       	ori	r24, 0xA0	; 160
+ 1fc:	8b b9       	out	0x0b, r24	; 11
+	PORTD &= ~(1<<bluePort) & ~(1<<greenPort);
+ 1fe:	8b b1       	in	r24, 0x0b	; 11
+ 200:	8f 73       	andi	r24, 0x3F	; 63
+ 202:	8b b9       	out	0x0b, r24	; 11
+ 204:	2f e5       	ldi	r18, 0x5F	; 95
+ 206:	8a ee       	ldi	r24, 0xEA	; 234
+ 208:	90 e0       	ldi	r25, 0x00	; 0
+ 20a:	21 50       	subi	r18, 0x01	; 1
+ 20c:	80 40       	sbci	r24, 0x00	; 0
+ 20e:	90 40       	sbci	r25, 0x00	; 0
+ 210:	e1 f7       	brne	.-8      	; 0x20a <batteryLow+0x8a>
+ 212:	00 c0       	rjmp	.+0      	; 0x214 <batteryLow+0x94>
+ 214:	00 00       	nop
+	_delay_ms(300);
+	PORTD |= (1<<bluePort) | (1<<greenPort);
+ 216:	8b b1       	in	r24, 0x0b	; 11
+ 218:	80 6c       	ori	r24, 0xC0	; 192
+ 21a:	8b b9       	out	0x0b, r24	; 11
+	PORTD &= ~(1<<redPort) & ~(1<<greenPort);
+ 21c:	8b b1       	in	r24, 0x0b	; 11
+ 21e:	8f 75       	andi	r24, 0x5F	; 95
+ 220:	8b b9       	out	0x0b, r24	; 11
+ 222:	2f e5       	ldi	r18, 0x5F	; 95
+ 224:	8a ee       	ldi	r24, 0xEA	; 234
+ 226:	90 e0       	ldi	r25, 0x00	; 0
+ 228:	21 50       	subi	r18, 0x01	; 1
+ 22a:	80 40       	sbci	r24, 0x00	; 0
+ 22c:	90 40       	sbci	r25, 0x00	; 0
+ 22e:	e1 f7       	brne	.-8      	; 0x228 <batteryLow+0xa8>
+ 230:	00 c0       	rjmp	.+0      	; 0x232 <batteryLow+0xb2>
+ 232:	00 00       	nop
+	_delay_ms(300);
+	PORTD |= (1<<redPort) | (1<<greenPort);
+ 234:	8b b1       	in	r24, 0x0b	; 11
+ 236:	80 6a       	ori	r24, 0xA0	; 160
+ 238:	8b b9       	out	0x0b, r24	; 11
 	//idle();
 	return 0;
 }
+ 23a:	80 e0       	ldi	r24, 0x00	; 0
+ 23c:	08 95       	ret
 
-unsigned char charging(void)//charge indicator
-{
- 1aa:	cf 93       	push	r28
- 1ac:	df 93       	push	r29
-	//pin change int
-	comp = comparator();
- 1ae:	0e 94 95 00 	call	0x12a	; 0x12a <comparator>
- 1b2:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <_edata>
-	if ((PINB & (1<<batteryPort)) == 0)
- 1b6:	18 99       	sbic	0x03, 0	; 3
- 1b8:	02 c0       	rjmp	.+4      	; 0x1be <charging+0x14>
-	{
-		PORTD &= ~(1<<redPort);
- 1ba:	5d 98       	cbi	0x0b, 5	; 11
- 1bc:	0d c0       	rjmp	.+26     	; 0x1d8 <charging+0x2e>
-	}
-	else if((((PINB & (1<<batteryPort)) != 0) & (comp)))
- 1be:	93 b1       	in	r25, 0x03	; 3
- 1c0:	91 70       	andi	r25, 0x01	; 1
- 1c2:	c9 2f       	mov	r28, r25
- 1c4:	90 e0       	ldi	r25, 0x00	; 0
- 1c6:	d9 2f       	mov	r29, r25
- 1c8:	90 e0       	ldi	r25, 0x00	; 0
- 1ca:	8c 23       	and	r24, r28
- 1cc:	9d 23       	and	r25, r29
- 1ce:	89 2b       	or	r24, r25
- 1d0:	11 f0       	breq	.+4      	; 0x1d6 <charging+0x2c>
-	{
-		PORTD |= (1<<redPort);
- 1d2:	5d 9a       	sbi	0x0b, 5	; 11
- 1d4:	01 c0       	rjmp	.+2      	; 0x1d8 <charging+0x2e>
-	}
-	else
-	{
-		PORTD &= ~(1<<redPort);
- 1d6:	5d 98       	cbi	0x0b, 5	; 11
-	}
-
-	return 0;
-}
- 1d8:	80 e0       	ldi	r24, 0x00	; 0
- 1da:	df 91       	pop	r29
- 1dc:	cf 91       	pop	r28
- 1de:	08 95       	ret
-
-000001e0 <i2c_start>:
+0000023e <i2c_init>:
 {
 	TWCR0 = (1<<TWINT) | (1<<TWEN) | (1<<TWEA);
 	while(!(TWCR0 & (1<<TWINT)));    
 
     return TWDR0;
 }/* i2c_readAck */
- 1e0:	94 ea       	ldi	r25, 0xA4	; 164
- 1e2:	90 93 bc 00 	sts	0x00BC, r25	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7e00bc>
- 1e6:	ec eb       	ldi	r30, 0xBC	; 188
- 1e8:	f0 e0       	ldi	r31, 0x00	; 0
- 1ea:	90 81       	ld	r25, Z
- 1ec:	99 23       	and	r25, r25
- 1ee:	ec f7       	brge	.-6      	; 0x1ea <i2c_start+0xa>
- 1f0:	90 91 b9 00 	lds	r25, 0x00B9	; 0x8000b9 <__TEXT_REGION_LENGTH__+0x7e00b9>
- 1f4:	98 7f       	andi	r25, 0xF8	; 248
- 1f6:	98 30       	cpi	r25, 0x08	; 8
- 1f8:	11 f0       	breq	.+4      	; 0x1fe <i2c_start+0x1e>
- 1fa:	90 31       	cpi	r25, 0x10	; 16
- 1fc:	a1 f4       	brne	.+40     	; 0x226 <i2c_start+0x46>
- 1fe:	80 93 bb 00 	sts	0x00BB, r24	; 0x8000bb <__TEXT_REGION_LENGTH__+0x7e00bb>
- 202:	84 e8       	ldi	r24, 0x84	; 132
- 204:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7e00bc>
- 208:	ec eb       	ldi	r30, 0xBC	; 188
- 20a:	f0 e0       	ldi	r31, 0x00	; 0
- 20c:	80 81       	ld	r24, Z
- 20e:	88 23       	and	r24, r24
- 210:	ec f7       	brge	.-6      	; 0x20c <i2c_start+0x2c>
- 212:	90 91 b9 00 	lds	r25, 0x00B9	; 0x8000b9 <__TEXT_REGION_LENGTH__+0x7e00b9>
- 216:	98 7f       	andi	r25, 0xF8	; 248
- 218:	98 31       	cpi	r25, 0x18	; 24
- 21a:	39 f0       	breq	.+14     	; 0x22a <i2c_start+0x4a>
- 21c:	81 e0       	ldi	r24, 0x01	; 1
- 21e:	90 34       	cpi	r25, 0x40	; 64
- 220:	29 f4       	brne	.+10     	; 0x22c <i2c_start+0x4c>
- 222:	80 e0       	ldi	r24, 0x00	; 0
- 224:	08 95       	ret
- 226:	81 e0       	ldi	r24, 0x01	; 1
- 228:	08 95       	ret
- 22a:	80 e0       	ldi	r24, 0x00	; 0
- 22c:	08 95       	ret
+ 23e:	10 92 b9 00 	sts	0x00B9, r1	; 0x8000b9 <__TEXT_REGION_LENGTH__+0x7e00b9>
+ 242:	84 e0       	ldi	r24, 0x04	; 4
+ 244:	80 93 b8 00 	sts	0x00B8, r24	; 0x8000b8 <__TEXT_REGION_LENGTH__+0x7e00b8>
+ 248:	84 ea       	ldi	r24, 0xA4	; 164
+ 24a:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7e00bc>
+ 24e:	80 e0       	ldi	r24, 0x00	; 0
+ 250:	08 95       	ret
 
-0000022e <i2c_stop>:
- 22e:	84 e9       	ldi	r24, 0x94	; 148
- 230:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7e00bc>
- 234:	ec eb       	ldi	r30, 0xBC	; 188
- 236:	f0 e0       	ldi	r31, 0x00	; 0
- 238:	80 81       	ld	r24, Z
- 23a:	84 fd       	sbrc	r24, 4
- 23c:	fd cf       	rjmp	.-6      	; 0x238 <i2c_stop+0xa>
- 23e:	08 95       	ret
+00000252 <i2c_start>:
+ 252:	94 ea       	ldi	r25, 0xA4	; 164
+ 254:	90 93 bc 00 	sts	0x00BC, r25	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7e00bc>
+ 258:	ec eb       	ldi	r30, 0xBC	; 188
+ 25a:	f0 e0       	ldi	r31, 0x00	; 0
+ 25c:	90 81       	ld	r25, Z
+ 25e:	99 23       	and	r25, r25
+ 260:	ec f7       	brge	.-6      	; 0x25c <i2c_start+0xa>
+ 262:	90 91 b9 00 	lds	r25, 0x00B9	; 0x8000b9 <__TEXT_REGION_LENGTH__+0x7e00b9>
+ 266:	98 7f       	andi	r25, 0xF8	; 248
+ 268:	98 30       	cpi	r25, 0x08	; 8
+ 26a:	11 f0       	breq	.+4      	; 0x270 <i2c_start+0x1e>
+ 26c:	90 31       	cpi	r25, 0x10	; 16
+ 26e:	a1 f4       	brne	.+40     	; 0x298 <i2c_start+0x46>
+ 270:	80 93 bb 00 	sts	0x00BB, r24	; 0x8000bb <__TEXT_REGION_LENGTH__+0x7e00bb>
+ 274:	84 e8       	ldi	r24, 0x84	; 132
+ 276:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7e00bc>
+ 27a:	ec eb       	ldi	r30, 0xBC	; 188
+ 27c:	f0 e0       	ldi	r31, 0x00	; 0
+ 27e:	80 81       	ld	r24, Z
+ 280:	88 23       	and	r24, r24
+ 282:	ec f7       	brge	.-6      	; 0x27e <i2c_start+0x2c>
+ 284:	90 91 b9 00 	lds	r25, 0x00B9	; 0x8000b9 <__TEXT_REGION_LENGTH__+0x7e00b9>
+ 288:	98 7f       	andi	r25, 0xF8	; 248
+ 28a:	98 31       	cpi	r25, 0x18	; 24
+ 28c:	39 f0       	breq	.+14     	; 0x29c <i2c_start+0x4a>
+ 28e:	81 e0       	ldi	r24, 0x01	; 1
+ 290:	90 34       	cpi	r25, 0x40	; 64
+ 292:	29 f4       	brne	.+10     	; 0x29e <i2c_start+0x4c>
+ 294:	80 e0       	ldi	r24, 0x00	; 0
+ 296:	08 95       	ret
+ 298:	81 e0       	ldi	r24, 0x01	; 1
+ 29a:	08 95       	ret
+ 29c:	80 e0       	ldi	r24, 0x00	; 0
+ 29e:	08 95       	ret
 
-00000240 <i2c_write>:
- 240:	80 93 bb 00 	sts	0x00BB, r24	; 0x8000bb <__TEXT_REGION_LENGTH__+0x7e00bb>
- 244:	84 e8       	ldi	r24, 0x84	; 132
- 246:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7e00bc>
- 24a:	ec eb       	ldi	r30, 0xBC	; 188
- 24c:	f0 e0       	ldi	r31, 0x00	; 0
- 24e:	80 81       	ld	r24, Z
- 250:	88 23       	and	r24, r24
- 252:	ec f7       	brge	.-6      	; 0x24e <i2c_write+0xe>
- 254:	90 91 b9 00 	lds	r25, 0x00B9	; 0x8000b9 <__TEXT_REGION_LENGTH__+0x7e00b9>
- 258:	98 7f       	andi	r25, 0xF8	; 248
- 25a:	81 e0       	ldi	r24, 0x01	; 1
- 25c:	98 32       	cpi	r25, 0x28	; 40
- 25e:	09 f4       	brne	.+2      	; 0x262 <i2c_write+0x22>
- 260:	80 e0       	ldi	r24, 0x00	; 0
- 262:	08 95       	ret
+000002a0 <i2c_stop>:
+ 2a0:	84 e9       	ldi	r24, 0x94	; 148
+ 2a2:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7e00bc>
+ 2a6:	ec eb       	ldi	r30, 0xBC	; 188
+ 2a8:	f0 e0       	ldi	r31, 0x00	; 0
+ 2aa:	80 81       	ld	r24, Z
+ 2ac:	84 fd       	sbrc	r24, 4
+ 2ae:	fd cf       	rjmp	.-6      	; 0x2aa <i2c_stop+0xa>
+ 2b0:	08 95       	ret
 
-00000264 <i2c_readNak>:
+000002b2 <i2c_write>:
+ 2b2:	80 93 bb 00 	sts	0x00BB, r24	; 0x8000bb <__TEXT_REGION_LENGTH__+0x7e00bb>
+ 2b6:	84 e8       	ldi	r24, 0x84	; 132
+ 2b8:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7e00bc>
+ 2bc:	ec eb       	ldi	r30, 0xBC	; 188
+ 2be:	f0 e0       	ldi	r31, 0x00	; 0
+ 2c0:	80 81       	ld	r24, Z
+ 2c2:	88 23       	and	r24, r24
+ 2c4:	ec f7       	brge	.-6      	; 0x2c0 <i2c_write+0xe>
+ 2c6:	90 91 b9 00 	lds	r25, 0x00B9	; 0x8000b9 <__TEXT_REGION_LENGTH__+0x7e00b9>
+ 2ca:	98 7f       	andi	r25, 0xF8	; 248
+ 2cc:	81 e0       	ldi	r24, 0x01	; 1
+ 2ce:	98 32       	cpi	r25, 0x28	; 40
+ 2d0:	09 f4       	brne	.+2      	; 0x2d4 <i2c_write+0x22>
+ 2d2:	80 e0       	ldi	r24, 0x00	; 0
+ 2d4:	08 95       	ret
+
+000002d6 <i2c_readNak>:
  
  Return:  byte read from I2C device
 *************************************************************************/
 unsigned char i2c_readNak(void)
 {
 	TWCR0 = (1<<TWINT) | (1<<TWEN);
- 264:	84 e8       	ldi	r24, 0x84	; 132
- 266:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7e00bc>
+ 2d6:	84 e8       	ldi	r24, 0x84	; 132
+ 2d8:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7e00bc>
 	while(!(TWCR0 & (1<<TWINT)));
- 26a:	ec eb       	ldi	r30, 0xBC	; 188
- 26c:	f0 e0       	ldi	r31, 0x00	; 0
- 26e:	80 81       	ld	r24, Z
- 270:	88 23       	and	r24, r24
- 272:	ec f7       	brge	.-6      	; 0x26e <i2c_readNak+0xa>
+ 2dc:	ec eb       	ldi	r30, 0xBC	; 188
+ 2de:	f0 e0       	ldi	r31, 0x00	; 0
+ 2e0:	80 81       	ld	r24, Z
+ 2e2:	88 23       	and	r24, r24
+ 2e4:	ec f7       	brge	.-6      	; 0x2e0 <i2c_readNak+0xa>
 	
     return TWDR0;
- 274:	80 91 bb 00 	lds	r24, 0x00BB	; 0x8000bb <__TEXT_REGION_LENGTH__+0x7e00bb>
+ 2e6:	80 91 bb 00 	lds	r24, 0x00BB	; 0x8000bb <__TEXT_REGION_LENGTH__+0x7e00bb>
 }/* i2c_readNak */
- 278:	08 95       	ret
+ 2ea:	08 95       	ret
 
-0000027a <__vector_1>:
-	TCNT1 = 0;// sets the default value for the timer.
-	OCR1A = timerValue;// sets the value for the timer delay, example the 2 minutes or few seconds.
-	TIMSK1 = 0x01;// interrupt mask for timer 1A compare match
-	return 0;
-	
-}
- 27a:	1f 92       	push	r1
- 27c:	0f 92       	push	r0
- 27e:	0f b6       	in	r0, 0x3f	; 63
- 280:	0f 92       	push	r0
- 282:	11 24       	eor	r1, r1
- 284:	2f 93       	push	r18
- 286:	3f 93       	push	r19
- 288:	4f 93       	push	r20
- 28a:	5f 93       	push	r21
- 28c:	6f 93       	push	r22
- 28e:	7f 93       	push	r23
- 290:	8f 93       	push	r24
- 292:	9f 93       	push	r25
- 294:	af 93       	push	r26
- 296:	bf 93       	push	r27
- 298:	ef 93       	push	r30
- 29a:	ff 93       	push	r31
- 29c:	81 e0       	ldi	r24, 0x01	; 1
- 29e:	80 93 01 01 	sts	0x0101, r24	; 0x800101 <count>
- 2a2:	0e 94 9b 00 	call	0x136	; 0x136 <solOn>
- 2a6:	0e 94 6e 00 	call	0xdc	; 0xdc <apdsTransceive>
- 2aa:	82 e7       	ldi	r24, 0x72	; 114
- 2ac:	0e 94 f0 00 	call	0x1e0	; 0x1e0 <i2c_start>
- 2b0:	85 ee       	ldi	r24, 0xE5	; 229
- 2b2:	0e 94 20 01 	call	0x240	; 0x240 <i2c_write>
- 2b6:	0e 94 17 01 	call	0x22e	; 0x22e <i2c_stop>
- 2ba:	ff 91       	pop	r31
- 2bc:	ef 91       	pop	r30
- 2be:	bf 91       	pop	r27
- 2c0:	af 91       	pop	r26
- 2c2:	9f 91       	pop	r25
- 2c4:	8f 91       	pop	r24
- 2c6:	7f 91       	pop	r23
- 2c8:	6f 91       	pop	r22
- 2ca:	5f 91       	pop	r21
- 2cc:	4f 91       	pop	r20
- 2ce:	3f 91       	pop	r19
- 2d0:	2f 91       	pop	r18
- 2d2:	0f 90       	pop	r0
- 2d4:	0f be       	out	0x3f, r0	; 63
- 2d6:	0f 90       	pop	r0
- 2d8:	1f 90       	pop	r1
- 2da:	18 95       	reti
-
-000002dc <__vector_4>:
- 2dc:	1f 92       	push	r1
- 2de:	0f 92       	push	r0
- 2e0:	0f b6       	in	r0, 0x3f	; 63
- 2e2:	0f 92       	push	r0
- 2e4:	11 24       	eor	r1, r1
- 2e6:	2f 93       	push	r18
- 2e8:	3f 93       	push	r19
- 2ea:	4f 93       	push	r20
- 2ec:	5f 93       	push	r21
- 2ee:	6f 93       	push	r22
- 2f0:	7f 93       	push	r23
- 2f2:	8f 93       	push	r24
- 2f4:	9f 93       	push	r25
- 2f6:	af 93       	push	r26
- 2f8:	bf 93       	push	r27
- 2fa:	ef 93       	push	r30
- 2fc:	ff 93       	push	r31
- 2fe:	32 99       	sbic	0x06, 2	; 6
- 300:	15 c0       	rjmp	.+42     	; 0x32c <__vector_4+0x50>
- 302:	0e 94 9b 00 	call	0x136	; 0x136 <solOn>
- 306:	2f e9       	ldi	r18, 0x9F	; 159
- 308:	86 e8       	ldi	r24, 0x86	; 134
- 30a:	91 e0       	ldi	r25, 0x01	; 1
- 30c:	21 50       	subi	r18, 0x01	; 1
- 30e:	80 40       	sbci	r24, 0x00	; 0
- 310:	90 40       	sbci	r25, 0x00	; 0
- 312:	e1 f7       	brne	.-8      	; 0x30c <__vector_4+0x30>
- 314:	00 c0       	rjmp	.+0      	; 0x316 <__vector_4+0x3a>
- 316:	00 00       	nop
- 318:	0e 94 a8 00 	call	0x150	; 0x150 <solOff>
- 31c:	87 e8       	ldi	r24, 0x87	; 135
- 31e:	93 e1       	ldi	r25, 0x13	; 19
- 320:	01 97       	sbiw	r24, 0x01	; 1
- 322:	f1 f7       	brne	.-4      	; 0x320 <__vector_4+0x44>
- 324:	00 c0       	rjmp	.+0      	; 0x326 <__vector_4+0x4a>
- 326:	00 00       	nop
- 328:	0e 94 b5 00 	call	0x16a	; 0x16a <flashy>
+000002ec <__vector_1>:
+ 2ec:	1f 92       	push	r1
+ 2ee:	0f 92       	push	r0
+ 2f0:	0f b6       	in	r0, 0x3f	; 63
+ 2f2:	0f 92       	push	r0
+ 2f4:	11 24       	eor	r1, r1
+ 2f6:	2f 93       	push	r18
+ 2f8:	3f 93       	push	r19
+ 2fa:	4f 93       	push	r20
+ 2fc:	5f 93       	push	r21
+ 2fe:	6f 93       	push	r22
+ 300:	7f 93       	push	r23
+ 302:	8f 93       	push	r24
+ 304:	9f 93       	push	r25
+ 306:	af 93       	push	r26
+ 308:	bf 93       	push	r27
+ 30a:	ef 93       	push	r30
+ 30c:	ff 93       	push	r31
+ 30e:	81 e0       	ldi	r24, 0x01	; 1
+ 310:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <_edata>
+ 314:	0e 94 90 00 	call	0x120	; 0x120 <solOn>
+ 318:	0e 94 6e 00 	call	0xdc	; 0xdc <apdsTransceive>
+ 31c:	82 e7       	ldi	r24, 0x72	; 114
+ 31e:	0e 94 29 01 	call	0x252	; 0x252 <i2c_start>
+ 322:	85 ee       	ldi	r24, 0xE5	; 229
+ 324:	0e 94 59 01 	call	0x2b2	; 0x2b2 <i2c_write>
+ 328:	0e 94 50 01 	call	0x2a0	; 0x2a0 <i2c_stop>
  32c:	ff 91       	pop	r31
  32e:	ef 91       	pop	r30
  330:	bf 91       	pop	r27
@@ -513,145 +516,168 @@ unsigned char i2c_readNak(void)
  34a:	1f 90       	pop	r1
  34c:	18 95       	reti
 
-0000034e <__vector_3>:
- 34e:	1f 92       	push	r1
- 350:	0f 92       	push	r0
- 352:	0f b6       	in	r0, 0x3f	; 63
- 354:	0f 92       	push	r0
- 356:	11 24       	eor	r1, r1
- 358:	2f 93       	push	r18
- 35a:	3f 93       	push	r19
- 35c:	4f 93       	push	r20
- 35e:	5f 93       	push	r21
- 360:	6f 93       	push	r22
- 362:	7f 93       	push	r23
- 364:	8f 93       	push	r24
- 366:	9f 93       	push	r25
- 368:	af 93       	push	r26
- 36a:	bf 93       	push	r27
- 36c:	ef 93       	push	r30
- 36e:	ff 93       	push	r31
- 370:	0e 94 d5 00 	call	0x1aa	; 0x1aa <charging>
- 374:	ff 91       	pop	r31
- 376:	ef 91       	pop	r30
- 378:	bf 91       	pop	r27
- 37a:	af 91       	pop	r26
- 37c:	9f 91       	pop	r25
- 37e:	8f 91       	pop	r24
- 380:	7f 91       	pop	r23
- 382:	6f 91       	pop	r22
- 384:	5f 91       	pop	r21
- 386:	4f 91       	pop	r20
- 388:	3f 91       	pop	r19
- 38a:	2f 91       	pop	r18
- 38c:	0f 90       	pop	r0
- 38e:	0f be       	out	0x3f, r0	; 63
- 390:	0f 90       	pop	r0
- 392:	1f 90       	pop	r1
- 394:	18 95       	reti
+0000034e <pcIntSetup>:
+ 34e:	e8 e6       	ldi	r30, 0x68	; 104
+ 350:	f0 e0       	ldi	r31, 0x00	; 0
+ 352:	80 81       	ld	r24, Z
+ 354:	83 60       	ori	r24, 0x03	; 3
+ 356:	80 83       	st	Z, r24
+ 358:	ec e6       	ldi	r30, 0x6C	; 108
+ 35a:	f0 e0       	ldi	r31, 0x00	; 0
+ 35c:	80 81       	ld	r24, Z
+ 35e:	85 60       	ori	r24, 0x05	; 5
+ 360:	80 83       	st	Z, r24
+ 362:	80 e0       	ldi	r24, 0x00	; 0
+ 364:	08 95       	ret
 
-00000396 <__vector_11>:
+00000366 <__vector_4>:
+ 366:	1f 92       	push	r1
+ 368:	0f 92       	push	r0
+ 36a:	0f b6       	in	r0, 0x3f	; 63
+ 36c:	0f 92       	push	r0
+ 36e:	11 24       	eor	r1, r1
+ 370:	2f 93       	push	r18
+ 372:	3f 93       	push	r19
+ 374:	4f 93       	push	r20
+ 376:	5f 93       	push	r21
+ 378:	6f 93       	push	r22
+ 37a:	7f 93       	push	r23
+ 37c:	8f 93       	push	r24
+ 37e:	9f 93       	push	r25
+ 380:	af 93       	push	r26
+ 382:	bf 93       	push	r27
+ 384:	ef 93       	push	r30
+ 386:	ff 93       	push	r31
+ 388:	32 9b       	sbis	0x06, 2	; 6
+ 38a:	0e 94 c0 00 	call	0x180	; 0x180 <batteryLow>
+ 38e:	ff 91       	pop	r31
+ 390:	ef 91       	pop	r30
+ 392:	bf 91       	pop	r27
+ 394:	af 91       	pop	r26
+ 396:	9f 91       	pop	r25
+ 398:	8f 91       	pop	r24
+ 39a:	7f 91       	pop	r23
+ 39c:	6f 91       	pop	r22
+ 39e:	5f 91       	pop	r21
+ 3a0:	4f 91       	pop	r20
+ 3a2:	3f 91       	pop	r19
+ 3a4:	2f 91       	pop	r18
+ 3a6:	0f 90       	pop	r0
+ 3a8:	0f be       	out	0x3f, r0	; 63
+ 3aa:	0f 90       	pop	r0
+ 3ac:	1f 90       	pop	r1
+ 3ae:	18 95       	reti
 
-ISR(TIMER1_COMPA_vect)// Interrupt service routine  for timer
-{   
- 396:	1f 92       	push	r1
- 398:	0f 92       	push	r0
- 39a:	0f b6       	in	r0, 0x3f	; 63
- 39c:	0f 92       	push	r0
- 39e:	11 24       	eor	r1, r1
- 3a0:	2f 93       	push	r18
- 3a2:	3f 93       	push	r19
- 3a4:	4f 93       	push	r20
- 3a6:	5f 93       	push	r21
- 3a8:	6f 93       	push	r22
- 3aa:	7f 93       	push	r23
- 3ac:	8f 93       	push	r24
- 3ae:	9f 93       	push	r25
- 3b0:	af 93       	push	r26
- 3b2:	bf 93       	push	r27
- 3b4:	ef 93       	push	r30
- 3b6:	ff 93       	push	r31
-	//if (count == 1)
-	//{
-	solOff();
- 3b8:	0e 94 a8 00 	call	0x150	; 0x150 <solOff>
-	count = 0;
- 3bc:	10 92 01 01 	sts	0x0101, r1	; 0x800101 <count>
-	//}
-	//TCCR1B = 0x00;
-	flashy();
- 3c0:	0e 94 b5 00 	call	0x16a	; 0x16a <flashy>
-}
- 3c4:	ff 91       	pop	r31
- 3c6:	ef 91       	pop	r30
- 3c8:	bf 91       	pop	r27
- 3ca:	af 91       	pop	r26
- 3cc:	9f 91       	pop	r25
- 3ce:	8f 91       	pop	r24
- 3d0:	7f 91       	pop	r23
- 3d2:	6f 91       	pop	r22
- 3d4:	5f 91       	pop	r21
- 3d6:	4f 91       	pop	r20
- 3d8:	3f 91       	pop	r19
- 3da:	2f 91       	pop	r18
- 3dc:	0f 90       	pop	r0
- 3de:	0f be       	out	0x3f, r0	; 63
- 3e0:	0f 90       	pop	r0
- 3e2:	1f 90       	pop	r1
- 3e4:	18 95       	reti
+000003b0 <__vector_3>:
+ 3b0:	1f 92       	push	r1
+ 3b2:	0f 92       	push	r0
+ 3b4:	0f b6       	in	r0, 0x3f	; 63
+ 3b6:	0f 92       	push	r0
+ 3b8:	11 24       	eor	r1, r1
+ 3ba:	0f 90       	pop	r0
+ 3bc:	0f be       	out	0x3f, r0	; 63
+ 3be:	0f 90       	pop	r0
+ 3c0:	1f 90       	pop	r1
+ 3c2:	18 95       	reti
 
-000003e6 <main>:
-		*/
+000003c4 <__vector_11>:
+ 3c4:	1f 92       	push	r1
+ 3c6:	0f 92       	push	r0
+ 3c8:	0f b6       	in	r0, 0x3f	; 63
+ 3ca:	0f 92       	push	r0
+ 3cc:	11 24       	eor	r1, r1
+ 3ce:	2f 93       	push	r18
+ 3d0:	3f 93       	push	r19
+ 3d2:	4f 93       	push	r20
+ 3d4:	5f 93       	push	r21
+ 3d6:	6f 93       	push	r22
+ 3d8:	7f 93       	push	r23
+ 3da:	8f 93       	push	r24
+ 3dc:	9f 93       	push	r25
+ 3de:	af 93       	push	r26
+ 3e0:	bf 93       	push	r27
+ 3e2:	ef 93       	push	r30
+ 3e4:	ff 93       	push	r31
+ 3e6:	0e 94 9d 00 	call	0x13a	; 0x13a <solOff>
+ 3ea:	10 92 00 01 	sts	0x0100, r1	; 0x800100 <_edata>
+ 3ee:	0e 94 aa 00 	call	0x154	; 0x154 <flashy>
+ 3f2:	ff 91       	pop	r31
+ 3f4:	ef 91       	pop	r30
+ 3f6:	bf 91       	pop	r27
+ 3f8:	af 91       	pop	r26
+ 3fa:	9f 91       	pop	r25
+ 3fc:	8f 91       	pop	r24
+ 3fe:	7f 91       	pop	r23
+ 400:	6f 91       	pop	r22
+ 402:	5f 91       	pop	r21
+ 404:	4f 91       	pop	r20
+ 406:	3f 91       	pop	r19
+ 408:	2f 91       	pop	r18
+ 40a:	0f 90       	pop	r0
+ 40c:	0f be       	out	0x3f, r0	; 63
+ 40e:	0f 90       	pop	r0
+ 410:	1f 90       	pop	r1
+ 412:	18 95       	reti
 
-		/*apdsBegin(nebula_write);
-		apdsCalibrate(1);
-		sei();*/
-		portSetup();
- 3e6:	0e 94 c5 00 	call	0x18a	; 0x18a <portSetup>
+00000414 <main>:
 		DDRC &= ~(1<<2);
 		PORTC |=(1<<2);
 		DDRB &= ~(1<<0);
 		PORTB |= (1<<0);
 		*/
 		DDRD |= (1<<greenPort);
- 3ea:	57 9a       	sbi	0x0a, 7	; 10
+ 414:	57 9a       	sbi	0x0a, 7	; 10
 		DDRD |= (1<<bluePort);
- 3ec:	56 9a       	sbi	0x0a, 6	; 10
+ 416:	56 9a       	sbi	0x0a, 6	; 10
 		DDRD |= (1<<redPort); PORTD |= ((1<<greenPort) | (1<<bluePort) | (1<<redPort));
- 3ee:	55 9a       	sbi	0x0a, 5	; 10
- 3f0:	8b b1       	in	r24, 0x0b	; 11
- 3f2:	80 6e       	ori	r24, 0xE0	; 224
- 3f4:	8b b9       	out	0x0b, r24	; 11
+ 418:	55 9a       	sbi	0x0a, 5	; 10
+ 41a:	8b b1       	in	r24, 0x0b	; 11
+ 41c:	80 6e       	ori	r24, 0xE0	; 224
+ 41e:	8b b9       	out	0x0b, r24	; 11
+		PORTC &= ~(1<<drvIn1);
 		PORTC &= ~(1<<drvIn2);
 		//PORTE |= (1<<drvSleep);
 		
 		*/
-		//boostEnable();
-		boostDisable();
- 3f6:	0e 94 91 00 	call	0x122	; 0x122 <boostDisable>
-		//DDRB |=(1<<1)|(1<<7);
-		//DDRE |=(1<<3);
-		//PORTB &= ~(1<<1);
-		////PORTB &= ~(1<<7);
+		boostEnable();
+ 420:	0e 94 8c 00 	call	0x118	; 0x118 <boostEnable>
+		//boostDisable();
+		
+		pcIntSetup();
+ 424:	0e 94 a7 01 	call	0x34e	; 0x34e <pcIntSetup>
+		//solOn();
+		//_delay_ms(5000);
+		//solOff();
+		//_delay_ms(5000);
+		//proximity();
+		sei();
+ 428:	78 94       	sei
 		//PORTE &= ~(1<<3);
-		SMCR |=(1<<0x07);//07 powersave
- 3fa:	83 b7       	in	r24, 0x33	; 51
- 3fc:	80 68       	ori	r24, 0x80	; 128
- 3fe:	83 bf       	out	0x33, r24	; 51
-		sleep_mode();
- 400:	83 b7       	in	r24, 0x33	; 51
- 402:	81 60       	ori	r24, 0x01	; 1
- 404:	83 bf       	out	0x33, r24	; 51
- 406:	88 95       	sleep
- 408:	83 b7       	in	r24, 0x33	; 51
- 40a:	8e 7f       	andi	r24, 0xFE	; 254
- 40c:	83 bf       	out	0x33, r24	; 51
-        sei();
- 40e:	78 94       	sei
- 410:	ff cf       	rjmp	.-2      	; 0x410 <__LOCK_REGION_LENGTH__+0x10>
+		///SMCR |=(1<<0x07);//07 powersave
+		//sleep_mode();
+        //sei();
+		
+		i2c_init();
+ 42a:	0e 94 1f 01 	call	0x23e	; 0x23e <i2c_init>
+		i2c_start(0x60);
+ 42e:	80 e6       	ldi	r24, 0x60	; 96
+ 430:	0e 94 29 01 	call	0x252	; 0x252 <i2c_start>
+    while(1)
+    {
+		
+		i2c_init();
+ 434:	0e 94 1f 01 	call	0x23e	; 0x23e <i2c_init>
+		i2c_start(0x41);
+ 438:	81 e4       	ldi	r24, 0x41	; 65
+ 43a:	0e 94 29 01 	call	0x252	; 0x252 <i2c_start>
+		
+//sleep_mode();
+flashy();
+ 43e:	0e 94 aa 00 	call	0x154	; 0x154 <flashy>
+ 442:	f8 cf       	rjmp	.-16     	; 0x434 <main+0x20>
 
-00000412 <_exit>:
- 412:	f8 94       	cli
+00000444 <_exit>:
+ 444:	f8 94       	cli
 
-00000414 <__stop_program>:
- 414:	ff cf       	rjmp	.-2      	; 0x414 <__stop_program>
+00000446 <__stop_program>:
+ 446:	ff cf       	rjmp	.-2      	; 0x446 <__stop_program>

@@ -41,19 +41,20 @@ ISR(PCINT1_vect)
 {  // sleep_disable();
 	if ((PINC & (1<<2))==0)
 	{
-	solOn();
-	_delay_ms(500);
-	solOff();
-	_delay_ms(20);
-	flashy();
+	//solOn();
+	//_delay_ms(500);
+	//solOff();
+	//_delay_ms(20);
+	//flashy();
 	//sleep_mode();
 	//_delay_ms(1000);
+	batteryLow();
 	}
 }
 
 ISR(PCINT0_vect)
 {   //sleep_disable();
-	charging();
+	//charging();
 	//sleep_mode();
 }
 unsigned char timerSetup(unsigned int timerValue)

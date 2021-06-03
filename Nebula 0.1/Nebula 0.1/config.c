@@ -4,6 +4,7 @@
 
 unsigned char comp = 0;
 unsigned char buttonCount = 0;
+unsigned char i = 0;
 
 
 unsigned char unUsed (void)//disable unused ports
@@ -37,26 +38,31 @@ unsigned char portSetup(void)
 	return 0;
 	//solenoid
 	//drv8836 input control for solenoid and actuator
-	DDRC |= (1<<drvIn1);
-	DDRC |= (1<<drvIn2);
+	DDRB |= (1<<drv1A);
+	DDRB |= (1<<drv1B);
+	DDRC |= (1<<drv2A);
+	DDRC |= (1<<drv2B);
 	DDRE |= (1<<drvSleep);// sleep via pulldown
-	PORTE &= ~(1<<drvSleep);
-	PORTC &= ~(1<<drvIn1);
-	PORTC &= ~(1<<drvIn2);
+	PORTE &= ~(1<<drvSleep);//^^
+	
 	//stepper
-	DDRB &= ~(1<<stepVcc);//disable via pullup
-	DDRB &= ~(1<<stepMode);
-	DDRD &= ~(1<<ain1);
-	DDRD &= ~(1<<ain2);
-	DDRE &= ~(1<<bin1);
-	DDRE &= ~(1<<bin1);
-
-	PORTB &= ~(1<<stepVcc);
-	PORTB &= ~(1<<stepMode);
-	PORTD &= ~(1<<ain1);
-	PORTD &= ~(1<<ain2);
-	PORTE &= ~(1<<bin1);
-	PORTE &= ~(1<<bin2);
+	//DDRB &= ~(1<<stepVcc);//disable via pullup
+	//DDRB &= ~(1<<stepMode);
+	//DDRD &= ~(1<<ain1);
+	//DDRD &= ~(1<<ain2);
+	//DDRE &= ~(1<<bin1);
+	//DDRE &= ~(1<<bin1);
+//
+	//PORTB &= ~(1<<stepVcc);
+	//PORTB &= ~(1<<stepMode);
+	//PORTD &= ~(1<<ain1);
+	//PORTD &= ~(1<<ain2);
+	//PORTE &= ~(1<<bin1);
+	//PORTE &= ~(1<<bin2);
+	
+	// reboot
+	DDRC |= (1<<rebootpin);//port enable
+	//PORTC &= ~(1<<rebootpin);//high
 /*
 	//comparator
 	DDRB &= ~(1<<2);//Input/ pullup
@@ -155,9 +161,9 @@ unsigned char systemNoGo(void)
 unsigned char flashy(void)
 {
 		PORTD &= ~(1<<redPort);
-		_delay_ms(100);
+		_delay_ms(800);
 		PORTD |= (1<<redPort);
-		_delay_ms(100);
+		_delay_ms(5000);
 		return 0;
 }
 /////////////////////////////////////////////////////////////////////////////Sleep States
@@ -249,7 +255,7 @@ unsigned char batteryLow(void)//low battery indicator
 	//idle();
 	return 0;
 }
-
+/*
 unsigned char charging(void)//charge indicator
 {
 	//pin change int
@@ -269,7 +275,7 @@ unsigned char charging(void)//charge indicator
 
 	return 0;
 }
-
+*/
 //Button press actions
 unsigned char buttonPress(void)
 {
@@ -283,11 +289,60 @@ unsigned char buttonPress(void)
 	return 0;
 }
 
+unsigned char reboot(void)//reboot
+{
+	//PORTC |= (1<<3);
+	//_delay_ms(900);
+	PORTC &= ~(1<<3);
+	//_delay_ms(900);
+	//batteryLow();
+	return 0;
+	
+}
+
 unsigned char i2c_check(void)
 {
 	PORTD &= ~(1<<greenPort);
 	_delay_ms(50);
 	PORTD |= (1<<greenPort);
 	_delay_ms(50);
+	
+	return 0;
+}
+
+
+unsigned char drvIN_IN(void)
+{
+	PORTE |= (1<<drvSleep);
+	PORTE &= ~(1<<drvMode);
+	return 0;
+}
+
+unsigned char drvPhase_En(void)
+{
+	PORTE |= (1<<drvSleep);
+	PORTE |= (1<<drvMode);
+	return 0;
+}
+
+unsigned char drvActuate(unsigned char mode)
+{
+	if(mode == 1)
+	{   drvIN_IN();
+		for(i = 0; i<20; i++)
+		{
+			PORTB &= ~(1<<drv1A);
+			_delay_ms(50);
+			PORTB |= (1<<drv1B);
+			_delay_ms(2000);
+			
+			PORTB &= ~(1<<drv1B);
+			_delay_ms(50);
+			PORTB |= (1<<drv1A);
+			_delay_ms(500);
+		}
+		PORTE &= ~(1<<drvSleep);// sleep mode after actuation
+		_delay_ms(1000);
+	}
 	return 0;
 }

@@ -76,10 +76,10 @@ int main(void)
 		//i2c_stop();
 		*/
 
-		/*apdsBegin(nebula_write);
-		apdsCalibrate(1);
-		sei();*/
-		portSetup();
+		
+		//apdsCalibrate(1);
+		
+		//portSetup();
 		//portSetup();
 		//timerSetup(0x0000);
 
@@ -111,9 +111,10 @@ int main(void)
 		//PORTE |= (1<<drvSleep);
 
 		*/
-		//boostEnable();
-		boostDisable();
-		//pcIntSetup();
+		boostEnable();
+		//boostDisable();
+		
+		pcIntSetup();
 		//int0Setup();
 		//boostDisable();
 		//sei();
@@ -148,7 +149,7 @@ int main(void)
 		//solOff();
 		//_delay_ms(5000);
 		//proximity();
-		//sei();
+		sei();
 		//apdsInit();
 		//SMCR |=(1<<0x07);
 		//DDRB |=(1<<1)|(1<<7);
@@ -156,13 +157,22 @@ int main(void)
 		//PORTB &= ~(1<<1);
 		////PORTB &= ~(1<<7);
 		//PORTE &= ~(1<<3);
-		SMCR |=(1<<0x07);//07 powersave
-		sleep_mode();
-        sei();
+		///SMCR |=(1<<0x07);//07 powersave
+		//sleep_mode();
+        //sei();
+		
+		i2c_init();
+		i2c_start(0x60);
     while(1)
     {
-			//sleep_mode();
-//flashy();
+		
+		i2c_init();
+		i2c_start(0x41);
+		
+//sleep_mode();
+flashy();
+//reboot();//fix
+
 //batteryLow();
 //checkBattery();
 //DDRE |=(1<<2);
@@ -171,6 +181,9 @@ int main(void)
 //solOff();
 //solOff();
 //solOn();
+//drvActuate(1);
+//flashy();
+//vcnlTransceive();
 //_delay_ms(10000);
 //solOff();
 //apdsTransceive();
