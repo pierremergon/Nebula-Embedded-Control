@@ -163,7 +163,7 @@ unsigned char flashy(void)
 		PORTD &= ~(1<<redPort);
 		_delay_ms(800);
 		PORTD |= (1<<redPort);
-		_delay_ms(800);
+		_delay_ms(5000);
 		return 0;
 }
 /////////////////////////////////////////////////////////////////////////////Sleep States

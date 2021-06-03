@@ -5,13 +5,14 @@ unsigned char vcnlBegin(unsigned char vcnladdr)
 {
 	unsigned char i2cStatus;
 	i2c_init();
-
-	i2cStatus = i2c_start(vcnladdr);
+    i2c_start(vcnladdr);
+	
+	/*
 	if (i2cStatus != 0)
 	{
 		idle();
 	}
-
+*/
 	return 0;
 }
 

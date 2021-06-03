@@ -7,11 +7,11 @@ unsigned char apdsBegin(unsigned char apdsaddr)
 	i2c_init();
 	
 	i2cStatus = i2c_start(apdsaddr);
-	if (i2cStatus != 0)
+	/*if (i2cStatus != 0)
 	{
 		idle();
 	}
-	
+	*/
 	return 0;
 }
 

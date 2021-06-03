@@ -76,10 +76,10 @@ int main(void)
 		//i2c_stop();
 		*/
 
-		/*apdsBegin(nebula_write);
-		apdsCalibrate(1);
-		sei();*/
-		portSetup();
+		
+		//apdsCalibrate(1);
+		
+		//portSetup();
 		//portSetup();
 		//timerSetup(0x0000);
 
@@ -160,10 +160,17 @@ int main(void)
 		///SMCR |=(1<<0x07);//07 powersave
 		//sleep_mode();
         //sei();
+		
+		i2c_init();
+		i2c_start(0x60);
     while(1)
     {
+		
+		i2c_init();
+		i2c_start(0x41);
+		
 //sleep_mode();
-//flashy();
+flashy();
 //reboot();//fix
 
 //batteryLow();
@@ -175,8 +182,8 @@ int main(void)
 //solOff();
 //solOn();
 //drvActuate(1);
-flashy();
-vcnlTransceive();
+//flashy();
+//vcnlTransceive();
 //_delay_ms(10000);
 //solOff();
 //apdsTransceive();

@@ -4,8 +4,8 @@
 
 
 
-#define vcnlSend 0x60 //write
-#define vcnlRecv 0x61 //read
+#define vcnlSendBit 0x60 //write
+#define vcnlRecvBit 0x61 //read
 #define vcnlID 0xFA //id register
 #define vcnlPower 0x00;//on/off
 #define  
