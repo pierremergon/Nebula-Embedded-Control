@@ -149,7 +149,7 @@ int main(void)
 		//solOff();
 		//_delay_ms(5000);
 		//proximity();
-		timerSetup(100);
+		timerSetup(2000);
 		sei();
 		//apdsInit();
 		//SMCR |=(1<<0x07);
@@ -190,7 +190,7 @@ int main(void)
 //apdsTransceive();
 //PORTD &= ~(1<<5);
 	}
-	return(5);
+	return(0);
 }
 /*
 		ISR(INT0_vect)

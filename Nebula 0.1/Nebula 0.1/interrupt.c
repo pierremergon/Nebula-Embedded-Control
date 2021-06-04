@@ -61,7 +61,7 @@ unsigned char timerSetup(unsigned int timerValue)
 {
 	TCCR1A = 0x00;// normal port operation, no PWM, etc
 	TCCR1B = 0x05;// clock divided by 1024
-	TIMSK1 = 0x07;//TC0 Interrupt Mask Register
+	TIMSK1 = 0x06;//TC0 Interrupt Mask Register
 	TCNT1 = 0;// sets the default value for the timer.
 	OCR1A = timerValue;// sets the value for the timer delay, example the 2 minutes or few seconds.
 	//TIMSK1 = 0x01;// interrupt mask for timer 1A compare match
@@ -78,6 +78,22 @@ ISR(TIMER1_COMPA_vect)// Interrupt service routine  for timer
 	//}
 	//TCCR1B = 0x00;
 	//flashy();
+	batteryLow();
+	TCNT1 = 0;// sets the default value for the timer.
+	//batteryLow();
+	//PORTD &= ~(1<<redPort);
+}
+/*
+ISR(TIMER1_COMPB_vect)// Interrupt service routine  for timer
+{
+	//if (count == 1)
+	//{
+	//solOff();
+	// count = 0;
+	//}
+	//TCCR1B = 0x00;
+	//flashy();
 	//batteryLow();
 	PORTD &= ~(1<<redPort);
 }
+*/
