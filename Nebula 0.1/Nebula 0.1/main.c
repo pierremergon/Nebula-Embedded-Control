@@ -163,7 +163,7 @@ int main(void)
         //sei();
 
 		i2c_init();
-		i2c_start(0x60);
+		i2c_start(0xC0);
     while(1)
     {
 

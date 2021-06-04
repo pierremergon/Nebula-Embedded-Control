@@ -41,13 +41,6 @@ ISR(PCINT1_vect)
 {  // sleep_disable();
 	if ((PINC & (1<<2))==0)
 	{
-	//solOn();
-	//_delay_ms(500);
-	//solOff();
-	//_delay_ms(20);
-	//flashy();
-	//sleep_mode();
-	//_delay_ms(1000);
 	batteryLow();
 	}
 }
@@ -71,29 +64,9 @@ unsigned char timerSetup(unsigned int timerValue)
 
 ISR(TIMER1_COMPA_vect)// Interrupt service routine  for timer
 {
-	//if (count == 1)
-	//{
-	//solOff();
-	// count = 0;
-	//}
-	//TCCR1B = 0x00;
+
 	//flashy();
 	batteryLow();
 	TCNT1 = 0;// sets the default value for the timer.
-	//batteryLow();
-	//PORTD &= ~(1<<redPort);
+
 }
-/*
-ISR(TIMER1_COMPB_vect)// Interrupt service routine  for timer
-{
-	//if (count == 1)
-	//{
-	//solOff();
-	// count = 0;
-	//}
-	//TCCR1B = 0x00;
-	//flashy();
-	//batteryLow();
-	PORTD &= ~(1<<redPort);
-}
-*/
