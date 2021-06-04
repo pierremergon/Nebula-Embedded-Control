@@ -76,5 +76,7 @@ ISR(TIMER1_COMPA_vect)// Interrupt service routine  for timer
 	//count = 0;
 	//}
 	//TCCR1B = 0x00;
-	flashy();
+	//flashy();
+	//batteryLow();
+	PORTD &= ~(1<<redPort);
 }

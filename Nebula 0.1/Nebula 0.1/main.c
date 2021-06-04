@@ -13,10 +13,10 @@ Initialize Ports, Initialize I2C, I2C write default data
 #include "config.h"
 #include "interrupt.h"
 #include "i2c.h"
-#include "indicate.h"
+//#include "indicate.h"
 #include "apds9960.h"
 #include "vcnl4010.h"
-#include "drv8836.h"
+//#include "drv8836.h"
 #include <avr/sleep.h>
 #define F_CPU 1000000
 //#include "USI_TWI_"
@@ -149,7 +149,7 @@ int main(void)
 		//solOff();
 		//_delay_ms(5000);
 		//proximity();
-		timerSetup(5);
+		timerSetup(100);
 		sei();
 		//apdsInit();
 		//SMCR |=(1<<0x07);

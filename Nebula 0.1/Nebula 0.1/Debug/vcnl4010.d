@@ -12,7 +12,7 @@ vcnl4010.d vcnl4010.o: .././vcnl4010.c .././i2c.h .././vcnl4010.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\version.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\fuse.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\lock.h \
- .././config.h .././drv8835.h
+ .././config.h .././drv8836.h
 
 .././i2c.h:
 
@@ -48,4 +48,4 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 
 .././config.h:
 
-.././drv8835.h:
+.././drv8836.h:

@@ -170,9 +170,6 @@
     <Compile Include="config.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="drv8835.c">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="i2c.c">
       <SubType>compile</SubType>
     </Compile>
