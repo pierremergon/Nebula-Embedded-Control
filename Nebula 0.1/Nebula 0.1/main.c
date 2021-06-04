@@ -76,9 +76,9 @@ int main(void)
 		//i2c_stop();
 		*/
 
-		
+
 		//apdsCalibrate(1);
-		
+
 		//portSetup();
 		//portSetup();
 		//timerSetup(0x0000);
@@ -113,7 +113,7 @@ int main(void)
 		*/
 		boostEnable();
 		//boostDisable();
-		
+
 		pcIntSetup();
 		//int0Setup();
 		//boostDisable();
@@ -149,6 +149,7 @@ int main(void)
 		//solOff();
 		//_delay_ms(5000);
 		//proximity();
+		timerSetup(5);
 		sei();
 		//apdsInit();
 		//SMCR |=(1<<0x07);
@@ -160,17 +161,17 @@ int main(void)
 		///SMCR |=(1<<0x07);//07 powersave
 		//sleep_mode();
         //sei();
-		
+
 		i2c_init();
 		i2c_start(0x60);
     while(1)
     {
-		
-		i2c_init();
-		i2c_start(0x41);
-		
+
+		//2c_init();
+		//i2c_start(0x41);
+
 //sleep_mode();
-flashy();
+//flashy();
 //reboot();//fix
 
 //batteryLow();
