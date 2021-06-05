@@ -57,8 +57,16 @@ int main(void)
 		i2c_init();
 		i2c_start(0xC0);
 		*/
-		vcnlBegin();
-		vcnlSend(vcnlSendBit, ps_Config1_Low,0x83,0x02);
+		//vcnlBegin();
+			
+		vcnlSend(0xC0,0x00,0x83,0x02);
+		/*i2c_init();
+		i2c_start(0xC0);
+		i2c_write(0x00);
+		i2c_write(0x83);
+		i2c_write(0x02);
+		i2c_stop();
+		*/
 
     while(1)
     {
@@ -94,3 +102,17 @@ int main(void)
 			num = apdsTransceive();
 		}
 		*/
+
+/*
+unsigned char vcnlSend(unsigned char writeAddress, unsigned char writeReg, unsigned char value1, unsigned char value2)
+{
+	//unsigned char i2cStatus;
+	//i2c_init();
+	i2c_start(writeAddress);//write address
+	i2c_write(writeReg);//register
+	i2c_write(value1);//first 8 bits
+	i2c_write(value2);//second 8 bits
+	i2c_stop();
+	return 0;
+	
+} */

@@ -12,5 +12,5 @@ interrupt.c
 
 main.c
 
-vcnl4010.c
+vcnl36826s.c
 

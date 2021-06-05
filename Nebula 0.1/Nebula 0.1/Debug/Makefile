@@ -42,7 +42,7 @@ C_SRCS +=  \
 ../i2c.c \
 ../interrupt.c \
 ../main.c \
-../vcnl4010.c
+../vcnl36826s.c
 
 
 PREPROCESSING_SRCS += 
@@ -57,7 +57,7 @@ config.o \
 i2c.o \
 interrupt.o \
 main.o \
-vcnl4010.o
+vcnl36826s.o
 
 OBJS_AS_ARGS +=  \
 apds9960.o \
@@ -65,7 +65,7 @@ config.o \
 i2c.o \
 interrupt.o \
 main.o \
-vcnl4010.o
+vcnl36826s.o
 
 C_DEPS +=  \
 apds9960.d \
@@ -73,7 +73,7 @@ config.d \
 i2c.d \
 interrupt.d \
 main.d \
-vcnl4010.d
+vcnl36826s.d
 
 C_DEPS_AS_ARGS +=  \
 apds9960.d \
@@ -81,7 +81,7 @@ config.d \
 i2c.d \
 interrupt.d \
 main.d \
-vcnl4010.d
+vcnl36826s.d
 
 OUTPUT_FILE_PATH +=Nebula\ 0.1.elf
 
@@ -132,7 +132,7 @@ LINKER_SCRIPT_DEP+=
 	@echo Finished building: $<
 	
 
-./vcnl4010.o: .././vcnl4010.c
+./vcnl36826s.o: .././vcnl36826s.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\Atmel\ATmega_DFP\1.3.300\include"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega328pb -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\Atmel\ATmega_DFP\1.3.300\gcc\dev\atmega328pb" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

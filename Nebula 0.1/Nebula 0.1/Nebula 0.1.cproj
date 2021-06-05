@@ -167,9 +167,6 @@
     <Compile Include="config.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="config.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="i2c.c">
       <SubType>compile</SubType>
     </Compile>
@@ -179,7 +176,7 @@
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="vcnl4010.c">
+    <Compile Include="vcnl36826s.c">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>

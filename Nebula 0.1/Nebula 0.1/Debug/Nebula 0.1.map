@@ -8,7 +8,9 @@ c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/..
 Allocating common symbols
 Common symbol       size              file
 
+valueHigh           0x1               vcnl36826s.o
 num                 0x2               main.o
+valueLow            0x1               vcnl36826s.o
 
 Discarded input sections
 
@@ -77,6 +79,8 @@ Discarded input sections
  .text          0x00000000        0x0 i2c.o
  .data          0x00000000        0x0 i2c.o
  .bss           0x00000000        0x0 i2c.o
+ .text.i2c_init
+                0x00000000       0x14 i2c.o
  .text.i2c_start_wait
                 0x00000000       0x50 i2c.o
  .text.i2c_rep_start
@@ -93,37 +97,14 @@ Discarded input sections
  .data          0x00000000        0x0 main.o
  .bss           0x00000000        0x0 main.o
  COMMON         0x00000000        0x2 main.o
- .text          0x00000000        0x0 vcnl4010.o
- .data          0x00000000        0x0 vcnl4010.o
- .bss           0x00000000        0x0 vcnl4010.o
+ .text          0x00000000        0x0 vcnl36826s.o
+ .data          0x00000000        0x0 vcnl36826s.o
+ .bss           0x00000000        0x0 vcnl36826s.o
  .text.vcnlBegin
-                0x00000000        0x8 vcnl4010.o
- .text.vcnlSend
-                0x00000000       0x14 vcnl4010.o
+                0x00000000        0x8 vcnl36826s.o
  .text.vcnlReceive
-                0x00000000        0x6 vcnl4010.o
- .text.vcnlTransceive
-                0x00000000       0x1a vcnl4010.o
- .text.vcnlStop
-                0x00000000        0x8 vcnl4010.o
- .text.vcnlInit
-                0x00000000       0x1a vcnl4010.o
- .text.vcnlProximity
-                0x00000000       0x44 vcnl4010.o
- .text.vcnlCalibrate
-                0x00000000        0xc vcnl4010.o
- .text.vcnlHandler
-                0x00000000       0x26 vcnl4010.o
- .debug_info    0x00000000      0x4a6 vcnl4010.o
- .debug_abbrev  0x00000000      0x168 vcnl4010.o
- .debug_loc     0x00000000      0x13b vcnl4010.o
- .debug_aranges
-                0x00000000       0x60 vcnl4010.o
- .debug_ranges  0x00000000       0x50 vcnl4010.o
- .debug_line    0x00000000      0x22c vcnl4010.o
- .debug_str     0x00000000      0x250 vcnl4010.o
- .comment       0x00000000       0x31 vcnl4010.o
- .debug_frame   0x00000000       0xac vcnl4010.o
+                0x00000000       0x34 vcnl36826s.o
+ COMMON         0x00000000        0x2 vcnl36826s.o
  .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
@@ -178,7 +159,7 @@ LOAD config.o
 LOAD i2c.o
 LOAD interrupt.o
 LOAD main.o
-LOAD vcnl4010.o
+LOAD vcnl36826s.o
 START GROUP
 LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a
 END GROUP
@@ -286,7 +267,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x44c
+.text           0x00000000      0x46a
  *(.vectors)
  .vectors       0x00000000       0xb4 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/1.3.300/gcc/dev/atmega328pb/avr5/crtatmega328pb.o
                 0x00000000                __vector_default
@@ -399,46 +380,46 @@ END GROUP
  .text.batteryLow
                 0x00000166       0xbe config.o
                 0x00000166                batteryLow
- .text.i2c_init
-                0x00000224       0x14 i2c.o
-                0x00000224                i2c_init
  .text.i2c_start
-                0x00000238       0x4e i2c.o
-                0x00000238                i2c_start
+                0x00000224       0x4e i2c.o
+                0x00000224                i2c_start
  .text.i2c_stop
-                0x00000286       0x12 i2c.o
-                0x00000286                i2c_stop
+                0x00000272       0x12 i2c.o
+                0x00000272                i2c_stop
  .text.i2c_write
-                0x00000298       0x24 i2c.o
-                0x00000298                i2c_write
+                0x00000284       0x24 i2c.o
+                0x00000284                i2c_write
  .text.i2c_readNak
-                0x000002bc       0x16 i2c.o
-                0x000002bc                i2c_readNak
+                0x000002a8       0x16 i2c.o
+                0x000002a8                i2c_readNak
  .text.__vector_1
-                0x000002d2       0x62 interrupt.o
-                0x000002d2                __vector_1
+                0x000002be       0x62 interrupt.o
+                0x000002be                __vector_1
  .text.pcIntSetup
-                0x00000334       0x18 interrupt.o
-                0x00000334                pcIntSetup
+                0x00000320       0x18 interrupt.o
+                0x00000320                pcIntSetup
  .text.__vector_4
-                0x0000034c       0x4a interrupt.o
-                0x0000034c                __vector_4
+                0x00000338       0x4a interrupt.o
+                0x00000338                __vector_4
  .text.__vector_3
-                0x00000396       0x14 interrupt.o
-                0x00000396                __vector_3
+                0x00000382       0x14 interrupt.o
+                0x00000382                __vector_3
  .text.timerSetup
-                0x000003aa       0x24 interrupt.o
-                0x000003aa                timerSetup
+                0x00000396       0x24 interrupt.o
+                0x00000396                timerSetup
  .text.__vector_11
-                0x000003ce       0x50 interrupt.o
-                0x000003ce                __vector_11
- .text.main     0x0000041e       0x2a main.o
-                0x0000041e                main
-                0x00000448                . = ALIGN (0x2)
+                0x000003ba       0x50 interrupt.o
+                0x000003ba                __vector_11
+ .text.main     0x0000040a       0x2c main.o
+                0x0000040a                main
+ .text.vcnlSend
+                0x00000436       0x30 vcnl36826s.o
+                0x00000436                vcnlSend
+                0x00000466                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00000448        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
-                0x00000448                _exit
-                0x00000448                exit
+ .fini9         0x00000466        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x00000466                _exit
+                0x00000466                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -457,11 +438,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00000448        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .fini0         0x00000466        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x0000044c                _etext = .
+                0x0000046a                _etext = .
 
-.data           0x00800100        0x0 load address 0x0000044c
+.data           0x00800100        0x0 load address 0x0000046a
                 [!provide]                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -481,8 +462,8 @@ END GROUP
                 0x00800100                count
  *(COMMON)
                 0x00800101                PROVIDE (__bss_end, .)
-                0x0000044c                __data_load_start = LOADADDR (.data)
-                0x0000044c                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x0000046a                __data_load_start = LOADADDR (.data)
+                0x0000046a                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x00800101        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
@@ -532,11 +513,12 @@ END GROUP
  *(.comment)
  .comment       0x00000000       0x30 apds9960.o
                                  0x31 (size before relaxing)
- .comment       0x00000030       0x31 config.o
- .comment       0x00000030       0x30 i2c.o
+ .comment       0x00000030       0x30 config.o
                                  0x31 (size before relaxing)
+ .comment       0x00000060       0x31 i2c.o
  .comment       0x00000060       0x31 interrupt.o
  .comment       0x00000060       0x31 main.o
+ .comment       0x00000060       0x31 vcnl36826s.o
 
 .note.gnu.avr.deviceinfo
                 0x00000000       0x40
@@ -558,7 +540,7 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000      0x200
+.debug_aranges  0x00000000      0x230
  *(.debug_aranges)
  .debug_aranges
                 0x00000000       0x60 apds9960.o
@@ -570,20 +552,23 @@ END GROUP
                 0x00000190       0x50 interrupt.o
  .debug_aranges
                 0x000001e0       0x20 main.o
+ .debug_aranges
+                0x00000200       0x30 vcnl36826s.o
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x1f7b
+.debug_info     0x00000000     0x21ca
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x8ea C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/1.3.300/gcc/dev/atmega328pb/avr5/crtatmega328pb.o
  .debug_info    0x000008ea      0x80b apds9960.o
  .debug_info    0x000010f5      0x995 config.o
  .debug_info    0x00001a8a      0x1d6 i2c.o
  .debug_info    0x00001c60      0x1f6 interrupt.o
- .debug_info    0x00001e56      0x125 main.o
+ .debug_info    0x00001e56      0x11f main.o
+ .debug_info    0x00001f75      0x255 vcnl36826s.o
 
-.debug_abbrev   0x00000000      0xe28
+.debug_abbrev   0x00000000      0xee2
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x86e C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/1.3.300/gcc/dev/atmega328pb/avr5/crtatmega328pb.o
  .debug_abbrev  0x0000086e      0x152 apds9960.o
@@ -591,8 +576,9 @@ END GROUP
  .debug_abbrev  0x00000b8c       0xfb i2c.o
  .debug_abbrev  0x00000c87       0xf7 interrupt.o
  .debug_abbrev  0x00000d7e       0xaa main.o
+ .debug_abbrev  0x00000e28       0xba vcnl36826s.o
 
-.debug_line     0x00000000     0x10ce
+.debug_line     0x00000000     0x118e
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x1a5 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/1.3.300/gcc/dev/atmega328pb/avr5/crtatmega328pb.o
  .debug_line    0x000001a5      0x33e apds9960.o
@@ -600,35 +586,40 @@ END GROUP
  .debug_line    0x00000b23      0x2f5 i2c.o
  .debug_line    0x00000e18      0x1c0 interrupt.o
  .debug_line    0x00000fd8       0xf6 main.o
+ .debug_line    0x000010ce       0xc0 vcnl36826s.o
 
-.debug_frame    0x00000000      0x47c
+.debug_frame    0x00000000      0x4dc
  *(.debug_frame)
  .debug_frame   0x00000000       0xbc apds9960.o
  .debug_frame   0x000000bc      0x184 config.o
  .debug_frame   0x00000240       0xb0 i2c.o
  .debug_frame   0x000002f0      0x168 interrupt.o
  .debug_frame   0x00000458       0x24 main.o
+ .debug_frame   0x0000047c       0x60 vcnl36826s.o
 
-.debug_str      0x00000000      0x7b7
+.debug_str      0x00000000      0x833
  *(.debug_str)
  .debug_str     0x00000000      0x318 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/1.3.300/gcc/dev/atmega328pb/avr5/crtatmega328pb.o
  .debug_str     0x00000318      0x23b apds9960.o
                                 0x26f (size before relaxing)
- .debug_str     0x00000553      0x150 config.o
-                                0x2f6 (size before relaxing)
- .debug_str     0x000006a3       0x8b i2c.o
+ .debug_str     0x00000553      0x19a config.o
+                                0x2ed (size before relaxing)
+ .debug_str     0x000006ed       0x41 i2c.o
                                 0x1e4 (size before relaxing)
  .debug_str     0x0000072e       0x78 interrupt.o
                                 0x219 (size before relaxing)
- .debug_str     0x000007a6       0x11 main.o
-                                0x1aa (size before relaxing)
+ .debug_str     0x000007a6       0x1a main.o
+                                0x1a0 (size before relaxing)
+ .debug_str     0x000007c0       0x73 vcnl36826s.o
+                                0x216 (size before relaxing)
 
-.debug_loc      0x00000000      0xcb3
+.debug_loc      0x00000000      0xe3c
  *(.debug_loc)
  .debug_loc     0x00000000      0x20d apds9960.o
  .debug_loc     0x0000020d      0x6c5 config.o
  .debug_loc     0x000008d2      0x12d i2c.o
  .debug_loc     0x000009ff      0x2b4 interrupt.o
+ .debug_loc     0x00000cb3      0x189 vcnl36826s.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -648,13 +639,14 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x00000000      0x1b0
+.debug_ranges   0x00000000      0x1d0
  *(.debug_ranges)
  .debug_ranges  0x00000000       0x50 apds9960.o
  .debug_ranges  0x00000050       0xc0 config.o
  .debug_ranges  0x00000110       0x50 i2c.o
  .debug_ranges  0x00000160       0x40 interrupt.o
  .debug_ranges  0x000001a0       0x10 main.o
+ .debug_ranges  0x000001b0       0x20 vcnl36826s.o
 
 .debug_macro
  *(.debug_macro)
