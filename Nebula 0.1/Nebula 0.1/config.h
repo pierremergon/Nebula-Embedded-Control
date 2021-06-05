@@ -55,6 +55,7 @@ unsigned char drvActuate(unsigned char mode);// determines actuation depending o
 #define batteryStatusPort 0 //battery port
 #define rebootpin 3 //reboot pin
 #define drvMode 1 //drv8837 motor mode ow = in/in high = ph/en, pulldown internally
+#define proxInt 1 //proximity interrupt port
 
 
 ///////////////////////////////////////////////////////////////////////////

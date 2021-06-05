@@ -23,43 +23,28 @@ Initialize Ports, Initialize I2C, I2C write default data
 	int num;
 int main(void)
 {
-
-		DDRD |= (1<<greenPort);
-		DDRD |= (1<<bluePort);
-		DDRD |= (1<<redPort); PORTD |= ((1<<greenPort) | (1<<bluePort) | (1<<redPort));
+        portSetup();
+		//DDRD |= (1<<greenPort);
+		//DDRD |= (1<<bluePort);
+		//DDRD |= (1<<redPort); PORTD |= ((1<<greenPort) | (1<<bluePort) | (1<<redPort));
 		//PORTE &= ~(1<<drvSleep);
 
-	/*	DDRC |= (1<<drvIn1);
-		DDRC |= (1<<drvIn2);
-		PORTC &= ~(1<<drvIn1);
-		PORTC &= ~(1<<drvIn2);
-		//PORTE |= (1<<drvSleep);
-
-		*/
 		boostEnable();
 		//boostDisable();
 
 		pcIntSetup();
 
 		timerSetup(2000);
+		vcnlSetup(1);//prox enabled
 		sei();
-		//apdsInit();
-		//SMCR |=(1<<0x07);
-		//DDRB |=(1<<1)|(1<<7);
-		//DDRE |=(1<<3);
-		//PORTB &= ~(1<<1);
-		////PORTB &= ~(1<<7);
-		//PORTE &= ~(1<<3);
-		///SMCR |=(1<<0x07);//07 powersave
-		//sleep_mode();
-        //sei();
+
 /*
 		i2c_init();
 		i2c_start(0xC0);
 		*/
 		//vcnlBegin();
 			
-		vcnlSend(0xC0,0x00,0x83,0x02);
+		//vcnlSend(0xC0,0x00,0x83,0x02);
 		/*i2c_init();
 		i2c_start(0xC0);
 		i2c_write(0x00);
@@ -67,7 +52,7 @@ int main(void)
 		i2c_write(0x02);
 		i2c_stop();
 		*/
-
+		
     while(1)
     {
 

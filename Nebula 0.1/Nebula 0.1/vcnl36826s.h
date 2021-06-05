@@ -31,6 +31,7 @@ unsigned char vcnlSend(unsigned char writeAddress, unsigned char writeReg, unsig
 unsigned char vcnlReceive(unsigned char writeAddress, unsigned char readAddress, unsigned char readReg);//receive bits
 unsigned char proximity(); // Proximity sensor
 unsigned char gesture();  // Gesture Sensor
+unsigned char vcnlSetup(unsigned char type);///setup initial bits and send to device
 
 
 

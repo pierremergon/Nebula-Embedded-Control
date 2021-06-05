@@ -36,3 +36,24 @@ unsigned char vcnlReceive(unsigned char writeAddress, unsigned char readAddress,
 	i2c_stop();
 	return 0;
 }
+
+unsigned char vcnlSetup(unsigned char type)//1 for proximity sensor, 0 for gesture
+{
+	if(type = 1)
+	{
+		vcnlSend(vcnlSendBit,ps_Config1_Low,0x83,0x02);
+		vcnlSend(vcnlSendBit,ps_Config2_Low,0x2F,0x14);
+		vcnlSend(vcnlSendBit,ps_Config3,0x1E,0xF2);
+		vcnlSend(vcnlSendBit,ps_THDL,0xA0,0x00);
+		vcnlSend(vcnlSendBit,ps_THDH,0xF0,0x00);
+		vcnlSend(vcnlSendBit,ps_AC_L,0x5D,0x03);
+	}
+
+	else
+	{
+		;
+
+	}
+		return 0;
+}
+//TODO 

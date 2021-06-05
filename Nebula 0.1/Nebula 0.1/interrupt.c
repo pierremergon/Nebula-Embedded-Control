@@ -32,11 +32,13 @@ ISR(INT0_vect)
 unsigned char pcIntSetup(void)
 
 {
-	PCICR |= (1<<PCIE1) | (1<<PCIE0);
+	PCICR |= (1<<PCIE1) | (1<<PCIE0) | (1<<PCIE0);
 	PCMSK1 |= (1<<PCINT10) |(1<<PCINT0);
+	PCMSK2 |= (1<<PCINT17);
 	return 0;
 }
 
+//button interrupt
 ISR(PCINT1_vect)
 {  // sleep_disable();
 	if ((PINC & (1<<2))==0)
@@ -50,6 +52,12 @@ ISR(PCINT0_vect)
 	//charging();
 	//sleep_mode();
 }
+
+ISR(PCINT2_vect)
+{
+	flashy();
+
+}
 unsigned char timerSetup(unsigned int timerValue)
 {
 	TCCR1A = 0x00;// normal port operation, no PWM, etc
@@ -59,7 +67,6 @@ unsigned char timerSetup(unsigned int timerValue)
 	OCR1A = timerValue;// sets the value for the timer delay, example the 2 minutes or few seconds.
 	//TIMSK1 = 0x01;// interrupt mask for timer 1A compare match
 	return 0;
-
 }
 
 ISR(TIMER1_COMPA_vect)// Interrupt service routine  for timer

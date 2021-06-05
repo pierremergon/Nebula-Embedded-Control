@@ -22,9 +22,9 @@ unsigned char portSetup(void)
 {
 	unUsed();
 	//battery indicator ports
-	DDRD = (1<<redPort);//internal pullup
-	DDRD = (1<<greenPort);
-	DDRD = (1<<bluePort);
+	DDRD |= (1<<redPort);//internal pullup
+	DDRD |= (1<<greenPort);
+	DDRD |= (1<<bluePort);
 	PORTD |= (1<<redPort);
 	PORTD |= (1<<greenPort);
 	PORTD |= (1<<bluePort);// disables LED
@@ -68,6 +68,10 @@ unsigned char portSetup(void)
 	DDRB &= ~(1<<2);//Input/ pullup
 	PORTD |= (1<<2);
 */
+
+	//Proximity Setup
+	DDRD &= ~(1<<proxInt);
+	PORTD |= (1<<proxInt);
 }
 
 // boost converter enable/disable
