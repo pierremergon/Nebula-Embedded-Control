@@ -29,11 +29,9 @@
 #define ps_AC_Data_M 0xFB; //Auto-calibration MSB Data
 
 
-unsigned char vcnlInit(unsigned char type); // gesture or proximity sensor
-
-unsigned char transmit(unsigned char data); // transmit data
-
-unsigned char receive(unsigned char data); // receive data
+unsigned char vcnlBegin(void);
+unsigned char vcnlSend(unsigned char address; unsigned char writeReg; unsigned char value1; unsigned char value2);//send bits
+unsigned char vcnlReceive(unsigned char address; unsigned char writeReg; unsigned char value1; unsigned char value2);//receive bits
 unsigned char proximity(); // Proximity sensor
 unsigned char gesture();  // Gesture Sensor
 

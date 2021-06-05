@@ -13,92 +13,17 @@ Initialize Ports, Initialize I2C, I2C write default data
 #include "config.h"
 #include "interrupt.h"
 #include "i2c.h"
-//#include "indicate.h"
+#include "indicate.h"
 #include "apds9960.h"
-#include "vcnl4010.h"
-//#include "drv8836.h"
+#include "vcnl36826s.h"
+#include "drv8836.h"
 #include <avr/sleep.h>
 #define F_CPU 1000000
-//#include "USI_TWI_"
-//#define vcnl_write 0x26
+
 	int num;
 int main(void)
 {
-	/*
-		//unUsed();//disable unused ports
-		unsigned char test;
-		DDRC |=(1<<1)|(1<<0);
-		i2c_init();//initialize i2c
-		test=apdsTransceive();
-		if ((test=0x92))
-		{
-			PORTC |=(1<<0);
-		}
-		else
-		{
-			PORTC |=(1<<1);
-		}
-		//intSetup();//enables external interrupt
-		//sei();
-		//solOn();
-		//ISR(INT1_vect);
 
-		//ledInitialize();
-
-		int1Setup();
-		apds9960_prox_write();
-		sei();
-		*/
-		//_delay_ms(500);;
-		//apdsBegin();
-		//_delay_ms(500);
-		//num=apdsSend(0x00,0x00);
-		//apdsStop();
-		//ISR(INT0_vect);
-		/*if (num==0)
-		{
-			DDRC |= (0xff);
-			PORTC |=(1<<0);
-		}
-
-		else if(num==1)
-		{
-			DDRC |= (0xff);
-			PORTC |=(1<<1);
-		}
-
-		else
-		{
-			;
-		}
-
-
-		//i2c_stop();
-		*/
-
-
-		//apdsCalibrate(1);
-
-		//portSetup();
-		//portSetup();
-		//timerSetup(0x0000);
-
-		/*int num;
-		i2c_init();
-		vcnlBegin(vcnl_write);
-		num = vcnlTransceive();
-		*/
-		/*DDRD = (1<<6);
-		DDRD |= (1<<redPort);
-		DDRD |= (1<<greenPort);
-		DDRD |=(1<<redPort);
-		DDRD |=(1<<bluePort);
-		DDRE |=(1<<drvSleep);
-		DDRC &= ~(1<<2);
-		PORTC |=(1<<2);
-		DDRB &= ~(1<<0);
-		PORTB |= (1<<0);
-		*/
 		DDRD |= (1<<greenPort);
 		DDRD |= (1<<bluePort);
 		DDRD |= (1<<redPort); PORTD |= ((1<<greenPort) | (1<<bluePort) | (1<<redPort));
@@ -115,40 +40,7 @@ int main(void)
 		//boostDisable();
 
 		pcIntSetup();
-		//int0Setup();
-		//boostDisable();
-		//sei();
-		/*PORTC |=(1<<1);
-		_delay_ms(20);
-		PORTC &= ~(1<<1);
-		PORTC |=(1<<0);
-		_delay_ms(20);
-		PORTC &= ~(1<<0);
-*/
-		/*PORTC &= ~(1<<1);
-		_delay_ms(20);
-		PORTC |=(1<<1);
-		*/
 
-
-
-		//solOn();
-		//solOff();
-		//DDRD &= ~(1<<2);
-		//PORTD |= (1<<2);
-		//apdsInit();
-		//i2c_init();
-		//apdsBegin(nebula_write);
-		//proximity();
-		//int0Setup();
-		//apdsInit();
-		//apdsTransceive();
-		//solOn();
-		//solOn();
-		//_delay_ms(5000);
-		//solOff();
-		//_delay_ms(5000);
-		//proximity();
 		timerSetup(2000);
 		sei();
 		//apdsInit();
@@ -161,9 +53,13 @@ int main(void)
 		///SMCR |=(1<<0x07);//07 powersave
 		//sleep_mode();
         //sei();
-
+/*
 		i2c_init();
 		i2c_start(0xC0);
+		*/
+		vcnlBegin();
+		vcnlSend(vcnlSendBit, ps_Config1_Low,0x83,0x02);
+
     while(1)
     {
 
