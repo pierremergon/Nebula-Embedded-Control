@@ -44,7 +44,7 @@ unsigned char portSetup(void)
 	DDRC |= (1<<drv2B);
 	DDRE |= (1<<drvSleep);// sleep via pulldown
 	PORTE &= ~(1<<drvSleep);//^^
-	
+
 	//stepper
 	//DDRB &= ~(1<<stepVcc);//disable via pullup
 	//DDRB &= ~(1<<stepMode);
@@ -59,9 +59,10 @@ unsigned char portSetup(void)
 	//PORTD &= ~(1<<ain2);
 	//PORTE &= ~(1<<bin1);
 	//PORTE &= ~(1<<bin2);
-	
+
 	// reboot
 	DDRC |= (1<<rebootpin);//port enable
+	PORTC |=(1<<rebootpin);//high
 	//PORTC &= ~(1<<rebootpin);//high
 /*
 	//comparator
@@ -296,12 +297,13 @@ unsigned char buttonPress(void)
 unsigned char reboot(void)//reboot
 {
 	//PORTC |= (1<<3);
-	//_delay_ms(900);
-	PORTC &= ~(1<<3);
-	//_delay_ms(900);
+	_delay_ms(3000);
+	PORTC &= ~(1<<rebootpin);
+	_delay_ms(400);
+	PORTC |= (1<<rebootpin);
 	//batteryLow();
 	return 0;
-	
+
 }
 
 unsigned char i2c_check(void)
@@ -310,7 +312,7 @@ unsigned char i2c_check(void)
 	_delay_ms(50);
 	PORTD |= (1<<greenPort);
 	_delay_ms(50);
-	
+
 	return 0;
 }
 
@@ -339,7 +341,7 @@ unsigned char drvActuate(unsigned char mode)
 			_delay_ms(50);
 			PORTB |= (1<<drv1B);
 			_delay_ms(2000);
-			
+
 			PORTB &= ~(1<<drv1B);
 			_delay_ms(50);
 			PORTB |= (1<<drv1A);

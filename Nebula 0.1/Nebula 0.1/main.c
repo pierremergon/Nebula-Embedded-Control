@@ -43,7 +43,7 @@ int main(void)
 		i2c_start(0xC0);
 		*/
 		//vcnlBegin();
-			
+
 		//vcnlSend(0xC0,0x00,0x83,0x02);
 		/*i2c_init();
 		i2c_start(0xC0);
@@ -52,7 +52,7 @@ int main(void)
 		i2c_write(0x02);
 		i2c_stop();
 		*/
-		
+
     while(1)
     {
 
@@ -61,7 +61,7 @@ int main(void)
 
 //sleep_mode();
 //flashy();
-//reboot();//fix
+reboot();//fix
 
 //batteryLow();
 //checkBattery();
@@ -99,5 +99,5 @@ unsigned char vcnlSend(unsigned char writeAddress, unsigned char writeReg, unsig
 	i2c_write(value2);//second 8 bits
 	i2c_stop();
 	return 0;
-	
+
 } */
