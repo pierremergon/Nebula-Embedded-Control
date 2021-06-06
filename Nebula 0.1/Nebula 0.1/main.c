@@ -18,6 +18,7 @@ Initialize Ports, Initialize I2C, I2C write default data
 #include "vcnl36826s.h"
 #include "drv8836.h"
 #include <avr/sleep.h>
+#include <util/delay.h>
 #define F_CPU 1000000
 
 	int num;
@@ -32,10 +33,10 @@ int main(void)
 		boostEnable();
 		//boostDisable();
 
-		pcIntSetup();
+		//pcIntSetup();
 
 		timerSetup(2000);
-		vcnlSetup(1);//prox enabled
+		//vcnlSetup(1);//prox enabled
 		sei();
 
 /*
@@ -52,6 +53,8 @@ int main(void)
 		i2c_write(0x02);
 		i2c_stop();
 		*/
+		//PORTE |= (1<<drvSleep);
+		//PORTE &= ~(1<<drvMode);
 
     while(1)
     {
@@ -61,7 +64,8 @@ int main(void)
 
 //sleep_mode();
 //flashy();
-reboot();//fix
+//PORTD &= ~(1<<redPort);
+//reboot();//fix
 
 //batteryLow();
 //checkBattery();
@@ -71,13 +75,24 @@ reboot();//fix
 //solOff();
 //solOff();
 //solOn();
-//drvActuate(1);
+drvActuate(1);
 //flashy();
 //vcnlTransceive();
 //_delay_ms(10000);
 //solOff();
 //apdsTransceive();
 //PORTD &= ~(1<<5);
+
+//PORTB &= ~(1<<drv1B);
+//PORTB |= (1<<drv1A);
+//_delay_ms(500);
+//PORTB |= (1<<drv1B);
+//_delay_ms(2000);
+
+//PORTB &= ~(1<<drv1B) | (1<<drv1A);
+//_delay_ms(500);
+//PORTB |= (1<<drv1A);
+//_delay_ms(2000);
 	}
 	return(0);
 }

@@ -299,7 +299,7 @@ unsigned char reboot(void)//reboot
 	//PORTC |= (1<<3);
 	_delay_ms(3000);
 	PORTC &= ~(1<<rebootpin);
-	_delay_ms(400);
+	_delay_ms(1000);
 	PORTC |= (1<<rebootpin);
 	//batteryLow();
 	return 0;
@@ -345,7 +345,7 @@ unsigned char drvActuate(unsigned char mode)
 			PORTB &= ~(1<<drv1B);
 			_delay_ms(50);
 			PORTB |= (1<<drv1A);
-			_delay_ms(500);
+			_delay_ms(2000);
 		}
 		PORTE &= ~(1<<drvSleep);// sleep mode after actuation
 		_delay_ms(1000);
