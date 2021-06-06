@@ -337,8 +337,8 @@ unsigned char drvActuate(unsigned char mode)
 	{   drvIN_IN();
 		for(i = 0; i<20; i++)
 		{
-			PORTB &= ~(1<<drv1A);
-			_delay_ms(50);
+			PORTB &= ~(1<<drv1A) | (1<<drv)
+			_delay_ms(500);
 			PORTB |= (1<<drv1B);
 			_delay_ms(2000);
 
